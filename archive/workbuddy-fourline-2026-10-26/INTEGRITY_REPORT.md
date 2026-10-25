@@ -20,7 +20,7 @@ mount with no access to `E:\WorkBuddyProject`), and it is now superseded by obse
 | Companion manifest dir | `...\outputs\WorkBuddy_AllStages_20261026\` |
 | `MANIFEST.csv` bytes | 325,349 |
 | `MANIFEST.csv` SHA-256 | `f24b79119d5fb96c59ab4afc76420cdc9734fa84a8e2a21b89455edf41401836` |
-| `MANIFEST.sha256` bytes | 80 |
+| `MANIFEST.sha256` bytes | 80 on disk / 79 inside the package (newline normalised — see §3) |
 | Verification record | `WorkBuddy_AllStages_20261026_VERIFICATION.json`, 1,223 bytes, `status: PASS` |
 | Source project root | `E:\WorkBuddyProject` — 33,442 files / 10,067,570,810 bytes |
 
@@ -48,6 +48,24 @@ f24b79119d5fb96c59ab4afc76420cdc9734fa84a8e2a21b89455edf41401836  MANIFEST.csv
 ```
 
 Independently recomputed over `MANIFEST.csv` → identical digest. The binding holds.
+
+### One byte of difference between disk and package, and why it is harmless
+
+`MANIFEST.sha256` is **80 bytes on disk** (CRLF line ending) but **79 bytes inside the
+package** (LF). The packaging step normalised the newline of that one sidecar. Recording
+it because a reader comparing the two sizes would otherwise suspect a truncated file:
+
+| Object | Bytes | SHA-256 |
+| --- | --- | --- |
+| `MANIFEST.sha256` on disk | 80 | `43cd5de17247f5769d63c47f8358e69bf9dd698d6e78d9912cb037ef7354b222` |
+| `MANIFEST.sha256` in package | 79 | `809c5686ffd8fc6b6636f54366763897d5d82b2906d8df68b2f9caefd5caa06a` |
+
+The two are byte-identical after CRLF→LF normalisation, and the difference is confined to
+the trailing newline of a single line. Critically, **`MANIFEST.csv` is byte-identical in
+both places** — 325,349 bytes, SHA-256 `f24b7911…01836` — so the object the digest
+actually binds is unchanged and the binding is still verifiable. A sidecar whose own
+line ending shifted does not affect any member digest, because member digests are computed
+over decompressed member content, not over the sidecar.
 
 ## 4. Per-entry verification of every package member
 

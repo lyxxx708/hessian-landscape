@@ -17,9 +17,15 @@ and, for the first time, the underlying raw research payload it describes.
 | Bytes | **2,089,046,079** |
 | SHA-256 | `290b84297c0ef2263ba40270f112358e1322a49bbcd17bffd749bd80757ebf1f` |
 | Members | 2,026 (2,024 content + `MANIFEST.csv` + `MANIFEST.sha256`) |
-| Uncompressed | 2,141,079,119 bytes |
+| Uncompressed | 2,141,079,119 bytes (the 2,024 content members) |
 | Download | [Release `archive-20261026`](https://github.com/lyxxx708/hessian-landscape/releases/tag/archive-20261026) |
-| Transport | GitHub Release asset, byte-exact, single part (no reassembly) |
+| Transport | GitHub Release assets, **5 parts**, byte-exact, concatenated to reassemble |
+
+The payload travels as five parts because the build host's uplink measured ~126 KB/s, which
+makes a single 2.089 GB POST a 4.6-hour single point of failure. Each part carries its own
+SHA-256 and each is separately resumable. Reassembly is one `cat` in lexicographic order and
+reproduces the digest above exactly. See [RELEASE_ASSETS.md](RELEASE_ASSETS.md) for the part
+table.
 
 Start at [REPRODUCTION_GUIDE.md](REPRODUCTION_GUIDE.md) to recover and verify it on a new
 machine. Verify with the bundled `tools/verify_package.py` — standard library only, and it

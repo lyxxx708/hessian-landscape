@@ -28,21 +28,47 @@ carries the GENESIS-only documentary history and does **not** yet contain this a
 
 ## 3. Download the package
 
+The release carries the payload as **five parts**, not one file. Download the whole
+release, then concatenate in order:
+
 ```bash
-gh release download archive-20261026 \
-  --repo lyxxx708/hessian-landscape \
-  --pattern 'WorkBuddy_AllStages_20261026.zip'
+gh release download archive-20261026 --repo lyxxx708/hessian-landscape
+cat WorkBuddy_AllStages_20261026.zip.part0* > WorkBuddy_AllStages_20261026.zip
 ```
 
-Without `gh`:
+Without `gh`, fetch each part from:
 
 ```
-https://github.com/lyxxx708/hessian-landscape/releases/download/archive-20261026/WorkBuddy_AllStages_20261026.zip
+https://github.com/lyxxx708/hessian-landscape/releases/download/archive-20261026/WorkBuddy_AllStages_20261026.zip.part01
+https://github.com/lyxxx708/hessian-landscape/releases/download/archive-20261026/WorkBuddy_AllStages_20261026.zip.part02
+https://github.com/lyxxx708/hessian-landscape/releases/download/archive-20261026/WorkBuddy_AllStages_20261026.zip.part03
+https://github.com/lyxxx708/hessian-landscape/releases/download/archive-20261026/WorkBuddy_AllStages_20261026.zip.part04
+https://github.com/lyxxx708/hessian-landscape/releases/download/archive-20261026/WorkBuddy_AllStages_20261026.zip.part05
 ```
 
-Expected size: **2,089,046,079 bytes** exactly.
+Part sizes are not uniform — `part01`..`part04` are 419,430,400 bytes each and `part05`
+is 411,324,479 — so check sizes before concatenating:
+
+```bash
+ls -l WorkBuddy_AllStages_20261026.zip.part0*
+```
+
+`part0*` expands in lexicographic order, which is the correct concatenation order. Do not
+use `sort -n` or any ordering that could reorder four-digit suffixes differently.
+
+Expected reassembled size: **2,089,046,079 bytes** exactly.
 
 ## 4. Verify before trusting anything
+
+Verify each part first, then the assembly. Checking parts individually localises a bad
+download to one file instead of leaving you with a 2 GB blob that fails for an unknown
+reason:
+
+```bash
+sha256sum WorkBuddy_AllStages_20261026.zip.part0*
+```
+
+Compare against `CHECKSUMS.sha256` (or the part table in `RELEASE_ASSETS.md`). Then:
 
 ```bash
 sha256sum WorkBuddy_AllStages_20261026.zip
@@ -50,8 +76,8 @@ sha256sum WorkBuddy_AllStages_20261026.zip
 ```
 
 If that line does not match, **stop**. Do not extract, do not cite, do not build on it.
-Re-download; a partial or truncated asset is the most common failure and it will still
-unzip "successfully" for early entries.
+A partial or truncated part is the most common failure, and a truncated zip will still
+unzip "successfully" for early entries — the manifest check is what catches it.
 
 Then verify the manifest binding and every member:
 
