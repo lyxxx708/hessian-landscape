@@ -20,3 +20,7 @@ This index separates the existing GENESIS research archive from the integrated c
 - Regime Mixing handoff remains `NOT_IMPORTED` / `POINTER_ONLY_UNTRANSFERABLE`.
 - Keep source texts intact. Record corrections or changed interpretations in a dated status or audit document with provenance, without rewriting historical conclusions.
 - Do not promote failed, unrun, or documentary-only work to a verified scientific result. Do not upload raw data to this public repository without explicit authorization and completed privacy, rights, credential, and holdout review.
+
+## GENESIS forward research decisions
+
+The [GENESIS investment and main-track research assessment](genesis/README.md) (2026-10-26) evaluates evidence, novelty and decision gates, with a falsifiable experimental protocol. It is analysis and planning, **not** a new verification or an alteration of the historical claim ledger.
