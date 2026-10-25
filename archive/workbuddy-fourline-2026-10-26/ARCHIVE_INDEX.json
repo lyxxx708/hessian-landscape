@@ -74,54 +74,36 @@
     "github_repository": "https://github.com/lyxxx708/hessian-landscape",
     "branch": "archive/workbuddy-fourline-20261026",
     "pull_request": "https://github.com/lyxxx708/hessian-landscape/pull/4",
-    "transport": "GitHub Release assets, 5 parts (the package fits one asset by size, but the local uplink is ~126 KB/s, so a single 4.6-hour POST was rejected as a single point of failure; each part is separately resumable and separately hash-verifiable)",
+    "transport": "GitHub Release assets: 63 chunks of 32 MiB, uploaded 8-way concurrent. Chunk size is set by the observed ~20-minute single-POST lifetime, not by the 2 GiB per-asset limit.",
     "release_tag": "archive-20261026",
     "transport_constraint": {
-      "measured_uplink_Bps": 126432,
-      "measured_against": "httpbin.org (independent of GitHub, so the ceiling is the local uplink)",
-      "full_package_hours_at_that_rate": 4.6,
-      "concurrency_adds_bandwidth": false
+      "single_stream_Bps": 117000,
+      "single_post_lifetime_minutes": 22,
+      "observed_reset": "400 MiB part reset at 22m13s having stored ~133 MB",
+      "measured_aggregate_by_workers_KBps": {
+        "1": 117,
+        "2": 182,
+        "4": 331,
+        "8": 574,
+        "16": 762
+      },
+      "measurement_method": "every concurrency figure was confirmed by re-reading the release; a POST response alone was never accepted as success",
+      "download_vs_upload_asymmetry_KBps": {
+        "download": 1553,
+        "upload": 117
+      },
+      "proxy_bypass_changes_upload": false
     },
-    "parts": [
-      {
-        "index": 1,
-        "name": "WorkBuddy_AllStages_20261026.zip.part01",
-        "bytes": 419430400,
-        "offset": 0,
-        "sha256": "526481f1a407131c4921d1e1617b5760ff60452d083e9a182fc9d5386c2c8fdd"
-      },
-      {
-        "index": 2,
-        "name": "WorkBuddy_AllStages_20261026.zip.part02",
-        "bytes": 419430400,
-        "offset": 419430400,
-        "sha256": "076f1a75197ba17b0c47f5d6d3bad6d4c370e700715c4135fc08872301e302e2"
-      },
-      {
-        "index": 3,
-        "name": "WorkBuddy_AllStages_20261026.zip.part03",
-        "bytes": 419430400,
-        "offset": 838860800,
-        "sha256": "b74ad5e227e300880b0efcfb9904f8841e54e71d66cfdea16df5f5f8afe4b5ad"
-      },
-      {
-        "index": 4,
-        "name": "WorkBuddy_AllStages_20261026.zip.part04",
-        "bytes": 419430400,
-        "offset": 1258291200,
-        "sha256": "62ccb4a0df36fd779b28170c93e78f402638e9f30003fb933923dbfde1a9b3bc"
-      },
-      {
-        "index": 5,
-        "name": "WorkBuddy_AllStages_20261026.zip.part05",
-        "bytes": 411324479,
-        "offset": 1677721600,
-        "sha256": "ac4b71a0641f87a41ab0f22c987c2066bb603f39386bf57ffe33f7925ed71313"
-      }
-    ],
-    "reassembled_sha256": "290b84297c0ef2263ba40270f112358e1322a49bbcd17bffd749bd80757ebf1f",
-    "reassembled_matches": true,
-    "reassembly": "cat WorkBuddy_AllStages_20261026.zip.part0* > WorkBuddy_AllStages_20261026.zip (lexicographic order is correct because the suffixes are zero-padded)"
+    "chunks": {
+      "count": 63,
+      "chunk_mib": 32,
+      "name_pattern": "WB4L.pNNN",
+      "reassembled_sha256": "290b84297c0ef2263ba40270f112358e1322a49bbcd17bffd749bd80757ebf1f",
+      "reassembled_matches": true,
+      "reassembly": "cat WB4L.p* > WorkBuddy_AllStages_20261026.zip (lexicographic order is correct; suffixes are zero-padded to 3 digits)",
+      "per_chunk_table": "CHUNK_MANIFEST.csv",
+      "total_bytes": 2089046079
+    }
   },
   "status_vocabulary": [
     "REPORT_ONLY",

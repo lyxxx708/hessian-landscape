@@ -31,8 +31,8 @@ Measured facts that forced the change:
 | Upload to `uploads.github.com` (direct, no proxy) | 126,956 B/s over a 20 MB probe |
 | Upload to `httpbin.org` (independent of GitHub) | **126,432 B/s ≈ 1.0 Mbit/s** |
 | Observed during the real part-01 transfer | **85,100 B/s** steady state |
-| Four concurrent 10 MB uploads | No aggregate gain — bandwidth does not stack |
 | Download from `github.com`, same proxy | **1,553 KB/s ≈ 12.7 Mbit/s** |
+| **Parallel uploads, verified by re-reading the release** | 2 streams 182 KB/s · 4 → 331 · 8 → 574 · 16 → **762 KB/s** |
 
 The reference point matters: because a non-GitHub host reported the same ~126 KB/s, the
 slowness is **not GitHub-specific throttling**.
@@ -76,18 +76,48 @@ Wall-clock floor at 85–127 KB/s over 2,089,046,079 bytes: **4.6–6.8 hours**.
 figure at the measured 117 KB/s ceiling is **4.9 hours**; the observed steady state during
 the real run (85–98 KB/s) puts it at the slower end.
 
-A single 4.6-hour uninterrupted POST is a bad bet on a link that has already produced
-intermittent empty responses, because one dropped connection discards the whole 2 GB.
-So the package is transmitted as **five independent parts**, each of which is separately
-resumable and separately verifiable:
+### The 400 MiB split was wrong too, and here is the measurement that showed it
 
-| Part | Bytes | Offset | SHA-256 |
-| --- | --- | --- | --- |
-| `...zip.part01` | 419,430,400 | 0 | `526481f1a407131c4921d1e1617b5760ff60452d083e9a182fc9d5386c2c8fdd` |
-| `...zip.part02` | 419,430,400 | 419,430,400 | `076f1a75197ba17b0c47f5d6d3bad6d4c370e700715c4135fc08872301e302e2` |
-| `...zip.part03` | 419,430,400 | 838,860,800 | `b74ad5e227e300880b0efcfb9904f8841e54e71d66cfdea16df5f5f8afe4b5ad` |
-| `...zip.part04` | 419,430,400 | 1,258,291,200 | `62ccb4a0df36fd779b28170c93e78f402638e9f30003fb933923dbfde1a9b3bc` |
-| `...zip.part05` | 411,324,479 | 1,677,721,600 | `ac4b71a0641f87a41ab0f22c987c2066bb603f39386bf57ffe33f7925ed71313` |
+Five parts of 400 MiB were built, and part01 was launched. It was **reset after 22m13s
+having stored ~133 MB**. That single data point invalidates the whole 5-part plan:
+
+| Attempt | Bytes | Outcome |
+| --- | --- | --- |
+| probe | 2 MB | `uploaded` |
+| probe | 20 MB | `uploaded` |
+| probe | 50 MB | `uploaded` |
+| another session's part | 70.5 MB | `uploaded` |
+| **part01** | 400 MB | **connection reset at 22m13s, ~133 MB stored** |
+
+Everything that finished inside ~10 minutes succeeded; the one that needed ~57 minutes
+failed. So the endpoint does not hold a single POST much past ~20 minutes, and a 400 MiB
+part at ~117 KB/s **can never complete** — retrying it would burn an hour per attempt to
+produce nothing. That is the kind of failure that looks like flaky networking and is
+actually a sizing error.
+
+Chunks are therefore sized to finish well inside the window even at single-stream speed:
+
+- **32 MiB per chunk → 63 chunks**, ~4.7 min each single-stream, **4× headroom** under the
+  ~20 min limit.
+- Uploaded **8-way concurrent**, because throughput scales (see the table above): an
+  effective ~700 KB/s instead of 117 KB/s, cutting a ~5 h transfer to well under one hour.
+- Reassembly is `cat WB4L.p* > WorkBuddy_AllStages_20261026.zip`; verifies to
+  `290b84297c0ef2263ba40270f112358e1322a49bbcd17bffd749bd80757ebf1f`.
+
+Per-chunk digests, byte counts and offsets are in `CHUNK_MANIFEST.csv` alongside this file,
+and the machine-readable form is `ARCHIVE_INDEX.json → storage.chunks`.
+
+### A test that measured failure as speed
+
+Recorded because it nearly caused a wrong decision. An earlier concurrency probe reported
+"2.47× speedup from parallelism" — but its parallel arm had failed **4/4 with HTTP 404**,
+and the figure was computed from wall-clock time without checking that any bytes landed.
+Deleted assets and unverified POSTs read as fast uploads.
+
+The corrected probe re-reads the release after every round and only counts an upload when
+the asset exists there with the expected size. That is where the 182 / 331 / 574 / 762 KB/s
+figures come from — stored bytes, confirmed present. Conclusion unchanged, evidence now
+real.
 
 Concatenating the five parts in order reproduces the original package exactly — the
 reassembled digest was computed and equals
