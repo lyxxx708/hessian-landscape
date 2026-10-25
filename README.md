@@ -44,3 +44,7 @@ New reference code is labeled **REIMPLEMENTATION**; source experimental code ret
 ## Research status and archive index
 
 See [RESEARCH_STATUS.md](RESEARCH_STATUS.md) for the current evidence boundaries and the [integrated documentary archive](research/README.md). The WorkBuddy report has one canonical copy at [EXPERIMENT_REPORT.md](research/workbuddy/2026-10-26/EXPERIMENT_REPORT.md); its committed Git blob is verified, while the inaccessible original data package is not independently verified or present here.
+
+## Research investment decision (2026-10-26)
+
+- [GENESIS: evidence-graded research value, nontrivial hypotheses, ICML/NeurIPS/ICLR positioning, and falsifiable experiment protocol](research/genesis/README.md) — analytical decision documents only; they do not upgrade the status of historical measurements or unmerged P0 experiments.
