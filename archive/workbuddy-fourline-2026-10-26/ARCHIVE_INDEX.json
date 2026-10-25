@@ -1,0 +1,138 @@
+{
+  "schema": "workbuddy-four-line-archive-index-v1",
+  "archive_id": "workbuddy-fourline-2026-10-26",
+  "report_date": "2026-10-26",
+  "package_created_utc": "2026-10-25T16:44:55Z",
+  "original_source_root": "E:\\WorkBuddyProject",
+  "package": {
+    "name": "WorkBuddy_AllStages_20261026.zip",
+    "bytes": 2089046079,
+    "sha256": "290b84297c0ef2263ba40270f112358e1322a49bbcd17bffd749bd80757ebf1f",
+    "members_total": 2026,
+    "content_members": 2024,
+    "content_uncompressed_bytes": 2141079119,
+    "sidecars": [
+      "MANIFEST.csv",
+      "MANIFEST.sha256"
+    ],
+    "byte_exact_preserved": true,
+    "recompressed": false
+  },
+  "manifest": {
+    "name": "MANIFEST.csv",
+    "bytes": 325349,
+    "sha256": "f24b79119d5fb96c59ab4afc76420cdc9734fa84a8e2a21b89455edf41401836",
+    "entries": 2024,
+    "binding_sidecar": {
+      "name": "MANIFEST.sha256",
+      "note": "On disk this sidecar is 80 bytes (CRLF); inside the package it is 79 bytes (LF) because the packaging step normalised the newline. The object the digest binds, MANIFEST.csv, is byte-identical in both places, so the binding is unaffected.",
+      "sha256_on_disk": "43cd5de17247f5769d63c47f8358e69bf9dd698d6e78d9912cb037ef7354b222",
+      "bytes_on_disk": 80,
+      "sha256_in_package": "809c5686ffd8fc6b6636f54366763897d5d82b2906d8df68b2f9caefd5caa06a",
+      "bytes_in_package": 79,
+      "line_ending_normalised": true
+    },
+    "binding_verified": true
+  },
+  "counts": {
+    "manifest_entries": 2024,
+    "project_entries": 1997,
+    "project_bytes": 2140588805,
+    "report_entries": 27,
+    "report_bytes": 490314,
+    "declared_scope_files": 1984,
+    "declared_scope_bytes": 2139736566
+  },
+  "research_line_mapping": {
+    "ANTI_SLOWING": {
+      "files": 123,
+      "bytes": 2595035
+    },
+    "CROSS_LINE": {
+      "files": 214,
+      "bytes": 2114349104
+    },
+    "GENESIS": {
+      "files": 223,
+      "bytes": 1700909
+    },
+    "NAO_V3": {
+      "files": 108,
+      "bytes": 5049877
+    },
+    "SHARED_INFRASTRUCTURE": {
+      "files": 1302,
+      "bytes": 14183026
+    },
+    "SIGNED_SOKAL": {
+      "files": 54,
+      "bytes": 3201168
+    }
+  },
+  "line_mapping_method": "Path-prefix classification over MANIFEST.csv archive_path values. CROSS_LINE covers science_v4 / records/science_v4, where all four lines were executed in one authoritative batch, plus the four-line diagnostics. SHARED_INFRASTRUCTURE covers bridge, runner, contracts, scripts, docs, test harnesses and packaging tools that serve every line. No file is assigned to a line by content inference.",
+  "storage": {
+    "github_repository": "https://github.com/lyxxx708/hessian-landscape",
+    "branch": "archive/workbuddy-fourline-20261026",
+    "pull_request": "https://github.com/lyxxx708/hessian-landscape/pull/4",
+    "transport": "GitHub Release assets: 63 chunks of 32 MiB, uploaded 8-way concurrent. Chunk size is set by the observed ~20-minute single-POST lifetime, not by the 2 GiB per-asset limit. Measured on the final round (p032-p063, 1,048,858,687 bytes in 996.6 s): 1,027.8 KB/s aggregate at a 133.8 KB/s per-chunk median; the 762 KB/s probe figure is a short burst, not a sustained rate.",
+    "release_tag": "archive-20261026",
+    "transport_constraint": {
+      "single_stream_Bps": 117000,
+      "single_post_lifetime_minutes": 22,
+      "observed_reset": "400 MiB part reset at 22m13s having stored ~133 MB",
+      "measured_aggregate_by_workers_KBps": {
+        "1": 117,
+        "2": 182,
+        "4": 331,
+        "8": 574,
+        "16": 762
+      },
+      "measurement_method": "every concurrency figure was confirmed by re-reading the release; a POST response alone was never accepted as success",
+      "download_vs_upload_asymmetry_KBps": {
+        "download": 1553,
+        "upload": 117
+      },
+      "proxy_bypass_changes_upload": false
+    },
+    "chunks": {
+      "count": 63,
+      "chunk_mib": 32,
+      "name_pattern": "WB4L.pNNN",
+      "reassembled_sha256": "290b84297c0ef2263ba40270f112358e1322a49bbcd17bffd749bd80757ebf1f",
+      "reassembled_matches": true,
+      "reassembly": "cat WB4L.p* > WorkBuddy_AllStages_20261026.zip (lexicographic order is correct; suffixes are zero-padded to 3 digits)",
+      "per_chunk_table": "CHUNK_MANIFEST.csv",
+      "total_bytes": 2089046079
+    }
+  },
+  "status_vocabulary": [
+    "REPORT_ONLY",
+    "METADATA_ARCHIVED",
+    "PAYLOAD_UPLOADED_UNVERIFIED",
+    "PAYLOAD_HASH_VERIFIED",
+    "FULL_ARCHIVE_VERIFIED",
+    "PUBLICATION_BLOCKED",
+    "INCOMPLETE_SOURCE"
+  ],
+  "scientific_state_unchanged": true,
+  "integrity_level": "FULL_ARCHIVE_VERIFIED",
+  "remote_verification": {
+    "level": "FULL_ARCHIVE_VERIFIED",
+    "reassembled_bytes": 2089046079,
+    "reassembled_sha256": "290b84297c0ef2263ba40270f112358e1322a49bbcd17bffd749bd80757ebf1f",
+    "result": "FULL_ARCHIVE_VERIFIED",
+    "verified_at": "2026-10-25T21:32:16Z",
+    "chunk_count": 63,
+    "chunk_manifest": "CHUNK_MANIFEST.csv",
+    "gates": {
+      "v1": true,
+      "v2": true,
+      "v3": true,
+      "v4": true,
+      "v5": true
+    },
+    "content_members": 2024,
+    "content_bytes": 2141079119,
+    "manifest_sha256": "f24b79119d5fb96c59ab4afc76420cdc9734fa84a8e2a21b89455edf41401836"
+  }
+}
