@@ -9,6 +9,7 @@ This index separates the existing GENESIS research archive from the integrated c
 | [`portfolio/`](portfolio/README.md) | Cross-project relationships, claim ledger, source registry, status, missing-source register, and reproducibility contract | Current documentary status index; not raw evidence |
 | [`history/`](history/ANTI_SLOWING_AND_NAO_HISTORY_20261026.md) | Historical source transcriptions and clearly labeled explanatory histories | Transcriptions preserve the text as received; syntheses do not overwrite them |
 | [`catalog/`](catalog/SOURCE_CATALOG_20261026.md) | File/source mapping, claim register, and bulk-receipt checklist | Provenance and custody tracking; not experimental evidence |
+| [`assessment/`](assessment/2026-10-26_VALUE_ASSESSMENT_AND_RESEARCH_PROGRAM.md) | Dated value assessment, analytic baseline (gauge projector), pre-registered predictions, next research program | ASSESSMENT backed by NEW_REIMPLEMENTATION; does not alter historical records |
 | [`workbuddy/2026-10-26/`](workbuddy/2026-10-26/README.md) | The single canonical WorkBuddy report copy and its inventory, source index, state note, and transfer runbook | Committed report blob verified; original package and raw assets absent |
 | [`../docs/`](../docs/SCIENTIFIC_STATE.md) and [`../archive/`](../archive/ASSET_MANIFEST.md) | Existing GENESIS science notes, mathematics, asset inventory, and measurements | Retained from the merged #1 archive |
 
