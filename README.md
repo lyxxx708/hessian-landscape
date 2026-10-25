@@ -25,6 +25,8 @@ Three scientifically distinct objects must never be conflated: exact parameter H
 - [Artifact inventory and missing originals](archive/ASSET_MANIFEST.md)
 - [Transcribed numbers (NOT source data)](archive/REPORTED_MEASUREMENTS.csv)
 - [Newly authored reference metric implementation](scripts/reference_block_metrics.py)
+- [2026-10-26 value assessment, gauge-structure findings and research program (ASSESSMENT)](research/assessment/2026-10-26_VALUE_ASSESSMENT_AND_RESEARCH_PROGRAM.md)
+- [DLN gauge-structure reimplementation and cross-platform logs (NEW_REIMPLEMENTATION)](reimplementation/dln_gauge/README.md)
 
 ## Provenance and caution
 
