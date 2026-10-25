@@ -19,13 +19,17 @@ and, for the first time, the underlying raw research payload it describes.
 | Members | 2,026 (2,024 content + `MANIFEST.csv` + `MANIFEST.sha256`) |
 | Uncompressed | 2,141,079,119 bytes (the 2,024 content members) |
 | Download | [Release `archive-20261026`](https://github.com/lyxxx708/hessian-landscape/releases/tag/archive-20261026) |
-| Transport | GitHub Release assets, **5 parts**, byte-exact, concatenated to reassemble |
+| Transport | GitHub Release assets, **63 chunks of 32 MiB**, byte-exact, concatenated to reassemble |
 
-The payload travels as five parts because the build host's uplink measured ~126 KB/s, which
-makes a single 2.089 GB POST a 4.6-hour single point of failure. Each part carries its own
-SHA-256 and each is separately resumable. Reassembly is one `cat` in lexicographic order and
-reproduces the digest above exactly. See [RELEASE_ASSETS.md](RELEASE_ASSETS.md) for the part
-table.
+The payload travels as 63 chunks because this host's uplink measured ~117 KB/s per stream,
+and a single POST on this link does not survive much past ~20 minutes. A 400 MiB part needs
+~57 minutes and was reset at 22m13s having stored ~133 MB, so the transfer can never finish
+that way — see the failure table in [RELEASE_ASSETS.md](RELEASE_ASSETS.md). At 32 MiB a chunk
+completes in ~4.7 minutes single-stream, leaving 4× headroom under the connection limit, and
+uploading them 8-way concurrent raises aggregate throughput to ~700 KB/s because bandwidth is
+allocated per connection. Each chunk carries its own SHA-256 and each is separately resumable.
+Reassembly is one `cat` in lexicographic order (zero-padded names) and reproduces the digest
+above exactly. See [RELEASE_ASSETS.md](RELEASE_ASSETS.md) for the chunk table.
 
 Start at [REPRODUCTION_GUIDE.md](REPRODUCTION_GUIDE.md) to recover and verify it on a new
 machine. Verify with the bundled `tools/verify_package.py` — standard library only, and it

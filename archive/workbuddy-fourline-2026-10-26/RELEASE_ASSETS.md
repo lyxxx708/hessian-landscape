@@ -119,11 +119,43 @@ the asset exists there with the expected size. That is where the 182 / 331 / 574
 figures come from — stored bytes, confirmed present. Conclusion unchanged, evidence now
 real.
 
-Concatenating the five parts in order reproduces the original package exactly — the
+Concatenating the 63 chunks in order reproduces the original package exactly — the
 reassembled digest was computed and equals
 `290b84297c0ef2263ba40270f112358e1322a49bbcd17bffd749bd80757ebf1f`. `REPRODUCTION_GUIDE.md`
-gives the reassembly-and-check sequence. Parts are named so that a plain lexicographic
-sort puts them in the correct order.
+gives the reassembly-and-check sequence. Chunks are named with a zero-padded three-digit
+suffix so a plain lexicographic sort puts them in the correct order.
+
+### A failed upload leaves a ghost that poisons the retry
+
+Worth recording because it turns a transient error into a permanent one, and it is not
+obvious from the API surface.
+
+When a chunk POST dies mid-transfer, GitHub keeps an asset record for that name with
+`state: "starter"` — it carries the declared `Content-Length` that the server never
+received. That record **holds the name**. Any later upload of the same name then streams
+the entire 32 MiB and only *then* returns **HTTP 404**, because the name is already claimed
+by the ghost. Each retry therefore costs a full chunk of uplink and fails the same way, so
+the archive can never converge while a ghost exists.
+
+Observed directly: 19 ghost records accumulated from interrupted attempts, and every
+retry against them burned ~450 s apiece before failing.
+
+The fix is to delete non-`uploaded` records before re-posting the same name:
+
+```
+DELETE https://api.github.com/repos/{owner}/{repo}/releases/assets/{asset_id}
+```
+
+Note the endpoint. Deleting an asset is **not** nested under the release
+(`/releases/{id}/assets/{asset_id}` returns 404); the asset id hangs off the repo. Only
+records whose `state != "uploaded"` may be removed — an `uploaded` asset is never deleted.
+
+There is a second, self-inflicted version of the same failure: **two uploaders posting the
+same release at once**. Both claim names from the same set, so each one poisons the other's
+retries. One process must own the release at a time; the uploader enforces this with a
+pidfile, and that liveness probe has to decode `tasklist` output as GBK on a Chinese-locale
+Windows install — decoding it as UTF-8 raises and makes the probe answer "not running" for
+a live process, silently disabling the lock.
 
 ### Re-compressing to cut transfer volume was tested and rejected
 
@@ -210,7 +242,7 @@ python archive/workbuddy-fourline-2026-10-26/tools/verify_package.py \
 ```
 
 `verify_package.py` recomputes the outer SHA-256, checks the member count, and re-checks
-every member against the manifest — so a single flipped byte in any of the five parts
+every member against the manifest — so a single flipped byte in any of the 63 chunks
 surfaces as a failure rather than as a plausible-looking archive.
 
 ## What is *not* in the release
