@@ -40,3 +40,16 @@ Damped inverse curvature of a deep linear parameterization may contain non-decay
 ## Repository policy
 
 New reference code is labeled **REIMPLEMENTATION**; source experimental code retains original file names and checksums when supplied. No unverified raw logs or screenshots are synthesized. Public repository: review all future uploads for private data before publishing.
+
+## 2026-10-26 cross-program documentation addendum
+
+The repository now also indexes **related but scientifically distinct** Anti-Slowing, Regime Mixing/NAO and WorkBuddy four-line results, without rewriting the original GENESIS/Hessian archive.
+
+- [Program map and scope/authority](docs/PROGRAM_MAP_AND_AUTHORITY_20261026.md)
+- [WorkBuddy four-line pilot evidence and failure statuses](docs/WORKBUDDY_FOUR_LINE_STATUS_20261026.md)
+- [Anti-Slowing → Regime Mixing/NAO historical corrections](docs/ANTI_SLOWING_AND_NAO_HISTORY_20261026.md)
+- [Catalog of preserved source-text transcripts](archive/SOURCE_CATALOG_20261026.md)
+- [Claim register](archive/CLAIM_REGISTER_20261026.csv)
+- [Outstanding bulk raw-archive receipt](archive/BULK_ARCHIVE_IMPORT_CHECKLIST.md)
+
+**Public archive caveat:** Three complete **parsed-text transcriptions** were saved, but the reported 1,984-file/~2.14 GB WorkBuddy original archive, original GENESIS numerical files, and source figures are **not included**. Historical review PASS is not new experimental validation.

@@ -37,3 +37,11 @@
 6. Update docs/CLAIMS_AND_AUDIT.md only after actually rerunning checks.
 
 **No original experiment file or hash has been fabricated in this package.**
+
+## 2026-10-26 documentary extension (this proposed commit)
+
+Added **parsed-text transcriptions** of the 2026-07-06 Anti-Slowing memo, 2026-08-17 NAO takeover reconstruction, and 2026-10-26 WorkBuddy four-line experiment report under `archive/source-transcripts/`. These are **not byte-preserved originals**, and their reported results are not independently rerun. The third report cites an external 1,984-member, 2,139,736,566-byte source archive; only the report is present here, not the original archive or its manifest.
+
+Added program scope/authority map, Anti/NAO claim chronology, four-line failure record, derived claim CSV and missing-package receipt checklist. See [SOURCE_CATALOG_20261026.md](SOURCE_CATALOG_20261026.md).
+
+Original GENESIS numerical assets listed in the preceding table remain missing. No evidence class has been silently upgraded.
