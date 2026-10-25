@@ -200,10 +200,59 @@ misread as a discrepancy.
 
 ### Which asset you actually download
 
-The release carries the five `part0N` assets, **not** a single monolithic zip. This is
-recorded plainly because a reader who follows only the transport table above would expect
-one file and find five. Section "Verification record" below states what has been proven
-about the uploaded bytes and what has not.
+The release carries **63 `WB4L.pNNN` chunk assets**, not a single monolithic zip and not
+the superseded five `part0N` parts. Recorded plainly because a reader who follows only the
+transport table above would expect one file and find 63.
+
+| Scheme | Status |
+| --- | --- |
+| Single 2.089 GB asset | Superseded — cannot finish inside the endpoint's ~20 min POST window |
+| 5 × 400 MiB `part0N` | Superseded — 400 MiB needs ~57 min at ~117 KB/s and was reset at 22m13s having stored ~133 MB; all five parts were deleted from the release |
+| **63 × 32 MiB `WB4L.pNNN`** | **Current — all 63 uploaded, re-downloaded and verified** |
+
+## Verification record
+
+Two different things can be "verified", and conflating them is how archives acquire false
+confidence. Kept separate on purpose.
+
+**1. The local package is internally closed.** All 2,024 content members were streamed and
+hashed and matched against `MANIFEST.csv`: zero mismatches. Member CRCs checked, no path
+traversal, no absolute paths, no duplicate members, no symlinks. Strong result, and it is
+about the *source*.
+
+**2. The uploaded bytes were downloaded back and hashed.** Actually done, not inferred. All
+63 chunks were fetched again from the release by an independent script, re-hashed locally,
+concatenated in manifest order, and the result re-verified member by member:
+
+| Gate | What it proves | Result |
+| --- | --- | --- |
+| V1 `ASSET_PRESENT` | all 63 names exist, `state: uploaded`, server digest == manifest digest | **PASS** |
+| V2 `ASSET_DOWNLOADABLE` | real GET returns 200 and byte count matches | **PASS** |
+| V3 `CHUNK_HASH` | locally recomputed sha256 of each downloaded chunk == manifest | **PASS** |
+| V4 `REASSEMBLY` | concatenation reproduces 2,089,046,079 bytes / `290b8429…7ebf1f` | **PASS** |
+| V5 `INNER_PACKAGE` | all 2,024 members of the reassembled zip match `MANIFEST.csv` | **PASS** |
+
+Status **`FULL_ARCHIVE_VERIFIED`** at 2026-10-25T21:32:16Z, then reconciled against the live
+release in both directions: 63 assets vs 63 manifest rows, 0 mismatches, 0 extra —
+`RELEASE_MATCHES_MANIFEST`. `INTEGRITY_REPORT.md` §8 carries the gate rationale, including
+why V4 is not redundant with V3.
+
+This does *not* claim the package's contents are scientifically correct, and it does not
+audit the ~7.9 GB of runtime cache deliberately excluded.
+
+The command that reproduces the whole ladder, runnable by anyone:
+
+```bash
+gh release download archive-20261026 --repo lyxxx708/hessian-landscape --pattern 'WB4L.p*'
+cat WB4L.p* > WorkBuddy_AllStages_20261026.zip
+sha256sum WorkBuddy_AllStages_20261026.zip   # 290b84297c0ef2263ba40270f112358e1322a49bbcd17bffd749bd80757ebf1f
+python archive/workbuddy-fourline-2026-10-26/tools/verify_package.py \
+  --zip WorkBuddy_AllStages_20261026.zip
+```
+
+`cat WB4L.p*` needs no sorting because the zero-padded three-digit suffix makes
+lexicographic order equal to concatenation order — that naming choice is what makes the
+naive command safe.
 
 ## Byte-exactness
 
@@ -216,30 +265,6 @@ two independent verifications pointing at the same object.
 
 `recompressed: false` and `byte_exact_preserved: true` in `ARCHIVE_INDEX.json` record
 this.
-
-## Verification record
-
-Two different things can be "verified", and conflating them is how archives acquire
-false confidence. Kept separate on purpose:
-
-**1. The local package is internally closed.** All 2,024 content members were streamed
-and hashed and matched against `MANIFEST.csv`: zero mismatches. Member CRCs checked, no
-path traversal, no absolute paths, no duplicate members, no symlinks. This is a strong
-result and it is about the *source*.
-
-**2. Whether the uploaded bytes are correct.** This requires downloading them back and
-hashing them, which is a separate claim. `INTEGRITY_REPORT.md` records the outcome and
-`README.md` states the current integrity level; read those rather than inferring a
-completed round trip from this file's presence.
-
-The command that produces the authoritative answer, runnable by anyone:
-
-```bash
-gh release download archive-20261026 --repo lyxxx708/hessian-landscape
-cat WorkBuddy_AllStages_20261026.zip.part0* > WorkBuddy_AllStages_20261026.zip
-python archive/workbuddy-fourline-2026-10-26/tools/verify_package.py \
-  --zip WorkBuddy_AllStages_20261026.zip
-```
 
 `verify_package.py` recomputes the outer SHA-256, checks the member count, and re-checks
 every member against the manifest — so a single flipped byte in any of the 63 chunks
@@ -276,13 +301,15 @@ Produced by an independent re-download (`verify_remote63.py`), not transcribed:
 
 | Field | Measured |
 | --- | --- |
-| Result | `FULL_ARCHIVE_VERIFIED` |
-| Integrity level earned | **`FULL_ARCHIVE_VERIFIED`** |
+| Result | **`FULL_ARCHIVE_VERIFIED`** |
 | Chunks re-downloaded | 63 |
-| Reassembled bytes | 2089046079 |
+| Reassembled bytes | 2,089,046,079 |
 | Reassembled SHA-256 | `290b84297c0ef2263ba40270f112358e1322a49bbcd17bffd749bd80757ebf1f` |
+| Inner members re-hashed | 2,024 |
 | Verified at (UTC) | `2026-10-25T21:32:16Z` |
+| Release reconciliation | 63 assets vs 63 manifest rows, 0 mismatch, 0 extra |
 
+Gates, each one a prerequisite of the next:
 
 | Gate | Check | Result |
 | --- | --- | --- |

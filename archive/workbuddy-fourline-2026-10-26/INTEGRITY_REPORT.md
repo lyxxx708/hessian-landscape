@@ -137,14 +137,37 @@ to an exact package member, with byte sizes taken from the manifest, not from th
 Zero unresolved. The report's citation chain is therefore intact inside the package — a
 claim the previous revision could not make, because it had none of these files.
 
-## 8. Why this is not yet `FULL_ARCHIVE_VERIFIED`
+## 8. How `FULL_ARCHIVE_VERIFIED` was reached
 
-`FULL_ARCHIVE_VERIFIED` requires re-downloading the uploaded bytes through an independent
-path and re-matching them against this manifest. That step's outcome is recorded in
-`RELEASE_ASSETS.md` and the transport section; until a clean re-download hash matches, the
-level stays `PAYLOAD_HASH_VERIFIED` for source-side identity.
+This level was withheld until the uploaded bytes had actually been fetched back through a
+path independent of the uploader, and granted only after all five gates passed. The ladder
+is recorded because "verified" without it is an assertion rather than evidence.
 
-Two further honest limits:
+| Gate | Test | Result |
+| --- | --- | --- |
+| V1 `ASSET_PRESENT` | all 63 names exist on the release, `state: uploaded`, and the server-declared digest equals the manifest digest | **PASS** |
+| V2 `ASSET_DOWNLOADABLE` | a real HTTPS GET of each asset returns 200 and the transferred byte count equals the manifest `bytes` | **PASS** |
+| V3 `CHUNK_HASH` | SHA-256 recomputed over each *downloaded* chunk equals the manifest digest — computed locally, not read from the API | **PASS** |
+| V4 `REASSEMBLY` | the 63 chunks concatenated in manifest order give 2,089,046,079 bytes and `290b84297c0ef2263ba40270f112358e1322a49bbcd17bffd749bd80757ebf1f` | **PASS** |
+| V5 `INNER_PACKAGE` | all 2,024 members of the reassembled zip re-hash to their `MANIFEST.csv` values, streamed member by member | **PASS** |
+
+V1 and V2 are separate on purpose: an asset can be *listed* by the API while its download
+URL 404s — that is exactly what a `starter` record does — so presence alone proves nothing
+about retrievability.
+
+V3 is the gate that carries the most weight. It is computed over bytes that arrived across
+the network during this check, so a chunk corrupted anywhere between the original disk and
+the CDN cannot pass. V4 then proves the *set and order* are right, not merely that each
+piece is individually intact: a perfectly valid chunk sitting in the wrong position passes
+V3 and fails V4. V5 closes the loop by re-deriving the package's own internal manifest from
+the downloaded artifact, so the claim depends on no file produced before the upload.
+
+The reassembled digest was additionally recomputed by an unrelated one-off script and
+matched again, so this does not rest on one program agreeing with itself. Finally the live
+release was reconciled against `CHUNK_MANIFEST.csv` in both directions — 63 assets, 63
+manifest rows, 0 mismatches, 0 extra assets, verdict `RELEASE_MATCHES_MANIFEST`.
+
+Two honest limits survive this verification:
 
 1. **Scope boundary, not completeness.** The package covers the 50 declared roots plus
    packaging provenance. `E:\WorkBuddyProject` holds another ~7.9 GB (`.venvs`,
@@ -153,6 +176,11 @@ Two further honest limits:
 2. **Content scan is heuristic.** The credential scan matches known key shapes over
    decoded text. It cannot prove the absence of an arbitrarily encoded secret. Reported as
    a heuristic, never as a guarantee.
+
+What `FULL_ARCHIVE_VERIFIED` does **not** mean: it does not certify the scientific claims
+inside the package, and it does not assert that the archive captures all work ever done. It
+asserts that the published artifact reproduces the verified source package, member for
+member, through a path independent of the process that produced it.
 
 ## 9. Reproduce this report
 
