@@ -100,7 +100,14 @@ Chunks are therefore sized to finish well inside the window even at single-strea
 - **32 MiB per chunk → 63 chunks**, ~4.7 min each single-stream, **4× headroom** under the
   ~20 min limit.
 - Uploaded **8-way concurrent**, because throughput scales (see the table above): an
-  effective ~700 KB/s instead of 117 KB/s, cutting a ~5 h transfer to well under one hour.
+  effective ~700 KB/s instead of 117 KB/s.
+- Measured on the final round, which carried p032–p063 (1,048,858,687 bytes) in 996.6 s:
+  **1,027.8 KB/s aggregate**, at a 133.8 KB/s per-chunk median. That round is the largest
+  single contiguous run in the receipts, so it is the best available end-to-end figure;
+  extrapolated across 2,089,046,079 bytes it puts the whole transfer near 33 minutes.
+- The 762 KB/s row in the probe table is a **short burst**, not a sustained rate. Quoted
+  separately so the two are not confused: burst probes overstate what a multi-gigabyte
+  transfer holds.
 - Reassembly is `cat WB4L.p* > WorkBuddy_AllStages_20261026.zip`; verifies to
   `290b84297c0ef2263ba40270f112358e1322a49bbcd17bffd749bd80757ebf1f`.
 

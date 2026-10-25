@@ -28,7 +28,10 @@ and a single POST on this link does not survive much past ~20 minutes. A 400 MiB
 that way — see the failure table in [RELEASE_ASSETS.md](RELEASE_ASSETS.md). At 32 MiB a chunk
 completes in ~4.7 minutes single-stream, leaving 4× headroom under the connection limit, and
 uploading them 8-way concurrent raises aggregate throughput to ~700 KB/s because bandwidth is
-allocated per connection. Each chunk carries its own SHA-256 and each is separately resumable.
+allocated per connection. Measured on the final round, which carried p032–p063
+(1,048,858,687 bytes) in 996.6 s: **1,027.8 KB/s**, consistent with 8 streams at the
+133.8 KB/s per-chunk median. Each chunk carries its own SHA-256 and each is separately
+resumable.
 Reassembly is one `cat` in lexicographic order (zero-padded names) and reproduces the digest
 above exactly. See [RELEASE_ASSETS.md](RELEASE_ASSETS.md) for the chunk table.
 
