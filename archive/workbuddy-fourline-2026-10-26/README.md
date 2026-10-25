@@ -26,9 +26,17 @@ The payload travels as 63 chunks because this host's uplink measured ~117 KB/s p
 and a single POST on this link does not survive much past ~20 minutes. A 400 MiB part needs
 ~57 minutes and was reset at 22m13s having stored ~133 MB, so the transfer can never finish
 that way — see the failure table in [RELEASE_ASSETS.md](RELEASE_ASSETS.md). At 32 MiB a chunk
-completes in ~4.7 minutes single-stream, leaving 4× headroom under the connection limit, and
-uploading them 8-way concurrent raises aggregate throughput to ~700 KB/s because bandwidth is
-allocated per connection. Each chunk carries its own SHA-256 and each is separately resumable.
+completes in ~4.7 minutes single-stream, leaving 4× headroom under the connection limit. Each
+chunk carries its own SHA-256 and each is separately resumable.
+
+Concurrency was raised only as far as the endpoint tolerated. A 16-way run produced 14
+`HTTP 404` failures after full 32 MiB transfers — the local proxy's TLS connection pool was
+exhausted, not the uplink — so the run that actually completed all 63 chunks used 3–4
+concurrent streams. Measured result: **69 minutes end-to-end, ~492 KB/s aggregate**, at
+~134 KB/s median per stream. The 762 KB/s figure in `RELEASE_ASSETS.md` is a short-burst
+probe throughput, not what the full transfer sustained; the two are recorded separately so
+neither is mistaken for the other.
+
 Reassembly is one `cat` in lexicographic order (zero-padded names) and reproduces the digest
 above exactly. See [RELEASE_ASSETS.md](RELEASE_ASSETS.md) for the chunk table.
 

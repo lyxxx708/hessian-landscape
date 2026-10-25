@@ -32,7 +32,14 @@ Measured facts that forced the change:
 | Upload to `httpbin.org` (independent of GitHub) | **126,432 B/s ≈ 1.0 Mbit/s** |
 | Observed during the real part-01 transfer | **85,100 B/s** steady state |
 | Download from `github.com`, same proxy | **1,553 KB/s ≈ 12.7 Mbit/s** |
-| **Parallel uploads, verified by re-reading the release** | 2 streams 182 KB/s · 4 → 331 · 8 → 574 · 16 → **762 KB/s** |
+| **Parallel uploads, short-burst probe** | 2 streams 182 KB/s · 4 → 331 · 8 → 574 · 16 → **762 KB/s** |
+| **The run that completed all 63 chunks** | **3–4 streams, ~492 KB/s aggregate, 134 KB/s median per stream** |
+
+The last two rows are not the same quantity and must not be quoted interchangeably. The
+probe measures a short burst at a given concurrency; the final row is what 2.089 GB actually
+sustained over 69 minutes. The probe's high-concurrency arms also failed intermittently —
+at 16 streams, 14 chunks returned `HTTP 404` after transferring their full 32 MiB — so 762
+KB/s was not reachable for a long transfer on this host. The completing run stayed at 3–4.
 
 The reference point matters: because a non-GitHub host reported the same ~126 KB/s, the
 slowness is **not GitHub-specific throttling**.
@@ -99,8 +106,14 @@ Chunks are therefore sized to finish well inside the window even at single-strea
 
 - **32 MiB per chunk → 63 chunks**, ~4.7 min each single-stream, **4× headroom** under the
   ~20 min limit.
-- Uploaded **8-way concurrent**, because throughput scales (see the table above): an
-  effective ~700 KB/s instead of 117 KB/s, cutting a ~5 h transfer to well under one hour.
+- Concurrency was raised only as far as the endpoint tolerated, and the ceiling was lower
+  than the throughput table suggests. A 16-way run failed **14 times with `HTTP 404` after
+  transferring the full 32 MiB** — the local proxy's TLS connection pool gave out, so the
+  404s were a local resource limit wearing a server error code. The run that actually
+  completed all 63 chunks used **3–4 concurrent streams**.
+- Measured on that run: **69 minutes end-to-end, ~492 KB/s aggregate**, median **134 KB/s**
+  per stream. Stated explicitly because the 762 KB/s figure above is a short-burst probe,
+  and quoting it as the achieved rate would overstate the transfer by roughly 1.5×.
 - Reassembly is `cat WB4L.p* > WorkBuddy_AllStages_20261026.zip`; verifies to
   `290b84297c0ef2263ba40270f112358e1322a49bbcd17bffd749bd80757ebf1f`.
 
