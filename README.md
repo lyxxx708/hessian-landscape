@@ -40,3 +40,7 @@ Damped inverse curvature of a deep linear parameterization may contain non-decay
 ## Repository policy
 
 New reference code is labeled **REIMPLEMENTATION**; source experimental code retains original file names and checksums when supplied. No unverified raw logs or screenshots are synthesized. Public repository: review all future uploads for private data before publishing.
+
+## Related research portfolio (2026-10-26)
+
+A cross-project documentary archive covering **GENESIS, τ_int(η) Anti-Slowing, Regime Mixing, signed-Sokal and NAO** is maintained in [research-portfolio/](research-portfolio/README.md). It includes the newer October 2026 four-track negative pilot results and a missing-originals register. The repository does **not** yet contain the reported 2.14 GB source ZIP.
