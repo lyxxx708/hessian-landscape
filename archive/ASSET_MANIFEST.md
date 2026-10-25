@@ -40,8 +40,8 @@
 
 ## 2026-10-26 documentary extension (this proposed commit)
 
-Added **parsed-text transcriptions** of the 2026-07-06 Anti-Slowing memo and 2026-08-17 NAO takeover reconstruction under `archive/source-transcripts/`. These are **not byte-preserved originals**, and their reported results are not independently rerun. Duplicate report transcriptions from PR #2/#3 are excluded; the one canonical report copy from PR #4 is at `archive/workbuddy-fourline-2026-10-26/EXPERIMENT_REPORT.md`. It cites an external 1,984-member, 2,139,736,566-byte source archive; that original archive and its manifest are not present here.
+Added **parsed-text transcriptions** of the 2026-07-06 Anti-Slowing memo and 2026-08-17 NAO takeover reconstruction under `research/history/sources/`. These are **not byte-preserved originals**, and their reported results are not independently rerun. Duplicate report transcriptions from PR #2/#3 are excluded; the one canonical report copy from PR #4 is at `research/workbuddy/2026-10-26/EXPERIMENT_REPORT.md`. It cites an external 1,984-member, 2,139,736,566-byte source archive; that original archive and its manifest are not present here.
 
-Added program scope/authority map, Anti/NAO claim chronology, four-line failure record, derived claim CSV and missing-package receipt checklist. See [SOURCE_CATALOG_20261026.md](SOURCE_CATALOG_20261026.md).
+Added program scope/authority map, Anti/NAO claim chronology, four-line failure record, derived claim CSV and missing-package receipt checklist. See [research archive index](../research/README.md).
 
 Original GENESIS numerical assets listed in the preceding table remain missing. No evidence class has been silently upgraded.

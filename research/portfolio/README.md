@@ -4,11 +4,11 @@
 **Scope:** Research-lineage, evidentiary inventory, historical findings, negative results and missing originals.
 **Status:** **PARTIAL DOCUMENTARY ARCHIVE** — not a complete dataset or independently reproduced release.
 
-This directory complements the repository's existing [Project GENESIS archive](../README.md). It does **not** rename the unrelated NAO "Genesis takeover" governance activity to the earlier Hessian Project GENESIS.
+This directory complements the repository's existing [Project GENESIS archive](../../README.md). It does **not** rename the unrelated NAO "Genesis takeover" governance activity to the earlier Hessian Project GENESIS.
 
 ## Start here
 
-1. [Overall research status](../RESEARCH_STATUS.md) — archive, original-data and independent-reproduction boundaries.
+1. [Overall research status](../../RESEARCH_STATUS.md) — archive, original-data and independent-reproduction boundaries.
 2. [Scientific state as of 2026-10-26](SCIENCE_STATUS_20261026.md) — the latest four-line WorkBuddy pilot and diagnostic outcomes.
 3. [Cross-project genealogy](PROJECT_LINEAGE.md) — direct succession vs conceptual links.
 4. [Claim ledger](CLAIM_LEDGER.csv) — claims, status, scope and contrary evidence.
@@ -18,7 +18,7 @@ This directory complements the repository's existing [Project GENESIS archive](.
 
 ## Preserved texts
 
-- [WorkBuddy four-track experiment report, version 20261026](../archive/workbuddy-fourline-2026-10-26/EXPERIMENT_REPORT.md): the single canonical report copy imported by PR #4. Its referenced figures, raw evidence and original 2.14GB package are not present here.
+- [WorkBuddy four-track experiment report, version 20261026](../workbuddy/2026-10-26/EXPERIMENT_REPORT.md): the single canonical report copy imported by PR #4. Its referenced figures, raw evidence and original 2.14GB package are not present here.
 - Regime Mixing theory handoff: `NOT_IMPORTED` / `POINTER_ONLY_UNTRANSFERABLE`; no readable source text or raw bytes were available for this archive.
 
 The report's committed Git blob SHA is verified in this branch. This does not verify its inaccessible original source assets, the reported source-file SHA256, or the missing source archive.

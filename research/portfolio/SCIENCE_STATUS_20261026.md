@@ -1,6 +1,6 @@
 # Scientific status — evidence cut 2026-10-26
 
-**Primary source:** [2026-10-26 WorkBuddy full-stage report](../archive/workbuddy-fourline-2026-10-26/EXPERIMENT_REPORT.md), §§3–13, S01–S19. This file transcribes source-reported data; original ZIP, CSVs, executable and raw run directories are not currently in this repository. It is not an independent re-execution.
+**Primary source:** [2026-10-26 WorkBuddy full-stage report](../workbuddy/2026-10-26/EXPERIMENT_REPORT.md), §§3–13, S01–S19. This file transcribes source-reported data; original ZIP, CSVs, executable and raw run directories are not currently in this repository. It is not an independent re-execution.
 
 ## A. Original WorkBuddy science-v4 producer outcomes
 

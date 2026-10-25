@@ -1,6 +1,6 @@
 # WorkBuddy four-line pilot: 2026-10-26 evidence snapshot
 
-**Source:** The canonical [463-line `EXPERIMENT_REPORT.md`](../archive/workbuddy-fourline-2026-10-26/EXPERIMENT_REPORT.md), imported from PR #4. All figures and [S01–S19] referenced therein are **not present in this archive**. This document records report claims, not new independent numerical validation.
+**Source:** The canonical [463-line `EXPERIMENT_REPORT.md`](../workbuddy/2026-10-26/EXPERIMENT_REPORT.md), imported from PR #4. All figures and [S01–S19] referenced therein are **not present in this archive**. This document records report claims, not new independent numerical validation.
 
 ## First-batch immutable execution status
 
@@ -62,4 +62,4 @@ The newly predeclared reversible three-state finite grid used 27 matrices × 3 c
 - The 2026-10-26 author explicitly states no original core claim has been independently established as a generalizable confirmatory result.
 - Engineering fixture PASS, deterministic gate PASS, computation verification, producer terminal success, and scientific result acceptance **must not be conflated**.
 
-Read the [canonical full report](../archive/workbuddy-fourline-2026-10-26/EXPERIMENT_REPORT.md) before interpreting these summaries.
+Read the [canonical full report](../workbuddy/2026-10-26/EXPERIMENT_REPORT.md) before interpreting these summaries.

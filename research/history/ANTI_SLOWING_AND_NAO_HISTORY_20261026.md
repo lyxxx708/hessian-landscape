@@ -8,7 +8,7 @@ The initial 138-run learning-rate / batch-size experiment returned τ_int near 0
 
 ## Stage 2: near-boundary anti-slowing and July 6 memo
 
-After revision, the July Scientific Memo reports ~800 runs/~200 GPU h and correlation-time drops as SGD learning rate approaches instability. The memo gives a 16M reference near 80→25 and argues for an apparent one-layer width transition between n_embd=128 and 256; W256 gives τ(η=0.50)=15.8 while W512 gives 3.2. These are **historically reported numerical observations**. They are not sufficient to infer a stationary intrinsic width threshold, Hessian causality, or an optimizer-universal phase transition. See [verbatim parsed-text memo](../archive/source-transcripts/2026-07-06_ANTI_SLOWING_SCIENTIFIC_MEMO.md).
+After revision, the July Scientific Memo reports ~800 runs/~200 GPU h and correlation-time drops as SGD learning rate approaches instability. The memo gives a 16M reference near 80→25 and argues for an apparent one-layer width transition between n_embd=128 and 256; W256 gives τ(η=0.50)=15.8 while W512 gives 3.2. These are **historically reported numerical observations**. They are not sufficient to infer a stationary intrinsic width threshold, Hessian causality, or an optimizer-universal phase transition. See [verbatim parsed-text memo](sources/anti-slowing/2026-07-06_ANTI_SLOWING_SCIENTIFIC_MEMO.md).
 
 ## Stage 3: SUPER V4 stationarity audit and pseudo-IAT pivot
 
@@ -26,7 +26,7 @@ The Aug 17 reconstructed NAO takeover report lists:
 
 These are reported by the historic scientific handoff. R5–R7 were designated **LEGACY_SEEN** for subsequent V2; they are *not* untouched V2 confirmation.
 
-As of the Aug 17 report, the sealed ResNet-18/CIFAR-10 science gate G1 was **NOT RUN**, and ViT-Tiny/CIFAR-100 and DistilBERT/AG News confirmation were **UNTOUCHED**. Nothing in this repository verifies later deployment/experimental success. See the [NAO takeover source transcript](../archive/source-transcripts/2026-08-17_NAO_GENESIS_TAKEOVER_REPORT.md).
+As of the Aug 17 report, the sealed ResNet-18/CIFAR-10 science gate G1 was **NOT RUN**, and ViT-Tiny/CIFAR-100 and DistilBERT/AG News confirmation were **UNTOUCHED**. Nothing in this repository verifies later deployment/experimental success. See the [NAO takeover source transcript](sources/nao/2026-08-17_NAO_GENESIS_TAKEOVER_REPORT.md).
 
 ## Stage 5: distinct Oct 2026 WorkBuddy pilot
 
@@ -39,4 +39,4 @@ The Oct 26 four-line report conducts a new synthetic 8-D finite-response Anti te
 - **Not established:** n_embd=256 universal physical threshold; Hessian top mode as causal mediator; global τ necessarily measures a single stationary relaxation timescale; universal cross-estimator Sokal critical exponents; cross-family confirmation completed.
 - **No validated GENESIS ↔ Anti mechanism bridge:** inverse-Hessian nonlocality and observable-time estimator behavior remain scientifically distinct.
 
-The [claim register](../archive/CLAIM_REGISTER_20261026.csv) tags the strongest time-dependent revisions.
+The [claim register](../catalog/CLAIM_REGISTER_20261026.csv) tags the strongest time-dependent revisions.

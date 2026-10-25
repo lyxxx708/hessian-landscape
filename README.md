@@ -43,4 +43,4 @@ New reference code is labeled **REIMPLEMENTATION**; source experimental code ret
 
 ## Research status and archive index
 
-See [RESEARCH_STATUS.md](RESEARCH_STATUS.md) for the current evidence boundaries and the [integrated documentary archive](research-portfolio/README.md). The WorkBuddy report has one canonical copy at [EXPERIMENT_REPORT.md](archive/workbuddy-fourline-2026-10-26/EXPERIMENT_REPORT.md); its committed Git blob is verified, while the inaccessible original data package is not independently verified or present here.
+See [RESEARCH_STATUS.md](RESEARCH_STATUS.md) for the current evidence boundaries and the [integrated documentary archive](research/README.md). The WorkBuddy report has one canonical copy at [EXPERIMENT_REPORT.md](research/workbuddy/2026-10-26/EXPERIMENT_REPORT.md); its committed Git blob is verified, while the inaccessible original data package is not independently verified or present here.

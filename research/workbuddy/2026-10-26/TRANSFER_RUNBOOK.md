@@ -41,7 +41,7 @@ For Git LFS, only after source review and LFS capability check:
 
 ```powershell
 git lfs install
-git lfs track 'archive/workbuddy-fourline-2026-10-26/payload/*'
+git lfs track 'research/workbuddy/2026-10-26/payload/*'
 git add .gitattributes
 ```
 
