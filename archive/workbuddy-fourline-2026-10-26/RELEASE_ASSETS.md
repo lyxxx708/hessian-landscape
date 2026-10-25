@@ -60,8 +60,21 @@ change the ceiling. Only two things would — a different network with real upst
 bandwidth, or shipping fewer bytes. The second was tested and rejected below. So the plan
 is to make a long transfer *survivable* rather than fast.
 
-Wall-clock floor at 85–127 KB/s over 2,089,046,079 bytes: **4.6–6.8 hours**, and the
-observed steady-state during the real run puts it at the slower end.
+Two further checks closed the remaining "maybe there is a fast path" question:
+
+| Check | Result |
+| --- | --- |
+| Upload 2 MiB instead of 400 MB | 116.8 KB/s — **smaller is not faster**, so this is a hard ceiling, not a ramping effect |
+| `api.github.com` as an alternative upload endpoint | `HTTP 404` — it does not accept uploads; `uploads.github.com` is the only route |
+| DNS for `uploads.github.com` | `198.18.0.17` (Clash fake-ip); no alternate edge to steer to |
+
+So there is one route, and it runs at ~117 KB/s. A single clean 2 MiB POST did land in
+`uploaded` state immediately, which confirms the endpoint works; the earlier `starter`
+outcome was specific to one very long-lived `gh` transfer, not to the API.
+
+Wall-clock floor at 85–127 KB/s over 2,089,046,079 bytes: **4.6–6.8 hours**. The projected
+figure at the measured 117 KB/s ceiling is **4.9 hours**; the observed steady state during
+the real run (85–98 KB/s) puts it at the slower end.
 
 A single 4.6-hour uninterrupted POST is a bad bet on a link that has already produced
 intermittent empty responses, because one dropped connection discards the whole 2 GB.
