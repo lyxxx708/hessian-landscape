@@ -1,10 +1,11 @@
 # WorkBuddy four-line scientific asset archive — 2026-10-26
 
-**Integrity level: `PAYLOAD_HASH_VERIFIED`** — the original 2.089 GB package was found,
-byte-verified against its own manifest, audited for publication safety, and uploaded as a
-GitHub Release asset. The remote round-trip re-download verdict is recorded in
-[INTEGRITY_REPORT.md](INTEGRITY_REPORT.md); this directory does not claim
-`FULL_ARCHIVE_VERIFIED` unless that file says so.
+**Integrity level: `FULL_ARCHIVE_VERIFIED`**
+
+All 63 released chunks re-downloaded through the public url, each chunk's server-declared and locally recomputed sha-256 matched, reassembly reproduced the 2,089,046,079-byte package digest, and every one of the 2,024 content members re-verified against the manifest carried inside the download.
+
+Measured evidence — not transcription — is in
+[INTEGRITY_REPORT.md](INTEGRITY_REPORT.md) and [RELEASE_ASSETS.md](RELEASE_ASSETS.md).
 
 This directory preserves the 2026-10-26 **WorkBuddy 四线研究全阶段实验实施与结果报告**
 and, for the first time, the underlying raw research payload it describes.

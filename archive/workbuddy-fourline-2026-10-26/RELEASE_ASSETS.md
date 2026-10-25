@@ -269,3 +269,25 @@ The same rule applies to `/docs/archive/` inside the package: a superseded versi
 kept, never overwritten. Several superseded protocol revisions (`science_v9/
 genesis_feasibility_v3r3..v3r14`, `science_v7/anti_q4h_d7r1..r3`) are preserved for
 exactly this reason.
+
+## Measured round-trip result
+
+Produced by an independent re-download (`verify_remote63.py`), not transcribed:
+
+| Field | Measured |
+| --- | --- |
+| Result | `FULL_ARCHIVE_VERIFIED` |
+| Integrity level earned | **`FULL_ARCHIVE_VERIFIED`** |
+| Chunks re-downloaded | 63 |
+| Reassembled bytes | 2089046079 |
+| Reassembled SHA-256 | `290b84297c0ef2263ba40270f112358e1322a49bbcd17bffd749bd80757ebf1f` |
+| Verified at (UTC) | `2026-10-25T21:32:16Z` |
+
+
+| Gate | Check | Result |
+| --- | --- | --- |
+| V1 | assets present, `state=uploaded`, server-declared digest matches | PASS |
+| V2 | real GET download, byte count matches | PASS |
+| V3 | each chunk's SHA-256 recomputed locally | PASS |
+| V4 | reassembly reproduces the package digest | PASS |
+| V5 | all 2,024 members re-hashed against the in-package manifest | PASS |

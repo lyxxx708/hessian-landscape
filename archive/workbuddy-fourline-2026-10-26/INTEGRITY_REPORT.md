@@ -1,6 +1,6 @@
 # Integrity report — WorkBuddy four-line archive, 2026-10-26
 
-**Claimed integrity level: `PAYLOAD_HASH_VERIFIED`** (not yet `FULL_ARCHIVE_VERIFIED` — see §7).
+**Claimed integrity level: `FULL_ARCHIVE_VERIFIED`** — all 63 released chunks re-downloaded through the public URL, each chunk's server-declared and locally recomputed SHA-256 matched, reassembly reproduced the 2,089,046,079-byte package digest, and every one of the 2,024 content members re-verified against the manifest carried inside the download.
 
 Every number below was produced by an executed command against the actual bytes on the
 authoritative local disk. Nothing in this file is transcribed from the 2026-10-26 report.
