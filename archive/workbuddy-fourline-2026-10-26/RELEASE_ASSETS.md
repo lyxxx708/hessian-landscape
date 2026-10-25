@@ -30,19 +30,38 @@ Measured facts that forced the change:
 | Upload to `uploads.github.com` (proxied) | 108,402 B/s over a 50 MB probe |
 | Upload to `uploads.github.com` (direct, no proxy) | 126,956 B/s over a 20 MB probe |
 | Upload to `httpbin.org` (independent of GitHub) | **126,432 B/s ≈ 1.0 Mbit/s** |
-| Observed during the real part-01 transfer | **85,100 B/s** |
+| Observed during the real part-01 transfer | **85,100 B/s** steady state |
 | Four concurrent 10 MB uploads | No aggregate gain — bandwidth does not stack |
+| Download from `github.com`, same proxy | **1,553 KB/s ≈ 12.7 Mbit/s** |
 
-The independent reference point matters: because a non-GitHub host reports the same
-~126 KB/s, the slowness is **not GitHub-specific throttling**. What was *not* separately
-isolated is whether the bottleneck is the local uplink, the international hop, or the
-local proxy — all three sit on the same path between this host and `httpbin.org`, so this
-measurement cannot distinguish them. Stated as measured rather than as inferred.
+The reference point matters: because a non-GitHub host reported the same ~126 KB/s, the
+slowness is **not GitHub-specific throttling**.
 
-Whatever the cause, it is a property of the path this archive was built over, and it sets
-the wall-clock floor: 2,089,046,079 bytes at 85–126 KB/s is **4.6–6.8 hours** of
-continuous transmission. A faster path would shorten that; the plan below is what makes
-the transfer survivable on this one.
+### It is the upstream direction, not the proxy and not the route
+
+One further measurement settles where the cap lives, and it changes the recommendation:
+
+| Direction | Path | Measured |
+| --- | --- | --- |
+| **Up** to `uploads.github.com` | via local proxy `127.0.0.1:7897` | 108,402 B/s |
+| **Up** to `uploads.github.com` | **direct, proxy bypassed** | 126,956 B/s |
+| **Up** to `httpbin.org` | via proxy | 126,432 B/s |
+| **Up** during the real transfer | via proxy | 56,000–98,000 B/s |
+| **Down** from `github.com` | via the same proxy | **1,553 KB/s (12.7 Mbit/s)** |
+
+Download over the *same* proxy to the *same* host class is roughly **12× faster than
+upload**. And bypassing the proxy entirely does not raise upload speed. Together those two
+facts rule out the proxy, the chosen node, and GitHub as the cause: the constraint is the
+**upstream direction itself** (local link or ISP-side upstream provisioning).
+
+Practical consequence, stated so nobody spends hours on it later: **re-routing cannot fix
+this.** Switching proxy nodes, splitting further, or using a different host would not
+change the ceiling. Only two things would — a different network with real upstream
+bandwidth, or shipping fewer bytes. The second was tested and rejected below. So the plan
+is to make a long transfer *survivable* rather than fast.
+
+Wall-clock floor at 85–127 KB/s over 2,089,046,079 bytes: **4.6–6.8 hours**, and the
+observed steady-state during the real run puts it at the slower end.
 
 A single 4.6-hour uninterrupted POST is a bad bet on a link that has already produced
 intermittent empty responses, because one dropped connection discards the whole 2 GB.
