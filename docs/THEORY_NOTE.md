@@ -22,7 +22,7 @@ Offdiag=1−S_mass(0).
 Normalized S_RMS(k)/S_RMS(0) is meaningful for uniformly sized blocks. Nonuniform block sizes require explicit element-count normalization for cross-architecture comparison.
 
 Block-pair geometric normalization:
-C_ij=||B_ij||_F/√(||B_ii||_F||B_jj||_F) where denominators are nonzero. For indefinite R, C_ij may exceed 1. For SPD R it is also not automatically bounded by 1 under *this Frobenius norm* definition without assumptions and normalization choices.
+C_ij=||B_ij||_F/√(||B_ii||_F||B_jj||_F) where denominators are nonzero. For indefinite R, C_ij may exceed 1. For a positive-semidefinite block matrix R with nonzero PSD diagonal blocks, this Frobenius-normalized pairwise quantity is at most 1 (the PSD block factorization implies ||B_ij||_F²≤||B_ii||_F||B_jj||_F). For indefinite R it need not be bounded by 1.
 
 ## Consistency identity
 
