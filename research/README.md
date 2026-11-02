@@ -1,5 +1,7 @@
 # Research archive and governance map
 
+**Current (2026-11-02):** [PR integration QA and scientific evidence boundaries](2026-11-02_PR_INTEGRATION_QA.md) documents the newly merged Release archive, synthetic P0 work, strategy and gauge source import. Earlier 2026-10-26 directory/residency statements below are preserved as historical descriptions; they do not negate the subsequently published WorkBuddy Release or new P0 scripts. The 2025 Phase IV/V original DLN matrix/checkpoint remains missing.
+
 This index separates the existing GENESIS research archive from the integrated cross-project materials. The repository's top-level [research status](../RESEARCH_STATUS.md) is the current status summary; [AGENTS.md](../AGENTS.md) defines contribution and evidence-handling rules.
 
 ## Directory responsibilities
