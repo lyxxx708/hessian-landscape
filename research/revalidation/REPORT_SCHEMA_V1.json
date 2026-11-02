@@ -1,0 +1,72 @@
+{
+  "schema_id": "GENESIS_REVALIDATION_EVIDENCE_V1",
+  "status": "DESIGN_ONLY",
+  "records": {
+    "run": "run_id,protocol_sha,source_git_sha,setting_id,family,seed_cluster,stage,training_seed,dataset_version,data_split_sha,model_sha,checkpoint_sha,checkpoint_fraction,lambda_relative,lambda_absolute,loss_objective,loss_reduction,normalization,group_sizes,precision,torch_cuda_version,gpu_utilization,peak_vram_gib,wallclock_seconds,eligibility_status,eligibility_reason",
+    "numerical": "run_id,ggn_psd_check,damped_ggn_spd_check,symmetry_error,cg_true_residual,cg_iterations,block_cg_residual,condition_estimate,probe_count,probe_mc_se,solve_bias_estimate,dense_reference_error,delta_stability_tolerance_ratio",
+    "structure": "run_id,block_energy_matrix,bin_energy_raw,bin_energy_error,normalized_element_rms_by_distance,flat_tail_cv,far_tail_amplitude,identity_corrected_resolvent_defined,offdiag_mass,permutation_null_score,gauge_reweighting_effect,depth_scaling_fit",
+    "utility": "run_id,g_norm,full_gain_quadratic,block_gain_best_ray,alpha_oracle,eta,delta,e_task,e_val,line_search_gain_full,line_search_gain_block,short_cg_gain,cheap_predictor_features",
+    "stats": "setting_id,stage,independent_seed_count,checkpoint_repetitions,damping_repetitions,eligible_count,invalid_count,median_delta,cluster_bootstrap_ci_delta,confounder_controls,holdout_freeze_sha,significance_or_uncertainty_method,multiple_testing_correction",
+    "evidence": "claim_id,claim_text,status,source_artifact_relative_path,source_artifact_sha256,code_sha,config_sha,units,independent_n,stat_interval,negative_control,limitation"
+  },
+  "mandatory_paths": [
+    "manifest.jsonl",
+    "status.json",
+    "env-lock.json",
+    "protocol-lock.json",
+    "dataset_manifest.json",
+    "seed_manifest_lock.json",
+    "tables/run_inventory.csv",
+    "tables/numerical_eligibility.csv",
+    "tables/structure_all_bins.csv",
+    "tables/utility_all_runs.csv",
+    "tables/s1_s2_seed_cluster_stats.csv",
+    "reports/SCIENTIFIC_VERDICT.md",
+    "reports/S_M_U_RESULTS.md",
+    "reports/NUMERICAL_QA.md",
+    "reports/NEGATIVE_RESULTS.md",
+    "reports/REPRODUCTION.md",
+    "reports/RESOURCE_ACCOUNTING.md",
+    "reports/FIGURE_INDEX.md",
+    "reports/INDEPENDENT_VERIFIER_RECEIPT.json"
+  ],
+  "claim_statuses": [
+    "DESIGNED",
+    "NUMERIC_VALIDATED_G0",
+    "EXPLORATORY_ONLY",
+    "HOLDOUT_FROZEN",
+    "CONFIRMATORY_PASS_CONDITIONAL",
+    "CONFIRMATORY_FAIL",
+    "NOT_IDENTIFIED",
+    "NOT_RUN",
+    "NUMERIC_UNRESOLVED",
+    "INCOMPLETE_BLOCKED_EVIDENCE"
+  ],
+  "complete_if": [
+    "G0 correctness and independent tests passed",
+    "all S1 26x5 planned training rows have completed or explicit scientifically justified INVALID status",
+    "five S2 anchor settings x16 new seed clusters completed or justified INVALID, without tuning or leakage",
+    "each eligible checkpoint has same-loss GGN, full vs precise layerwise and registered spectral damping results",
+    "adversarial independent QA computes selected raw metrics a second way and verifies report provenance",
+    "S and U decisions pre-specified and applied with honest negative and uncertainty outputs",
+    "S3 real optimizer eval done if gates pass, otherwise reproducible rule-triggered NO-GO",
+    "all large artifacts stay local with SHA256, only redacted compact research results eligible for Git"
+  ],
+  "incomplete_if_any": [
+    "actual CUDA inaccessible",
+    "preflight fails and remains unresolved",
+    "required family entirely resource-ineligible",
+    "S2 seed leakage",
+    "posthoc threshold revision without new independent confirmatory set",
+    "loss or GGN definition not validated",
+    "missing raw evidence hashes",
+    "statistical conclusion relies on checkpoint pseudo-replication"
+  ],
+  "non_goals": [
+    "training a large language model",
+    "achieving a positive scientific result at all costs",
+    "replicating inaccessible 2025 matrices",
+    "server/cloud deployment",
+    "auto-merging GitHub main"
+  ]
+}
