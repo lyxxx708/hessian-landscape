@@ -49,11 +49,15 @@ $envPaths = @{
     CUDA_CACHE_PATH = (Join-Path $paths.cache 'cuda')
     XDG_CACHE_HOME = (Join-Path $paths.cache 'xdg')
 }
-foreach ($dir in ($paths.Values + $envPaths.Values + @(
+$allDirs = @()
+$allDirs += @($paths.Values)
+$allDirs += @($envPaths.Values)
+$allDirs += @(
     (Join-Path $paths.runs 'checkpoints'),
     (Join-Path $paths.runs 'logs'),
     (Join-Path $paths.runs 'reports')
-))) {
+)
+foreach ($dir in $allDirs) {
     New-Item -ItemType Directory -Path $dir -Force | Out-Null
 }
 foreach ($key in $envPaths.Keys) {
