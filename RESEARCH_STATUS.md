@@ -1,5 +1,13 @@
 # Research status
 
+## Proposed epistemic reset — 2026-11-02 (draft, not executed)
+
+**User decision:** Original 2025 Phase IV/V raw Hessian matrices and checkpoints are unavailable, and early reported plateau numbers are too unreliable to use as present scientific evidence. **Retire those numerical claims as a basis for new findings** (retain the immutable historical archive); stop treating archival recovery as a prerequisite for prospective research.
+
+A [fresh large-scale revalidation protocol](research/revalidation/2026-11-02_FRESH_VALIDATION_PROTOCOL_V1.md) is now drafted with separate structure / mechanism / task-utility hypotheses and numerical G0 checks. **Status is DRAFT_NOT_FROZEN / NOT_EXECUTED**, not replication, confirmation, or authorization of GPU spending. A new empirical result must come from new code, real training checkpoints and held-out independent seed clusters.
+
+---
+
 ## Current addendum — 2026-11-02 (Asia/Singapore)
 
 **Integration complete for active new PRs:** #4, #6, #7, #8, and #9 are merged into `main` after source-level QA and successful branch CI. [Read the complete dated PR and science audit](research/2026-11-02_PR_INTEGRATION_QA.md).
