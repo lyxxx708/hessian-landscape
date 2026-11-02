@@ -1,0 +1,331 @@
+{
+  "schema_version": "1.0",
+  "protocol": "GENESIS_LOCAL_FULL_20261102",
+  "contract_status": "DESIGN_PRE_FREEZE",
+  "run_status": "NOT_RUN",
+  "local_only": true,
+  "owner_permissions": {
+    "local_gpu_time": "UNLIMITED_WITHIN_FINITE_PREDECLARED_EXPERIMENT_GRID",
+    "single_gpu_parallel_jobs": 1,
+    "pay_for_remote_gpu": false,
+    "paid_api_experiments": false,
+    "download_licensed_public_data": true,
+    "read_sealed_confirmatory_data_before_freeze": false,
+    "publish_raw_data_publicly": false,
+    "merge_to_main_automatically": false
+  },
+  "hardware": {
+    "gpu": "NVIDIA GeForce RTX 4070 Ti",
+    "expected_vram_gib": 12,
+    "python_prefer": "3.11 or 3.12, with compatible verified stable CUDA-enabled PyTorch",
+    "platform": "native Windows first; WSL2 only if required and proved beneficial",
+    "target_max_gpu_memory_gib": 9.5,
+    "minimum_gpu_free_on_start_gib": 8,
+    "thermal_pause_c": 85,
+    "scratch_directory": "E:\\GENESIS\\runs\\genesis_full_20261102",
+    "keep_code_git_separate_from_experiment_artifacts": true
+  },
+  "autonomy_policy": {
+    "codex_interactions_per_seed": 0,
+    "codex_interactions_per_damping": 0,
+    "scheduler": "deterministic Python process, resumable with work/manifest file state",
+    "subagents": "max 2 independent code/QA workstreams only; never per experiment",
+    "supervision": "process log and checkpoint/status.json; escalate only genuine unrecoverable blockers",
+    "automatic_fix": "only deterministic and audited runtime actions (OOM microbatch reduction preserving effective batch, bounded CG tolerance/iteration escalation, retries on transient IO)",
+    "forbidden": "change scientific outcome thresholds, cherry-pick seeds, replace GGN with empirical Fisher, fabricate tests or results",
+    "failed_runs": "retained as INVALID or FAIL with reason, not discarded",
+    "storage": "All working/cache/data/temp and bulky outputs on E:\\GENESIS. C: only unavoidable Windows/driver/system use; never fallback to C: without explicit user consent."
+  },
+  "stage_g0": {
+    "independent_seed_excluded_from_inference": true,
+    "checks": [
+      "GPU/CUDA/PyTorch/disk/RAM and exact env capture",
+      "JVP/VJP HVP and GGN-vs-dense on tiny MSE and CE models",
+      "adjoint and loss-scaling identities",
+      "dense inverse block energies vs Rademacher and matrix-free CG",
+      "blockwise precise CG vs dense block solve",
+      "finite difference exact-H verification",
+      "numerical solver error vs scientific effect floor",
+      "GPU memory/time calibration each family",
+      "all physical training checkpoints from a fixed objective"
+    ],
+    "must_pass_before_s1": true
+  },
+  "s1_discovery": {
+    "seed_clusters_per_setting": 5,
+    "checkpoint_training_fractions": [
+      0,
+      0.3333333333,
+      0.6666666667,
+      1
+    ],
+    "damping_ratios": [
+      0.001,
+      0.01,
+      0.1
+    ],
+    "damping_scale": "max(lambda_max_G_estimate, absolute_floor_locked_in_G0)",
+    "pre_frozen_setup": "Lock all configs/data/seed schedules/analysis and S2 selection before opening S1 science",
+    "configs": [
+      {
+        "family": "DLN",
+        "depths": [
+          4,
+          8,
+          16
+        ],
+        "width": 16,
+        "balance": [
+          "orthogonal_balanced",
+          "random_unbalanced"
+        ],
+        "input_covariance_condition_numbers": [
+          1,
+          100
+        ],
+        "total_settings": 12,
+        "data": "synthetic fixed teacher, per-seed independent train/test"
+      },
+      {
+        "family": "DLN_WIDTH",
+        "depths": [
+          4,
+          8,
+          16
+        ],
+        "width": 32,
+        "balance": [
+          "orthogonal_balanced"
+        ],
+        "input_covariance_condition_numbers": [
+          1
+        ],
+        "total_settings": 3,
+        "data": "same frozen teacher/data protocol, new independent seeds"
+      },
+      {
+        "family": "MLP",
+        "depths": [
+          3,
+          6,
+          12
+        ],
+        "width": 128,
+        "activation": [
+          "relu",
+          "tanh"
+        ],
+        "total_settings": 6,
+        "dataset": "MNIST; public source/version/splits and license recorded"
+      },
+      {
+        "family": "RESNET",
+        "variants": [
+          "resnet8_GN",
+          "resnet20_GN"
+        ],
+        "total_settings": 2,
+        "dataset": "CIFAR-10 with GroupNorm and frozen train/validation splits"
+      },
+      {
+        "family": "TRANSFORMER",
+        "depths": [
+          2,
+          4,
+          8
+        ],
+        "d_model": 192,
+        "attention_heads": 6,
+        "context_length": 128,
+        "total_settings": 3,
+        "dataset": "public-domain character-level corpus with exact source/license SHA"
+      }
+    ],
+    "total_settings": 26,
+    "minimum_new_training_runs": 130,
+    "approx_checkpoints_before_invalid": 520,
+    "approx_damping_measurements_before_invalid": 1560,
+    "training_budget_defaults_subject_to_g0_freeze": {
+      "DLN": {
+        "optimizer": "Adam",
+        "steps": 4000,
+        "batch_size": 256
+      },
+      "DLN_WIDTH": {
+        "optimizer": "Adam",
+        "steps": 4000,
+        "batch_size": 256
+      },
+      "MLP": {
+        "optimizer": "AdamW",
+        "epochs": 20,
+        "effective_batch_size": 128
+      },
+      "RESNET": {
+        "optimizer": "SGD_with_momentum",
+        "epochs": 80,
+        "effective_batch_size": 128
+      },
+      "TRANSFORMER": {
+        "optimizer": "AdamW",
+        "training_tokens": 50000000,
+        "effective_batch_tokens": 8192
+      }
+    },
+    "analysis": {
+      "retain_all_settings": true,
+      "distance_profiles": "all bins for GGN inverse and raw GGN",
+      "utility": "same gradient precise layerwise vs full GGN, optimal scalar oracle",
+      "mechanisms": [
+        "nullspace",
+        "gauge_parameter_rescaling",
+        "fixed_matrix_damping",
+        "spectral_pole",
+        "orthogonal_layer_block_permutation",
+        "random_subspaces"
+      ],
+      "uncertainty_unit": "independent seed cluster"
+    },
+    "inverse_block_sketch": {
+      "probes_per_source_start": 16,
+      "doubling_schedule": [
+        16,
+        32,
+        64,
+        128,
+        256
+      ],
+      "target_relative_95pct_CI_width": 0.2,
+      "no_convergence": "record_uncertain_not_zero",
+      "report_all_probes_and_residuals": true
+    }
+  },
+  "s2_confirmatory": {
+    "always_run_unconditional_anchor_panel_even_if_s1_negative": true,
+    "fresh_seed_clusters_per_setting": 16,
+    "anchor_conditions": [
+      "DLN depth8 unbalanced covariance100",
+      "DLN depth16 unbalanced covariance100",
+      "MLP depth6 relu",
+      "RESNET resnet20_GN",
+      "TRANSFORMER depth4"
+    ],
+    "anchor_training_runs": 80,
+    "optional_S1_selected_arms": "max one positive and one negative condition selected by PRE_FROZEN rule, 16 new seeds per arm; no duplicate anchors",
+    "minimum_confirmatory_runs": 80,
+    "holdout_reuse_for_tuning": false,
+    "stop_after_single_predeclared_confirmatory_evaluation": true,
+    "cluster_bootstrap_replicates": 2000,
+    "all_seeds_including_negative": true,
+    "fixed_seed_count_reason": "16 fresh seed clusters per anchor chosen before data because GPU time is not budget limited; checkpoint/lambda repeats do not increase n"
+  },
+  "s3_optimizer": {
+    "gate": "ONLY_IF_S1_PLUS_S2_DELTA_AND_PREDICTOR_PASS",
+    "minimal_negative_training_sanity_even_when_no_go": true,
+    "baselines": [
+      "precise_layerwise_GGN",
+      "same_cost_short_CG",
+      "AdamW",
+      "SOAP_or_KFAC_if_supported",
+      "Gradient_Smoothing",
+      "full_GGN_offline_oracle_small_only"
+    ],
+    "trained_task_metrics": [
+      "wall_clock_time_to_target",
+      "fixed_token_or_sample_budget_quality",
+      "peak_memory",
+      "curvature_matvecs",
+      "tuning_compute",
+      "failures"
+    ],
+    "new_algorithm": "optional low-rank or Krylov correction only after predictive utility evidence"
+  },
+  "controls": {
+    "never_reuse_2025_missing_values_as_targets": true,
+    "2026_orthogonal_p0": "toy_control_only",
+    "null_GGN_not_identical_exact_H": true,
+    "GGN_for_CE": "J_logits^T * H_CE_logits * J_logits, not empirical Fisher",
+    "layerwise_definition": "exact blockdiag(GGN + lambda I) solve to comparable residual, else report approximate and do not promote",
+    "no_model_switch_or_target_switch_within_checkpoint_comparison": true,
+    "no_silent_dataset_or_parameterization_change": true,
+    "inverse_energy_estimator_uncertainty_recorded": true,
+    "dynamic_training_vs_fixed_matrix_lambda_sweep_separated": true
+  },
+  "evidence_outputs": {
+    "local_root": "E:\\GENESIS\\runs\\genesis_full_20261102",
+    "manifest": "manifest.jsonl",
+    "run_state": "state.sqlite or state.json with atomic writes and locks",
+    "readable_status": "status.json",
+    "final_reports": [
+      "reports/SCIENTIFIC_VERDICT.md",
+      "reports/S_M_U_RESULTS.md",
+      "reports/NUMERICAL_QA.md",
+      "reports/NEGATIVE_RESULTS.md",
+      "reports/REPRODUCTION.md",
+      "reports/FIGURE_INDEX.md",
+      "reports/RESOURCE_ACCOUNTING.md"
+    ],
+    "raw_results_policy": "never automatically publish or delete, save hashed local CSV/NPZ/checkpoints",
+    "git_policy": "commit source/config/compact auditable summary only; branch and PR, no main merge without owner approval"
+  },
+  "allowed_end_states": [
+    "COMPLETE_POSITIVE",
+    "COMPLETE_NEGATIVE",
+    "COMPLETE_MIXED",
+    "INCOMPLETE_BLOCKED_EVIDENCE"
+  ],
+  "no_infinite_repeat": "All experiments finite by locked config; unlimited GPU time only permits sufficient repetitions and numerical rechecks, not threshold shopping.",
+  "storage_policy": {
+    "priority": "E_DRIVE_FIRST_MINIMIZE_C_DRIVE_WRITES",
+    "windows_preferred_drive": "E:",
+    "root": "E:\\GENESIS",
+    "worktree": "E:\\GENESIS\\worktrees\\hessian-landscape-revalidation",
+    "venv": "E:\\GENESIS\\venvs\\hessian-landscape",
+    "public_datasets": "E:\\GENESIS\\datasets",
+    "download_staging": "E:\\GENESIS\\downloads",
+    "caches": "E:\\GENESIS\\cache",
+    "temporary_files": "E:\\GENESIS\\tmp",
+    "outputs": "E:\\GENESIS\\runs\\genesis_full_20261102",
+    "checkpoints": "E:\\GENESIS\\runs\\genesis_full_20261102\\checkpoints",
+    "logs": "E:\\GENESIS\\runs\\genesis_full_20261102\\logs",
+    "reports": "E:\\GENESIS\\runs\\genesis_full_20261102\\reports",
+    "prefer_E_for": [
+      "git working files and Codex worktree",
+      "Python venv and pip/uv build caches",
+      "PyTorch CUDA-related downloaded wheels and extension/cache outputs",
+      "HF and torchvision dataset downloads",
+      "intermediate NPZ, checkpoints, raw probe results and temporary files",
+      "CUDA kernel caches, model checkpoints, training results, logs and reports"
+    ],
+    "process_local_environment_variables": [
+      "TEMP",
+      "TMP",
+      "TMPDIR",
+      "PIP_CACHE_DIR",
+      "UV_CACHE_DIR",
+      "HF_HOME",
+      "HF_DATASETS_CACHE",
+      "HF_HUB_CACHE",
+      "TORCH_HOME",
+      "TORCH_EXTENSIONS_DIR",
+      "TRITON_CACHE_DIR",
+      "NUMBA_CACHE_DIR",
+      "MPLCONFIGDIR",
+      "PYTHONPYCACHEPREFIX",
+      "CUDA_CACHE_PATH",
+      "XDG_CACHE_HOME"
+    ],
+    "set_environment_per_process_not_global": true,
+    "explicit_data_and_output_paths_required": true,
+    "forbid_silent_fallback_to_C": true,
+    "do_not_move_or_delete_existing_C_files": true,
+    "do_not_create_system_junctions_or_redirect_Windows_profile": true,
+    "unavoidable_system_use_of_C_allowed": true,
+    "verify_free_space_on_E_before_download_and_each_large_stage": true,
+    "estimate_peak_disk_before_G0_S1_S2_and_S3": true,
+    "include_C_and_E_delta_in_resource_accounting": true,
+    "on_E_missing_or_full": "STOP_WITH_STORAGE_BLOCKER_AND_NO_C_FALLBACK",
+    "safe_disk_management": "Prefer compress/deduplicate generated scratch/checkpoints only under E with manifest and retention policy; never silently delete evidence",
+    "bootstrap": "Dot-source scripts/prepare_local_e_drive.ps1 in the shell that launches Codex-owned Python processes; preserve local Windows/global environment"
+  }
+}

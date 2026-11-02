@@ -1,0 +1,49 @@
+.......sFF                                                               [100%]
+=================================== FAILURES ===================================
+____________________ test_runtime_versions_bound_to_freeze _____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-23/test_runtime_versions_bound_to0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7f13ddce1a70>
+
+    def test_runtime_versions_bound_to_freeze(tmp_path,monkeypatch):
+        from genesis_gpu.audit.g0 import run_g0
+        from genesis_gpu.study.freeze import freeze_protocol,verify_lock
+        cfg=default_config('smoke');cfg['root']=str(tmp_path);cfg['storage_root']=str(tmp_path)
+        run_g0(cfg,tmp_path);freeze_protocol(cfg,tmp_path)
+        import genesis_gpu.env.reproducibility as rep
+>       original=rep.runtime_abi
+                 ^^^^^^^^^^^^^^^
+E       AttributeError: module 'genesis_gpu.env.reproducibility' has no attribute 'runtime_abi'
+
+tests_v2/test_adversarial.py:94: AttributeError
+_________ test_budget_matched_cg_is_separate_from_fixed_short_baseline _________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-23/test_budget_matched_cg_is_sepa0')
+
+    def test_budget_matched_cg_is_separate_from_fixed_short_baseline(tmp_path):
+        from genesis_gpu.study.design import expand_design
+        from genesis_gpu.models.registry import build_model
+        from genesis_gpu.datasets.registry import load_bundle
+        from genesis_gpu.curvature.operators import FrozenOperator
+        from genesis_gpu.contracts import LossSpec
+        from genesis_gpu.science.utility import evaluate_utility
+        cfg=default_config('smoke');run=expand_design(cfg)[0]
+        data=load_bundle(run,cfg,tmp_path);x,y=data.batch('train',step=0,count=2,seed=run.seed,dtype=torch.float64)
+        op=FrozenOperator(build_model(run.model,run.seed).double(),x,y,LossSpec('mse'))
+        result,_=evaluate_utility(op,.1,rtol=1e-9,max_iter=200)
+>       assert result['matched_cg']['matvec_budget']>=result['matched_cg']['solve']['matvecs']
+               ^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'matched_cg'
+
+tests_v2/test_adversarial.py:111: KeyError
+=============================== warnings summary ===============================
+tests_v2/test_adversarial.py: 18 warnings
+  /opt/pyvenv/lib/python3.13/site-packages/torch/jit/_script.py:1480: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+SKIPPED [1] tests_v2/test_adversarial.py:74: Actual CUDA device required; not replaced by CPU
+FAILED tests_v2/test_adversarial.py::test_runtime_versions_bound_to_freeze - AttributeError: module 'genesis_gpu.env.reproducibility' has no attribute 'runtime_abi'
+FAILED tests_v2/test_adversarial.py::test_budget_matched_cg_is_separate_from_fixed_short_baseline - KeyError: 'matched_cg'
+2 failed, 7 passed, 1 skipped, 18 warnings in 6.54s

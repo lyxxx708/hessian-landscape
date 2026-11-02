@@ -1,0 +1,36 @@
+name: GENESIS v2 software verification (not scientific validation)
+on:
+  push:
+  pull_request:
+jobs:
+  cpu:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        python: ['3.11']
+    runs-on: ${{ matrix.os }}
+    env:
+      OMP_NUM_THREADS: '2'
+      OPENBLAS_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: python -m pip install torch==2.10.0 --index-url https://download.pytorch.org/whl/cpu
+      - run: python -m pip install -e ".[test]"
+      - run: python -m pytest tests_v2 -q
+      - run: python -m genesis_gpu --config configs/smoke_v2.yaml --root "${{ runner.temp }}/genesis-smoke" pipeline
+      - if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          Get-ChildItem scripts/genesis_*.ps1 | ForEach-Object {
+            $tokens=$null; $errors=$null
+            [void][System.Management.Automation.Language.Parser]::ParseFile($_.FullName,[ref]$tokens,[ref]$errors)
+            if($errors.Count) { throw ($errors | Out-String) }
+          }
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cpu-evidence-${{ matrix.os }}
+          path: ${{ runner.temp }}/genesis-smoke/reports/

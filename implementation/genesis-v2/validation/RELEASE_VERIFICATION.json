@@ -1,0 +1,66 @@
+{
+  "release": "GENESIS v2.0 executable source",
+  "release_date": "2026-11-02",
+  "profile_verified": "CPU_ENGINEERING_ONLY",
+  "base_repository": "lyxxx708/hessian-landscape",
+  "reviewed_remote_pr": 11,
+  "reviewed_remote_head": "26315f006c3fc60edbe8bb726df3c894a9f40c05",
+  "local_implementation_commit": "564b8640b20d328eca799aa3decd41d707ab4ab5",
+  "approved_blueprint_sha256": "6bb8578a984c9210504d448b2014a02d85b8740b26859ab906d808a3dbef5970",
+  "source_manifest_sha256": "6ea8ae068e284e2ea1d1c6257e0e1479fc4c3bb00111e5fb8d5aa185cd007d65",
+  "protocol_sha256_smoke": "4979f5ffe81d0b17083a79df5d0f62e235d62ba0430d5913e49b1bfd29110f13",
+  "environment": {
+    "python": "3.13.5",
+    "torch": "2.10.0+cpu",
+    "numpy": "2.3.5",
+    "scipy": "1.17.0",
+    "cuda_available": false,
+    "platform": "Linux"
+  },
+  "tests": {
+    "command": "OPENBLAS_NUM_THREADS=2 OMP_NUM_THREADS=2 python -m pytest -q",
+    "passed": 80,
+    "skipped": 1,
+    "failed": 0,
+    "skip_reason": "actual CUDA unavailable; not emulated",
+    "log": "validation/48_release_tests.txt"
+  },
+  "end_to_end": {
+    "executed_jobs": 40,
+    "training_jobs": 8,
+    "measurement_jobs": 32,
+    "model_families": [
+      "DLN",
+      "MLP",
+      "ResNet",
+      "Transformer"
+    ],
+    "status": "CPU_SMOKE_COMPLETE_NOT_SCIENTIFIC_VALIDATION",
+    "independent_replays": 8,
+    "errors": [],
+    "figures": 8,
+    "tables": 9,
+    "scientific_complete": false
+  },
+  "full_study_plan": {
+    "s1_training": 130,
+    "s2_training": 96,
+    "s1_diagnostic_jobs": 3120,
+    "s2_diagnostic_jobs": 2304,
+    "public_real_data_runs_executed_here": 0
+  },
+  "not_executed": [
+    "native Windows PowerShell execution",
+    "RTX 4070 Ti CUDA G0",
+    "full public-data S1/S2 study",
+    "positive-gated real S3 trial",
+    "legacy repository regression suite",
+    "GitHub Actions"
+  ],
+  "no_remote_mutation": true,
+  "no_user_workstation_access": true,
+  "no_paid_cloud_or_llm_calls_in_experiment": true,
+  "source_distribution": "ZIP with safe additive overlay; no legacy files overwritten",
+  "wheel_import_test": "validation/50_wheel_import_cli.txt",
+  "auditor_scope": "Different numerical code paths; code review is author self-review, not a second independent reviewer."
+}

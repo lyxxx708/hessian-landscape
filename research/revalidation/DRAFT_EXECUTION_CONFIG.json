@@ -1,0 +1,142 @@
+{
+  "protocol_id": "GENESIS-FRESH-REVALIDATION-v1",
+  "status": "SUPERSEDED_REFERENCE_ONLY_NOT_EXECUTABLE",
+  "revision_date": "2026-11-02",
+  "evidence_policy": {
+    "historical_2025": "RETIRED_AS_EVIDENCE_ARCHIVE_ONLY",
+    "synthetic_2026_p0": "G0_CONTROL_ONLY",
+    "new_results": "REQUIRE_NEW_RUNS_CHECKPOINTS_AND_INDEPENDENT_AUDIT"
+  },
+  "stages": [
+    {
+      "id": "G0",
+      "title": "numerical correctness and capacity preflight",
+      "inference_eligible": false,
+      "objective": "dense-vs-matrixfree, exact-vs-sketch, artifact checks, per model GPU/VRAM projection"
+    },
+    {
+      "id": "S1",
+      "title": "discovery on actual training",
+      "seeds_per_setting": 5,
+      "checkpoints_at_fraction": [
+        0,
+        0.5,
+        1
+      ],
+      "damping_ratio_to_spectral_norm": [
+        0.001,
+        0.01,
+        0.1
+      ],
+      "matrix_objects": [
+        "GGN",
+        "exact_H_on_small_validated_subsets"
+      ],
+      "families": [
+        {
+          "name": "DLN",
+          "depths": [
+            4,
+            8,
+            16
+          ],
+          "widths": [
+            16,
+            32
+          ],
+          "regimes": [
+            "balanced",
+            "imbalanced"
+          ],
+          "dataset": "frozen synthetic teacher and covariance panel"
+        },
+        {
+          "name": "MLP",
+          "depths": [
+            3,
+            6,
+            12
+          ],
+          "widths": [
+            128
+          ],
+          "dataset": "public small image classification dataset, frozen before run"
+        },
+        {
+          "name": "ResNet",
+          "variants": [
+            "small-resnet-cifar10"
+          ],
+          "dataset": "CIFAR-10"
+        },
+        {
+          "name": "TinyTransformer",
+          "variants": [
+            "2-4-8-layer small text LM, sizes from G0 resource preflight"
+          ],
+          "dataset": "licensed public small text corpus"
+        }
+      ]
+    },
+    {
+      "id": "S2",
+      "title": "sealed confirmation",
+      "seeds_per_selected_setting": 8,
+      "required_families": [
+        "vision",
+        "text"
+      ],
+      "additional_depth_extrapolation": true,
+      "selection": "PRE_FROZEN_RULE_REQUIRED_BEFORE_S1",
+      "holdout_seed_manifest": "NOT_CREATED_OR_ACCESSED"
+    },
+    {
+      "id": "S3",
+      "title": "training optimizer trial",
+      "enabled_condition": "S1+S2_TASK_VALUE_AND_PREDICTION_PASS",
+      "baselines": [
+        "precise-layerwise-GGN",
+        "offline-full-GGN-only-small",
+        "same-cost-CG",
+        "AdamW",
+        "SOAP/K-FAC-if-applicable",
+        "Gradient-Smoothing"
+      ],
+      "metrics": [
+        "wall_clock_time_to_target",
+        "final_validation_quality",
+        "peak_memory",
+        "matvec_and_tuning_cost"
+      ]
+    }
+  ],
+  "prescribed_numerics": {
+    "loss_specific_ggn": true,
+    "empirical_fisher_not_equivalent": true,
+    "positive_damping_required": true,
+    "solver_tolerance_fixed_before_scientific_inference": true,
+    "raw_distance_bins_required": true,
+    "probe_error_bars_required": true,
+    "source_and_checkpoint_hash_required": true
+  },
+  "gates": {
+    "S": "heldout cross-family conditional structure beyond controls",
+    "U": "independent natural-checkpoint benefit and stronger-than-cheap-predictors",
+    "optimizer": "compute-adjusted real training gain",
+    "historic": "no original 2025 value may become a confirmatory target"
+  },
+  "current_execution": {
+    "g0": "NOT_RUN_IN_THIS_PROTOCOL",
+    "s1": "NOT_RUN",
+    "s2": "NOT_RUN",
+    "s3": "NOT_RUN"
+  },
+  "prohibitions": [
+    "No private or sealed holdout access without separate permission",
+    "No remote GPU spend without execution decision",
+    "No claim promotion based on CI green",
+    "No deletion/relabel of historical reports"
+  ],
+  "superseded_for_full_local_gpu_by": "LOCAL_4070TI_FULL_V1.json",
+  "note": "Earlier conceptual stage sizing differs from the approved 4070 Ti full-run experiment. Use newer local config and PRIMARY_ENDPOINTS_AND_FREEZE_RULES.md; do not combine seed counts/damping definitions."
+}
