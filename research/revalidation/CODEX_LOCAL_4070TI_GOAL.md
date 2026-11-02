@@ -49,7 +49,7 @@ GPU compute time is unbounded by the user, but experiments remain **finite and d
 
 ## Phase C — execute S2 regardless of discovery's sign
 
-Run the **unconditional confirmatory anchors**, all with eight NEW independent training seed clusters: DLN depth 8 &16 unbalanced anisotropic, MLP depth 6 ReLU, ResNet20 GroupNorm/CIFAR10, and four-layer Tiny Transformer. This is a minimum of **40 new training runs**, whether S1 discovered an effect or a null. When the locked S1 selection rule requests one discovery-positive and one discovery-negative condition, add up to 8 new runs each, excluding duplicate anchors.
+Run the **unconditional confirmatory anchors**, all with sixteen NEW independent training seed clusters: DLN depth 8 &16 unbalanced anisotropic, MLP depth 6 ReLU, ResNet20 GroupNorm/CIFAR10, and four-layer Tiny Transformer. This is a minimum of **80 new training runs**, whether S1 discovered an effect or a null. When the locked S1 selection rule requests one discovery-positive and one discovery-negative condition, add up to 16 new runs each, excluding duplicate anchors.
 
 No tuning on S2. Do not look at S2 data before the seed/config/analysis freeze and committed S1 selection. Report confidence intervals by *training-seed cluster*, not checkpoint/lambda rows. Separate estimator Monte Carlo error from seed-to-seed variability; run independent raw metric recomputation. Lack of a platform or optimizer utility is a valid S2 result; do not make unsupported universal impossibility claims.
 
