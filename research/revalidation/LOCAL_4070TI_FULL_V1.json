@@ -201,7 +201,7 @@
   },
   "s2_confirmatory": {
     "always_run_unconditional_anchor_panel_even_if_s1_negative": true,
-    "fresh_seed_clusters_per_setting": 8,
+    "fresh_seed_clusters_per_setting": 16,
     "anchor_conditions": [
       "DLN depth8 unbalanced covariance100",
       "DLN depth16 unbalanced covariance100",
@@ -209,13 +209,14 @@
       "RESNET resnet20_GN",
       "TRANSFORMER depth4"
     ],
-    "anchor_training_runs": 40,
-    "optional_S1_selected_arms": "max one positive and one negative condition chosen by PRE_FROZEN selection code, 8 new seeds per arm; duplicate anchor skipped",
-    "minimum_confirmatory_runs": 40,
+    "anchor_training_runs": 80,
+    "optional_S1_selected_arms": "max one positive and one negative condition selected by PRE_FROZEN rule, 16 new seeds per arm; no duplicate anchors",
+    "minimum_confirmatory_runs": 80,
     "holdout_reuse_for_tuning": false,
     "stop_after_single_predeclared_confirmatory_evaluation": true,
     "cluster_bootstrap_replicates": 2000,
-    "all_seeds_including_negative": true
+    "all_seeds_including_negative": true,
+    "fixed_seed_count_reason": "16 fresh seed clusters per anchor chosen before data because GPU time is not budget limited; checkpoint/lambda repeats do not increase n"
   },
   "s3_optimizer": {
     "gate": "ONLY_IF_S1_PLUS_S2_DELTA_AND_PREDICTOR_PASS",
