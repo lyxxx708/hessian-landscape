@@ -1,7 +1,7 @@
 # Codex Local Goal — GENESIS complete revalidation on RTX 4070 Ti
 
 **Owner:** user · 2026-11-02 · **Status:** NOT_STARTED_LOCALLY.
-**Hardware:** local Windows RTX 4070 Ti, 12 GiB VRAM. User authorizes UNLIMITED LOCAL GPU RUN TIME; not unlimited VRAM, electricity-free hardware, Codex tokens, paid cloud services or external data access.
+**Hardware and disk:** local Windows RTX 4070 Ti, 12 GiB VRAM. User authorizes UNLIMITED LOCAL GPU RUN TIME; not unlimited VRAM, electricity-free hardware, Codex tokens, paid cloud services or external data access. **Mandatory storage rule: use E: for worktree, Python venv, caches, datasets, temporary files and ALL large scientific artifacts; minimize C: to unavoidable system files. Never fall back to C: on E: failure.**
 
 ## Objective
 
@@ -11,7 +11,7 @@ This is a run-to-evidence objective, not a request to produce another plan, tiny
 
 ## Sources and scope
 
-- Read root AGENTS.md. Read this file, research/revalidation/2026-11-02_FRESH_VALIDATION_PROTOCOL_V1.md, research/revalidation/LOCAL_4070TI_FULL_V1.json, and research/revalidation/PRIMARY_ENDPOINTS_AND_FREEZE_RULES.md. The 2026-10-26 protocols are historical scientific context, not permission to reuse old invalid claims.
+- Read root AGENTS.md. Read this file, research/revalidation/2026-11-02_FRESH_VALIDATION_PROTOCOL_V1.md, research/revalidation/LOCAL_4070TI_FULL_V1.json, research/revalidation/E_DRIVE_STORAGE_POLICY.md, and research/revalidation/PRIMARY_ENDPOINTS_AND_FREEZE_RULES.md. The 2026-10-26 protocols are historical scientific context, not permission to reuse old invalid claims.
 - Work on an isolated branch/worktree based on draft PR #11, preserving any existing local changes. Never overwrite historical archives, force-push main, delete research branches or auto-merge a PR.
 - Local CUDA GPU time is explicitly approved without a time cap; finite preregistered experimental grid and bounded individual solver retries still apply. NO paid cloud GPU, paid API calls, remote LLM inference within experiments, private sealed dataset, third-party credentials or automatic public raw data uploads. License-verified public datasets may be downloaded.
 - Do not waste tokens trying to recover the unavailable 2025 DLN matrix. It cannot validate the new research. Do not make a synthetic run match the reported 0.09–0.12 curve.
@@ -25,7 +25,7 @@ This is a run-to-evidence objective, not a request to produce another plan, tiny
 
 ## Phase A — preflight and implementation
 
-1. Inspect exact local git state, CUDA/nvidia-smi, 12 GiB VRAM, Windows/Python/CUDA/PyTorch, RAM/disk free space, source/data availability. Install a compatible stable CUDA-enabled PyTorch wheel using the official selector; do NOT hardcode an unverified wheel URL. Prefer an isolated Python 3.11/3.12 venv and freeze actual packages and driver in env-lock.
+1. Inspect exact local git state, CUDA/nvidia-smi, 12 GiB VRAM, Windows/Python/CUDA/PyTorch, RAM and **free space on both C: and E:**, source/data availability. **Create the experiment worktree on E:\GENESIS\worktrees, a dedicated Python 3.11/3.12 venv on E:\GENESIS\venvs, and all dataset/cache/scratch/artifact roots on E:.** Do not move or delete an existing clone on C:. Set process-local TEMP/TMP, pip/uv, HF, PyTorch, Triton, CUDA caches through scripts/prepare_local_e_drive.ps1 in every worker launch; pass explicit absolute E: output/data roots in code. Install a stable CUDA-enabled PyTorch wheel using the official selector; do NOT hardcode an unverified wheel URL. Record env/package/driver lock and E:/C: storage preflight.
 2. Do not fallback silently to CPU. Use only one GPU job at once and target peak device usage <=9.5 GiB to leave Windows desktop headroom. Adjust **microbatch only while preserving effective batch, normalization, sample/token budget and training state**. If not valid, record a resource failure. Keep GPU temperature/power monitored; pause safely for persistent >=85C; never bypass hardware protections or silently alter OS-wide power settings.
 3. Implement tested model/data adapters: fixed-target DLN, MLP/MNIST, GroupNorm ResNet8/20-CIFAR10, and character Tiny Transformer on a legally distributable public-domain/clearly licensed corpus. Pre-freeze corpus/version/hash and split; no later dataset switching based on outcome.
 4. Implement loss-specific GGN-vector products: mean squared residual G = J^T J/M; cross-entropy G = J_logits^T H_CE_logits J_logits using correct reduction. NO empirical-Fisher substitution. Verify JVP/VJP, exact-H HVP, adjoints, symmetry, PSD and fixed-vs-moving stochastic model state on tiny models, and independently compare against FP64 dense reference/finite differences. Frozen checkpoint and batch must remain unchanged during all CG matvecs.
@@ -59,12 +59,12 @@ Apply locked S and U Go/No-Go decisions after S2. If the gradient-conditioned fu
 
 ## Deliverables, QA and true stopping rules
 
-Use local ignored artifact storage (default local_artifacts/genesis_full_20261102) with manifest.jsonl, atomic status.json, env + protocol locks, all seed/checkpoint/config hashes, raw numerical arrays, estimator probes, solver traces and every failure/invalid case.
+Use **E:\GENESIS\runs\genesis_full_20261102** ignored artifact storage (NOT a relative path on C:) with manifest.jsonl, atomic status.json, env + protocol locks, all seed/checkpoint/config hashes, raw numerical arrays, estimator probes, solver traces and every failure/invalid case.
 
 Produce **reports/SCIENTIFIC_VERDICT.md** with distinct S / M / U verdicts, effect sizes, counts, confidence intervals, negative results, and path+SHA for every material claim, plus S_M_U_RESULTS.md, NUMERICAL_QA.md, NEGATIVE_RESULTS.md, REPRODUCTION.md, RESOURCE_ACCOUNTING.md and figures. A separate verifier independently recomputes a sample of raw metrics/plots and proves no holdout leakage or invalid claim promotion. Final state is COMPLETE_POSITIVE / COMPLETE_NEGATIVE / COMPLETE_MIXED only with full S1/S2 required coverage and audit. Ineligible runs must remain counted and cannot support a positive claim.
 
 Store large datasets/checkpoints/arrays locally; commit only runnable code, configs, tests and compact non-sensitive reports to a feature branch. Review rights/credentials before any public push. Do NOT auto-merge main.
 
-If CUDA absent, safe hardware conditions impossible, public dataset rights unsatisfied, G0 numerical validity irreparable, or essential settings cannot run on this 12 GiB device, stop with INCOMPLETE_BLOCKED_EVIDENCE and complete diagnostic artifacts. Do not fabricate completion or substitute toy demos. Otherwise autonomously implement, run, check, correct, and resume without unnecessary user questions.
+If CUDA absent, E: absent/full/unwritable (never use C: as overflow), safe hardware conditions impossible, public dataset rights unsatisfied, G0 numerical validity irreparable, or essential settings cannot run on this 12 GiB device, stop with INCOMPLETE_BLOCKED_EVIDENCE and complete diagnostic artifacts. Do not fabricate completion or substitute toy demos. Otherwise autonomously implement, run, check, correct, and resume without unnecessary user questions.
 
 **Use more GPU; use far fewer model tokens. Success = new reproducible scientific evidence, including negative evidence.**
