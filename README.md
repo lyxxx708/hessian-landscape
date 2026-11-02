@@ -47,4 +47,4 @@ See [RESEARCH_STATUS.md](RESEARCH_STATUS.md) for the current evidence boundaries
 
 ## Research investment decision (2026-10-26)
 
-- [GENESIS: evidence-graded research value, nontrivial hypotheses, ICML/NeurIPS/ICLR positioning, and falsifiable experiment protocol](research/genesis/README.md) — analytical decision documents only; they do not upgrade the status of historical measurements or unmerged P0 experiments.
+- [GENESIS: evidence-graded research value, nontrivial hypotheses, ICML/NeurIPS/ICLR positioning, and falsifiable experiment protocol](research/genesis/README.md) — analytical decision documents only; they do not upgrade the status of historical measurements or synthetic P0 results.
