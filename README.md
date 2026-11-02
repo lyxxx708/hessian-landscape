@@ -2,6 +2,8 @@
 
 Research archive for the **curvature structure / damped inverse Hessian / long-range plateau** line of Project GENESIS.
 
+**Fresh evidence reset (draft, 2026-11-02):** The original 2025 matrices and checkpoints are unavailable; old numeric plateau heights are not scientific targets. New hypotheses require fresh, independently auditable training checkpoints. See [large-scale revalidation draft](research/revalidation/2026-11-02_FRESH_VALIDATION_PROTOCOL_V1.md) and [G0 numerical core](scripts/fresh_revalidation_g0.py). **No large-scale experiment has been executed under this protocol.**
+
 ## Current integration snapshot (2026-11-02)
 
 PRs #4, #6, #7, #8 and #9 have been reviewed and merged. The **2026 WorkBuddy source payload is available as a [public GitHub Release](https://github.com/lyxxx708/hessian-landscape/releases/tag/archive-20261026)** (63 chunks), and **new synthetic P0 Hessian/GGN and gauge reimplementations** plus scientific investment protocols now exist in the Git tree. The **original 2025 Phase IV/V DLN source matrices/checkpoints are still unrecovered**; no universal plateau, optimizer acceleration, or scientific replication claim has been promoted. [Current evidence and PR integration QA](research/2026-11-02_PR_INTEGRATION_QA.md) · [Current research status](RESEARCH_STATUS.md).
