@@ -1,5 +1,13 @@
 # Project GENESIS — Hessian Landscape
 
+## CURRENT executable delivery — 2026-11-02
+
+**Full runnable GENESIS v2 source has been imported into [implementation/genesis-v2/](implementation/genesis-v2/README_GENESIS_V2.md).** Open [the current execution index](research/revalidation/README.md), paste [the Codex Goal](research/revalidation/START_CODEX_GOAL_V2.md), and follow [the exact 15-stage experiment/GitHub playbook](research/revalidation/EXECUTION_PLAYBOOK_V2.md). The [delivery receipt](research/revalidation/GITHUB_DELIVERY_RECEIPT_V2.md) tracks exact archive/checksum provenance and evidence boundaries.
+
+**Effective v2 design: 130 S1 + 96 independent S2 trajectories, conditional S3; local 4070 Ti, E:-first storage.** The following historical proposal text includes earlier G0-only / S2=80 plans and is retained as dated provenance, not executable v2 instructions. Source upload and CPU tests **do not mean CUDA G0 or any full science run has occurred**.
+
+---
+
 Research archive for the **curvature structure / damped inverse Hessian / long-range plateau** line of Project GENESIS.
 
 **Fresh evidence reset (draft, 2026-11-02):** The original 2025 matrices and checkpoints are unavailable; old numeric plateau heights are not scientific targets. New hypotheses require fresh, independently auditable training checkpoints. See [large-scale revalidation draft](research/revalidation/2026-11-02_FRESH_VALIDATION_PROTOCOL_V1.md) and [G0 numerical core](scripts/fresh_revalidation_g0.py). **No large-scale experiment has been executed under this protocol.**
