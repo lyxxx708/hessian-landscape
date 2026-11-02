@@ -19,7 +19,7 @@ cd E:\GENESIS\worktrees\hessian-landscape-v2\implementation\genesis-v2
 git rev-parse HEAD
 ~~~
 
-0.3. Before installing dependencies, verify 143 indexed source files against the shipped SHA-256 manifest; the 144th file is the manifest itself and is protected by the Git commit.
+0.3. Before installing dependencies, verify 144 indexed source files against the updated SHA-256 manifest; the 145th file is the manifest itself and is protected by the Git commit.
 
 ~~~powershell
 $M = Get-Content .\DELIVERY_MANIFEST.json -Raw | ConvertFrom-Json
