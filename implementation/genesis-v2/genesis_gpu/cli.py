@@ -16,12 +16,17 @@ def parser():
     p=argparse.ArgumentParser(prog='genesis',description=__doc__)
     p.add_argument('--config',default='configs/study_v2.yaml');p.add_argument('--root')
     sub=p.add_subparsers(dest='command',required=True)
-    for name in ('doctor','prepare-data','g0','freeze','plan','run','resume','status','stop','pause','adjudicate','verify','report','pipeline','init-config'):
+    for name in ('doctor','prepare-data','import-local-images','g0','freeze','plan','run','resume','status','stop','pause','adjudicate','verify','report','pipeline','init-config'):
         s=sub.add_parser(name)
         s.add_argument('--config',default=argparse.SUPPRESS);s.add_argument('--root',default=argparse.SUPPRESS)
         if name=='init-config':s.add_argument('--profile',choices=['full','smoke'],default='full');s.add_argument('--output',required=True)
         if name in ('doctor','g0'):s.add_argument('--device');s.add_argument('--storage')
         if name in ('prepare-data','pipeline'):s.add_argument('--accept-licenses',action='store_true')
+        if name=='import-local-images':
+            s.add_argument('--mnist-raw',type=Path,required=True,help='Folder containing four canonical MNIST .gz files')
+            s.add_argument('--cifar-batches',type=Path,required=True,help='cifar-10-batches-py folder')
+            s.add_argument('--confirm-authorized-local-use',action='store_true',
+                           help='Attest owner authorization for local research without redistribution')
         if name in ('g0','verify'):s.add_argument('--all',action='store_true')
         if name=='g0':s.add_argument('--save-reference',action='store_true')
         if name in ('plan','run','resume','adjudicate'):s.add_argument('--stage',default='s1')
@@ -75,11 +80,21 @@ def execute(args,cfg,root):
             atomic_json(root/'control.json',{'action':command,'time':time.time()});return {'action':command,'cooperative_only':True,'other_processes_killed':False}
         from genesis_gpu.runtime.scheduler import status
         return status(root)
+    if command=='import-local-images':
+        if (root/'protocol-lock.json').exists():
+            raise RuntimeError('Study already frozen: create a new protocol/root instead of replacing inputs')
+        if not args.confirm_authorized_local_use:
+            raise RuntimeError('Explicit --confirm-authorized-local-use required; never assume licence from download')
     prepare_storage(root,production=cfg['profile']=='full',min_free_bytes=int(cfg['resources']['disk_reserve_gib']*1024**3))
     configure_process_environment(Path(cfg['storage_root']),cfg['profile']=='full')
     if command=='prepare-data':
         from genesis_gpu.datasets.registry import prepare_data
         return prepare_data(cfg,root,accept_licenses=args.accept_licenses)
+    if command=='import-local-images':
+        from genesis_gpu.datasets.offline_import import import_local_images
+        return import_local_images(cfg,root,mnist_raw=args.mnist_raw,cifar_batches=args.cifar_batches,
+                                   authorized_local_use=args.confirm_authorized_local_use,
+                                   production=cfg['profile']=='full')
     if command=='g0':
         from genesis_gpu.audit.g0 import run_g0
         if (root/'protocol-lock.json').exists():raise RuntimeError('Already frozen: use verify, not overwrite G0 evidence')

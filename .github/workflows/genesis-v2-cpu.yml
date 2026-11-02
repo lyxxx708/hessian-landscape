@@ -25,7 +25,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - name: Verify shipped source bytes against 144-file SHA256 manifest
+      - name: Verify shipped source bytes against 146-file SHA256 manifest
         working-directory: implementation/genesis-v2
         run: |
           python - <<'PY'
@@ -33,7 +33,7 @@ jobs:
           root=pathlib.Path('.')
           m=json.loads((root/'DELIVERY_MANIFEST.json').read_text(encoding='utf-8'))
           files=m['files']
-          assert len(files)==144, f'Unexpected manifest count {len(files)}'
+          assert len(files)==146, f'Unexpected manifest count {len(files)}'
           assert len({e['path'] for e in files})==len(files), 'Duplicate manifest path'
           for e in files:
               name=e['path']

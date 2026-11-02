@@ -19,7 +19,7 @@ cd E:\GENESIS\worktrees\hessian-landscape-v2\implementation\genesis-v2
 git rev-parse HEAD
 ~~~
 
-0.3. Before installing dependencies, verify 144 indexed source files against the updated SHA-256 manifest; the 145th file is the manifest itself and is protected by the Git commit.
+0.3. Before installing dependencies, verify 146 indexed source files against the updated SHA-256 manifest; the 147th file is the manifest itself and is protected by the Git commit.
 
 ~~~powershell
 $M = Get-Content .\DELIVERY_MANIFEST.json -Raw | ConvertFrom-Json
@@ -71,6 +71,8 @@ If legacy tests fail, record the failing names and establish root cause separate
 
 ## Stage 3 — Pre-run science matrix and public data rights
 
+**2026-11-02 offline-source addendum (pre-freeze, higher priority for MNIST/CIFAR):** The owner has provided existing, licensed MNIST/CIFAR source files on C:. Use [the local E: import handoff](2026-11-02_OFFLINE_IMAGE_HANDOFF.md) and the new import-local-images CLI; no image download, no renewed image-licence investigation, and no C: modification. This addendum **does not** approve the separate Shakespeare text corpus or imply combined DATA_READY. Stage 3 must remain gated on reviewed, pinned text bytes and a complete data manifest, followed by new CUDA G0. Do not alter frozen protocols or force a bulk --accept-licenses for images already imported.
+
 3.1. Review the exact dataset sources and licences before downloading: synthetic fixed-teacher DLN, MNIST, CIFAR-10, and a precisely versioned/licensed public-domain Shakespeare character corpus. Never replace real-model datasets with synthetic smoke data for S1/S2.
 3.2. Inspect full config: 26 S1 settings, six S2 fixed anchors including **Transformer depth 8**, 5/16 seed split, four checkpoints at 0/1/3/2/3/end of training, three relative dampings 0.001/0.01/0.1, coarse/fine parameter grouping, finite optimizer budget, and C-base/C-deep rules.
 3.3. Obtain the driver-generated deterministic dry-run plan before freezing anything. Its training run counts must be 130 and 96, and seed manifests must not overlap. Do not reveal or tune against S2 data during discovery.
@@ -80,10 +82,13 @@ If legacy tests fail, record the failing names and establish root cause separate
 & $Py -m genesis_gpu --config configs\study_v2.yaml plan --stage s2 --dry-run
 ~~~
 
-3.4. After reading public-data licence/provenance, permit the configured public downloads, then store exact hashes and split metadata. If a URL/hash/licence is unclear, pause and record DATA_BLOCKED instead of changing data after seeing outcomes.
+3.4. For the owner-supplied MNIST/CIFAR, run the offline, canonical-hash-checked E: import from the linked handoff. Preserve C: source files, verify prepared SHA256/counts and write the partial image-source receipt. Separately review and prepare Shakespeare text and only then create the complete data manifest. If text source rights or version remain unclear, record IMAGE_DATASETS_READY_TEXT_PENDING / DATA_BLOCKED and stop before G0/S1.
 
 ~~~powershell
-& $Py -m genesis_gpu --config configs\study_v2.yaml prepare-data --accept-licenses
+# For MNIST/CIFAR use offline import-local-images in the linked handoff.
+# Only after source-specific text authorization and an approved text download,
+# use prepare-data to complete the three-source manifest (the image files are reused).
+# Do not batch-authorize datasets merely by running --accept-licenses.
 ~~~
 
 ## Stage 4 — Real RTX 4070 Ti G0 numerical and memory qualification
