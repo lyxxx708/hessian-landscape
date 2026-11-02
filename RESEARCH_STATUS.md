@@ -1,5 +1,15 @@
 # Research status
 
+## Latest project/software status — 2026-11-02
+
+**DELIVERED SOURCE, SCIENTIFIC EXECUTION NOT YET ESTABLISHED.** PR #11's branch now contains [all 144 files of the executable v2 distribution](implementation/genesis-v2/README_GENESIS_V2.md) under an isolated directory, with a [15-stage runbook](research/revalidation/EXECUTION_PLAYBOOK_V2.md) and [local Codex Goal](research/revalidation/START_CODEX_GOAL_V2.md). Existing archival material is unchanged.
+
+**Software evidence:** original Linux CPU engineering run 80 passed, one real-CUDA test skipped; GitHub CI rechecks source hashes and CPU tests separately. **Hardware/scientific evidence still missing:** user's native Windows RTX 4070 Ti G0, public data staging, S1=130 real training trajectories, S2=96 fresh trajectories, conditional S3, and independent scientific acceptance.
+
+The older design/G0-only notes below are retained unchanged as dated historical snapshots. Neither source delivery nor a green CPU CI promotes a historical Hessian claim.
+
+---
+
 ## Proposed epistemic reset — 2026-11-02 (draft, not executed)
 
 **User decision:** Original 2025 Phase IV/V raw Hessian matrices and checkpoints are unavailable, and early reported plateau numbers are too unreliable to use as present scientific evidence. **Retire those numerical claims as a basis for new findings** (retain the immutable historical archive); stop treating archival recovery as a prerequisite for prospective research.
