@@ -2,7 +2,7 @@
 
 > **状态：PROPOSED / NOT EXECUTED。** 该文件是建议采用的研究预注册草案，不代表已经获得资源许可、执行了任何训练、锁定了外部 confirmatory 数据或完成了科学复现。  
 > **配套决策报告**：[研究价值与主会裁决](2026-10-26_RESEARCH_VALUE_AND_CONFERENCE_DECISION.md)  
-> **已存在的基础工程**：[P0 draft PR #6](https://github.com/lyxxx708/hessian-landscape/pull/6)。其新 12 层 DLN 合成实验证实了某些解析控制，并非原始 2025 复现。  
+> **已存在的基础工程**：[P0 实验 PR #6](https://github.com/lyxxx708/hessian-landscape/pull/6)。其新 12 层 DLN 合成实验证实了某些解析控制，并非原始 2025 复现。  
 > **授权原则**：新训练需单独确认运行资源、代码版本与数据授权。不能擅自使用封存 holdout、confirmatory 或未获许可的私有资源。
 
 ## 0. 核心裁决问题、严格定义及输出
@@ -291,7 +291,7 @@ results/             # ignored / artifact storage, NOT automatically public
     confirmatory/    # no unapproved access or execution
 ~~~
 
-可复用 PR #6 现有计算正确性基础，但它**尚未合并 main**。若需要直接复用相关脚本，应先决定是将 PR #6 作为科学代码依赖合并、还是在新的实验分支上显式合并其确认的 commit；不能在文档中假装脚本已存在于 main。
+可复用 PR #6 现有计算正确性基础。**时间状态勘误（2026-11-02）：**本协议初稿完成时 PR #6 尚未合并；现已由维护者完成 QA 并合并 main（merge commit `faf4e9729f9c`），脚本可直接在 main 中使用，但仍须标注 `NEW SYNTHETIC REIMPLEMENTATION`，不得视为 2025 原始实验复现。
 
 ## 10. 科学设计审计清单（开始投入的先决条件）
 
