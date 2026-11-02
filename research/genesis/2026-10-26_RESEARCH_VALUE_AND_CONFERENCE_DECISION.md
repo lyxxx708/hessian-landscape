@@ -2,7 +2,7 @@
 
 > **文档性质**：独立研究判断 / 科学问题重构 / Go–No-Go 决策备忘录（非新实验报告、非同行评审结论）  
 > **证据截点**：2026-10-26（Asia/Singapore）  
-> **基线**：仓库 main commit [41de815](https://github.com/lyxxx708/hessian-landscape/commit/41de8154c0bd8517749f829c1265c565cd7b1a90)；另审阅未合并、draft 的 [PR #6](https://github.com/lyxxx708/hessian-landscape/pull/6)，head [90516c7](https://github.com/lyxxx708/hessian-landscape/commit/90516c7fcfd6001ea08450579c5ed2abec329403)。  
+> **基线**：仓库 main commit [41de815](https://github.com/lyxxx708/hessian-landscape/commit/41de8154c0bd8517749f829c1265c565cd7b1a90)；另审阅当时未合并、draft 的 [PR #6](https://github.com/lyxxx708/hessian-landscape/pull/6)，head [90516c7](https://github.com/lyxxx708/hessian-landscape/commit/90516c7fcfd6001ea08450579c5ed2abec329403)。  
 > **范围约束**：只讨论 GENESIS 的深度线性网络（DLN）、精确 Hessian、广义 Gauss–Newton（GGN）、阻尼逆曲率与结构化近似；Anti-Slowing、NAO、signed-Sokal 是独立研究线，不能合并为本项目证据。  
 > **审阅原则**：数学恒等式 ≠ 新定理；合成基准 ≠ 历史复现；数值现象 ≠ 机制；矩阵误差 ≠ 实际优化损失；科学潜力 ≠ 主会录用概率。
 
@@ -36,7 +36,7 @@
 **实际来源**：
 
 - main 分支：[科学状态](../../docs/SCIENTIFIC_STATE.md)、[历史断言审计](../../docs/CLAIMS_AND_AUDIT.md)、[DLN 平台](../../docs/LONG_PLATEAU_V_VB.md)、[Phase VI 仲裁](../../docs/MATRIX_DECAY_VI_REV4.md)。
-- 独立 P0 **未合并**：[PR #6](https://github.com/lyxxx708/hessian-landscape/pull/6)、[新实现报告](https://github.com/lyxxx708/hessian-landscape/blob/experiments/p0-dln-audit-20261026/docs/P0_REPORT_20261026.md)、[历史恢复判定](https://github.com/lyxxx708/hessian-landscape/blob/experiments/p0-dln-audit-20261026/docs/P0_HISTORICAL_RECOVERY_STATUS_20261026.md)。
+- 独立 P0 **写作时未合并；2026-11-02 已合并至 main**：[PR #6](https://github.com/lyxxx708/hessian-landscape/pull/6)、[新实现报告](https://github.com/lyxxx708/hessian-landscape/blob/experiments/p0-dln-audit-20261026/docs/P0_REPORT_20261026.md)、[历史恢复判定](https://github.com/lyxxx708/hessian-landscape/blob/experiments/p0-dln-audit-20261026/docs/P0_HISTORICAL_RECOVERY_STATUS_20261026.md)。
 - 2026 WorkBuddy 深层端点资格：[科研状态](../portfolio/SCIENCE_STATUS_20261026.md)。不同架构的 2026 checkpoint **不能**作为 2025 L12 DLN 的原始证据。
 - 本报告的新数学整理标为 **A**，各项项目性判断标为**分析判断**；**本报告未训练新网络、未重新跑 PR #6 数值、未恢复旧 checkpoint**。
 
