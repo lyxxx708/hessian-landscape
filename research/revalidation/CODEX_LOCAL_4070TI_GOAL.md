@@ -11,7 +11,7 @@ This is a run-to-evidence objective, not a request to produce another plan, tiny
 
 ## Sources and scope
 
-- Read root AGENTS.md. Read this file, research/revalidation/2026-11-02_FRESH_VALIDATION_PROTOCOL_V1.md and research/revalidation/LOCAL_4070TI_FULL_V1.json. The 2026-10-26 protocols are historical scientific context, not permission to reuse old invalid claims.
+- Read root AGENTS.md. Read this file, research/revalidation/2026-11-02_FRESH_VALIDATION_PROTOCOL_V1.md, research/revalidation/LOCAL_4070TI_FULL_V1.json, and research/revalidation/PRIMARY_ENDPOINTS_AND_FREEZE_RULES.md. The 2026-10-26 protocols are historical scientific context, not permission to reuse old invalid claims.
 - Work on an isolated branch/worktree based on draft PR #11, preserving any existing local changes. Never overwrite historical archives, force-push main, delete research branches or auto-merge a PR.
 - Local CUDA GPU time is explicitly approved without a time cap; finite preregistered experimental grid and bounded individual solver retries still apply. NO paid cloud GPU, paid API calls, remote LLM inference within experiments, private sealed dataset, third-party credentials or automatic public raw data uploads. License-verified public datasets may be downloaded.
 - Do not waste tokens trying to recover the unavailable 2025 DLN matrix. It cannot validate the new research. Do not make a synthetic run match the reported 0.09–0.12 curve.
