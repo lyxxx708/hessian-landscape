@@ -1,0 +1,107 @@
+schema_version: 2
+profile: full
+study_id: genesis_full_v2
+root: E:\GENESIS\runs\genesis_full_v2
+storage_root: E:\GENESIS
+device: cuda:0
+seed_namespace: GENESIS_V2_20261102
+s1_seeds: 5
+s2_seeds: 16
+damping_ratios:
+- 0.001
+- 0.01
+- 0.1
+groups:
+- coarse
+- fine
+curvature_batch: 32
+curvature_microbatch: 4
+damping_floor: 1.0e-08
+power_iterations: 30
+analysis_dtype: float32
+solver:
+  rtol: 1.0e-05
+  max_iter: 1000
+  stability_factor: 0.1
+  delta_stability: 0.005
+  dense_limit: 2048
+  preconditioner_probes: 8
+  short_cg_steps: 8
+probes:
+  schedule:
+  - 16
+  - 32
+  - 64
+  - 128
+  - 256
+  relative_halfwidth: 0.2
+  bootstrap: 1000
+  independent_final: true
+  deep_max: 256
+statistics:
+  bootstrap: 2000
+  alpha: 0.05
+  delta_median: 0.05
+  delta_lower: 0.01
+  min_eligible_fraction: 0.8
+  tail_cv: 0.15
+  tail_amplitude: 0.02
+  auc: 0.75
+  auc_improvement: 0.1
+  spearman: 0.5
+  mae_improvement: 0.1
+resources:
+  vram_target_gib: 9.5
+  thermal_pause_c: 85
+  disk_reserve_gib: 30
+  heartbeat_seconds: 15
+  stale_seconds: 300
+  max_retries: 2
+  microbatch_fallback:
+  - 32
+  - 16
+  - 8
+  - 4
+  - 2
+  - 1
+data:
+  text_url: https://www.gutenberg.org/cache/epub/100/pg100.txt
+  text_license: Project Gutenberg eBook 100; underlying Shakespeare text public-domain;
+    preserve distribution notice
+  text_expected_sha256: null
+  text_license_accepted: false
+  image_license_accepted: false
+  download_timeout_seconds: 120
+line_search:
+- 0.0
+- 0.01
+- 0.03
+- 0.1
+- 0.3
+- 1.0
+- 3.0
+s3:
+  enabled: true
+  seeds: 8
+  tuning_seeds: 3
+  lr_multipliers:
+  - 0.3
+  - 1.0
+  - 3.0
+  baselines:
+  - adamw
+  - layerwise_gn
+  - same_cost_cg
+  - gradient_smoothing
+  - kfac
+  - selective_krylov
+  target_loss_fraction: 0.5
+  time_improvement: 0.1
+  negative_control_steps: 32
+  calibration_steps: 12
+  tuning_fraction: 0.1
+  evaluation_modes:
+  - samples
+  - wall_time
+  window_strength: 0.1
+  damping_ratio: 0.01

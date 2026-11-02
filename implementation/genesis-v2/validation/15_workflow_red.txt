@@ -1,0 +1,60 @@
+FFFFFF                                                                   [100%]
+=================================== FAILURES ===================================
+_____________________ test_work_plan_counts_and_c_density ______________________
+
+    def test_work_plan_counts_and_c_density():
+>       from genesis_gpu.runtime.scheduler import plan_jobs
+E       ModuleNotFoundError: No module named 'genesis_gpu.runtime.scheduler'
+
+tests_v2/test_workflow.py:9: ModuleNotFoundError
+_______________ test_one_real_checkpoint_measurement_and_replay ________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-10/test_one_real_checkpoint_measu0')
+
+    def test_one_real_checkpoint_measurement_and_replay(tmp_path):
+        from genesis_gpu.training.trainer import train_run
+>       from genesis_gpu.runtime.measurement import measure_job, rebuild_snapshot
+E       ModuleNotFoundError: No module named 'genesis_gpu.runtime.measurement'
+
+tests_v2/test_workflow.py:23: ModuleNotFoundError
+_________________ test_structural_job_keeps_all_probe_evidence _________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-10/test_structural_job_keeps_all_0')
+
+    def test_structural_job_keeps_all_probe_evidence(tmp_path):
+        from genesis_gpu.training.trainer import train_run
+>       from genesis_gpu.runtime.measurement import measure_job
+E       ModuleNotFoundError: No module named 'genesis_gpu.runtime.measurement'
+
+tests_v2/test_workflow.py:39: ModuleNotFoundError
+_____________ test_statistics_aggregate_seeds_not_checkpoint_rows ______________
+
+    def test_statistics_aggregate_seeds_not_checkpoint_rows():
+>       from genesis_gpu.study.statistics import summarize_utility
+E       ModuleNotFoundError: No module named 'genesis_gpu.study.statistics'
+
+tests_v2/test_workflow.py:52: ModuleNotFoundError
+_________ test_invalid_and_missing_cannot_become_negative_confirmation _________
+
+    def test_invalid_and_missing_cannot_become_negative_confirmation():
+>       from genesis_gpu.study.statistics import summarize_utility
+E       ModuleNotFoundError: No module named 'genesis_gpu.study.statistics'
+
+tests_v2/test_workflow.py:68: ModuleNotFoundError
+___________ test_s2_adjudication_cannot_be_written_before_execution ____________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-10/test_s2_adjudication_cannot_be0')
+
+    def test_s2_adjudication_cannot_be_written_before_execution(tmp_path):
+>       from genesis_gpu.study.adjudication import adjudicate
+E       ModuleNotFoundError: No module named 'genesis_gpu.study.adjudication'
+
+tests_v2/test_workflow.py:78: ModuleNotFoundError
+=========================== short test summary info ============================
+FAILED tests_v2/test_workflow.py::test_work_plan_counts_and_c_density - ModuleNotFoundError: No module named 'genesis_gpu.runtime.scheduler'
+FAILED tests_v2/test_workflow.py::test_one_real_checkpoint_measurement_and_replay - ModuleNotFoundError: No module named 'genesis_gpu.runtime.measurement'
+FAILED tests_v2/test_workflow.py::test_structural_job_keeps_all_probe_evidence - ModuleNotFoundError: No module named 'genesis_gpu.runtime.measurement'
+FAILED tests_v2/test_workflow.py::test_statistics_aggregate_seeds_not_checkpoint_rows - ModuleNotFoundError: No module named 'genesis_gpu.study.statistics'
+FAILED tests_v2/test_workflow.py::test_invalid_and_missing_cannot_become_negative_confirmation - ModuleNotFoundError: No module named 'genesis_gpu.study.statistics'
+FAILED tests_v2/test_workflow.py::test_s2_adjudication_cannot_be_written_before_execution - ModuleNotFoundError: No module named 'genesis_gpu.study.adjudication'
+6 failed in 1.19s

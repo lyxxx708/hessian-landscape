@@ -1,0 +1,436 @@
+FFFFFFFFF                                                                [100%]
+=================================== FAILURES ===================================
+________________ test_cg_true_residual_and_indefinite_detection ________________
+
+name = 'solvers.cg'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_science.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.solvers.cg'
+import_ = <function _gcd_import at 0x7f76025f44a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.solvers.cg'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_cg_true_residual_and_indefinite_detection():
+>       cg=mod('solvers.cg').cg
+           ^^^^^^^^^^^^^^^^^
+
+tests_v2/test_science.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'solvers.cg'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.'+name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required module not implemented: {name}: {exc}')
+E           Failed: Required module not implemented: solvers.cg: No module named 'genesis_gpu.solvers.cg'
+
+tests_v2/test_science.py:15: Failed
+_______________________ test_block_and_dual_match_dense ________________________
+
+name = 'solvers.cg'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_science.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.solvers.cg'
+import_ = <function _gcd_import at 0x7f76025f44a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.solvers.cg'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_block_and_dual_match_dense():
+>       cg=mod('solvers.cg');dual=mod('curvature.dual_solve')
+           ^^^^^^^^^^^^^^^^^
+
+tests_v2/test_science.py:43: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'solvers.cg'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.'+name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required module not implemented: {name}: {exc}')
+E           Failed: Required module not implemented: solvers.cg: No module named 'genesis_gpu.solvers.cg'
+
+tests_v2/test_science.py:15: Failed
+_________________ test_same_matrix_different_gradient_utility __________________
+
+name = 'science.utility'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_science.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.science.utility'
+import_ = <function _gcd_import at 0x7f76025f44a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.science.utility'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_same_matrix_different_gradient_utility():
+>       utility=mod('science.utility').quadratic_utility
+                ^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_science.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'science.utility'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.'+name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required module not implemented: {name}: {exc}')
+E           Failed: Required module not implemented: science.utility: No module named 'genesis_gpu.science.utility'
+
+tests_v2/test_science.py:15: Failed
+______________ test_distinct_task_alpha_and_validation_not_refit _______________
+
+name = 'science.utility'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_science.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.science.utility'
+import_ = <function _gcd_import at 0x7f76025f44a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.science.utility'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_distinct_task_alpha_and_validation_not_refit():
+>       metric=mod('science.utility').task_response_metrics
+               ^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_science.py:66: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'science.utility'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.'+name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required module not implemented: {name}: {exc}')
+E           Failed: Required module not implemented: science.utility: No module named 'genesis_gpu.science.utility'
+
+tests_v2/test_science.py:15: Failed
+__________________ test_full_utility_qualified_and_immutable ___________________
+
+name = 'science.utility'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_science.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.science.utility'
+import_ = <function _gcd_import at 0x7f76025f44a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.science.utility'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_full_utility_qualified_and_immutable():
+>       evaluate=mod('science.utility').evaluate_utility
+                 ^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_science.py:84: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'science.utility'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.'+name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required module not implemented: {name}: {exc}')
+E           Failed: Required module not implemented: science.utility: No module named 'genesis_gpu.science.utility'
+
+tests_v2/test_science.py:15: Failed
+________________ test_structure_nonuniform_block_normalization _________________
+
+name = 'science.structure'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_science.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.science.structure'
+import_ = <function _gcd_import at 0x7f76025f44a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.science.structure'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_structure_nonuniform_block_normalization():
+>       profile=mod('science.structure').profile
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_science.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'science.structure'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.'+name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required module not implemented: {name}: {exc}')
+E           Failed: Required module not implemented: science.structure: No module named 'genesis_gpu.science.structure'
+
+tests_v2/test_science.py:15: Failed
+____________ test_block_probe_matches_dense_and_identity_correction ____________
+
+name = 'sketches.block_probe'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_science.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.sketches.block_probe'
+import_ = <function _gcd_import at 0x7f76025f44a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.sketches.block_probe'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_block_probe_matches_dense_and_identity_correction():
+>       sketch=mod('sketches.block_probe').estimate_blocks
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_science.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'sketches.block_probe'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.'+name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required module not implemented: {name}: {exc}')
+E           Failed: Required module not implemented: sketches.block_probe: No module named 'genesis_gpu.sketches.block_probe'
+
+tests_v2/test_science.py:15: Failed
+_______________ test_mechanism_matches_dln_rank_and_gauge_output _______________
+
+name = 'science.mechanism'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_science.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.science.mechanism'
+import_ = <function _gcd_import at 0x7f76025f44a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.science.mechanism'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_mechanism_matches_dln_rank_and_gauge_output():
+>       mechanism=mod('science.mechanism')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_science.py:125: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'science.mechanism'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.'+name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required module not implemented: {name}: {exc}')
+E           Failed: Required module not implemented: science.mechanism: No module named 'genesis_gpu.science.mechanism'
+
+tests_v2/test_science.py:15: Failed
+__________ test_global_flat_matrix_is_not_architecture_order_evidence __________
+
+name = 'science.controls'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_science.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.science.controls'
+import_ = <function _gcd_import at 0x7f76025f44a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.science.controls'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_global_flat_matrix_is_not_architecture_order_evidence():
+>       controls=mod('science.controls')
+                 ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_science.py:137: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'science.controls'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.'+name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required module not implemented: {name}: {exc}')
+E           Failed: Required module not implemented: science.controls: No module named 'genesis_gpu.science.controls'
+
+tests_v2/test_science.py:15: Failed
+=========================== short test summary info ============================
+FAILED tests_v2/test_science.py::test_cg_true_residual_and_indefinite_detection - Failed: Required module not implemented: solvers.cg: No module named 'genesis_gpu.solvers.cg'
+FAILED tests_v2/test_science.py::test_block_and_dual_match_dense - Failed: Required module not implemented: solvers.cg: No module named 'genesis_gpu.solvers.cg'
+FAILED tests_v2/test_science.py::test_same_matrix_different_gradient_utility - Failed: Required module not implemented: science.utility: No module named 'genesis_gpu.science.utility'
+FAILED tests_v2/test_science.py::test_distinct_task_alpha_and_validation_not_refit - Failed: Required module not implemented: science.utility: No module named 'genesis_gpu.science.utility'
+FAILED tests_v2/test_science.py::test_full_utility_qualified_and_immutable - Failed: Required module not implemented: science.utility: No module named 'genesis_gpu.science.utility'
+FAILED tests_v2/test_science.py::test_structure_nonuniform_block_normalization - Failed: Required module not implemented: science.structure: No module named 'genesis_gpu.science.structure'
+FAILED tests_v2/test_science.py::test_block_probe_matches_dense_and_identity_correction - Failed: Required module not implemented: sketches.block_probe: No module named 'genesis_gpu.sketches.block_probe'
+FAILED tests_v2/test_science.py::test_mechanism_matches_dln_rank_and_gauge_output - Failed: Required module not implemented: science.mechanism: No module named 'genesis_gpu.science.mechanism'
+FAILED tests_v2/test_science.py::test_global_flat_matrix_is_not_architecture_order_evidence - Failed: Required module not implemented: science.controls: No module named 'genesis_gpu.science.controls'
+9 failed in 1.44s

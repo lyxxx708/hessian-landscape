@@ -1,0 +1,15 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+_________ test_windows_install_and_launcher_guard_reparse_bulk_parents _________
+
+    def test_windows_install_and_launcher_guard_reparse_bulk_parents():
+        root=Path(__file__).parents[1]/'scripts'
+        bootstrap=(root/'genesis_bootstrap.ps1').read_text()
+        launcher=(root/'genesis_launch.ps1').read_text()
+>       assert 'Assert-NoReparseParent $Repo' in bootstrap
+E       assert 'Assert-NoReparseParent $Repo' in '[CmdletBinding()]\nparam(\n [string]$Root=\'E:\\GENESIS\',\n [string]$PythonVersion=\'3.11\',\n [ValidatePattern(\'^h... "Installed to $Venv. CUDA numerical G0 is still mandatory; run genesis_launch.ps1 to execute the guarded pipeline."\n'
+
+tests_v2/test_delivery.py:74: AssertionError
+=========================== short test summary info ============================
+FAILED tests_v2/test_delivery.py::test_windows_install_and_launcher_guard_reparse_bulk_parents - assert 'Assert-NoReparseParent $Repo' in '[CmdletBinding()]\nparam(\n [string]$Root=\'E:\\GENESIS\',\n [string]$PythonVersion=\'3.11\',\n [ValidatePattern(\'^h... "Installed to $Venv. CUDA numerical G0 is still mandatory; run genesis_launch.ps1 to execute the guarded pipeline."\n'
+1 failed in 0.07s

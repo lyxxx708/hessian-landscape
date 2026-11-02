@@ -1,0 +1,50 @@
+......FFF                                                                [100%]
+=================================== FAILURES ===================================
+_________________ test_report_fails_closed_on_stale_qa_ledger __________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-25/test_report_fails_closed_on_st0')
+
+    def test_report_fails_closed_on_stale_qa_ledger(tmp_path):
+        from genesis_gpu.reporting.report import generate_report
+        from genesis_gpu.runtime.atomic_io import file_receipt
+        from genesis_gpu.runtime.queue import JobStore
+        cfg=default_config('smoke');atomic_json(tmp_path/'protocol-lock.json',{'protocol_sha':'fixture','profile':'smoke','runs':[]})
+        store=JobStore(tmp_path/'run_status.sqlite')
+        for stage in ['s1','s2']:
+            path=tmp_path/f'{stage}.json';atomic_json(path,{'run_id':stage,'checkpoints':[]})
+            store.enqueue(stage,stage,'train',{'run':{'run_id':stage}},[]);store.claim(stage)
+            store.finish(stage,'COMPLETE',{'receipt':file_receipt(path,tmp_path)})
+            atomic_json(tmp_path/'audit'/f'{stage}_adjudication.json',{'verdict':'ENGINEERING_SMOKE_ONLY','utility':{'conditions':[]},'structure':{'verdict':'NOT_IDENTIFIED'},'mechanism':{'verdict':'NOT_IDENTIFIED'},'prediction':{'status':'NOT_RUN'},'jobs_digest':store.evidence_digest(stage)})
+        store.close()
+        atomic_json(tmp_path/'audit'/'s3_receipt.json',{'status':'S3_NO_GO'})
+        atomic_json(tmp_path/'audit'/'INDEPENDENT_VERIFIER_RECEIPT.json',{'status':'CPU_SMOKE_QA_PASSED','replay_enabled':True,'errors':[],'jobs_digest':{'s1':'STALE','s2':'STALE'}})
+        result=generate_report(cfg,tmp_path)
+>       assert result['state']=='INCOMPLETE_BLOCKED_EVIDENCE'
+E       AssertionError: assert 'CPU_SMOKE_CO...IC_VALIDATION' == 'INCOMPLETE_BLOCKED_EVIDENCE'
+E         
+E         - INCOMPLETE_BLOCKED_EVIDENCE
+E         + CPU_SMOKE_COMPLETE_NOT_SCIENTIFIC_VALIDATION
+
+tests_v2/test_cli_s3.py:89: AssertionError
+_______ test_optimizer_advantage_checks_strongest_baseline_not_only_adam _______
+
+    def test_optimizer_advantage_checks_strongest_baseline_not_only_adam():
+>       from genesis_gpu.training.benchmark import compare_trials
+E       ImportError: cannot import name 'compare_trials' from 'genesis_gpu.training.benchmark' (/mnt/data/genesis-v2/genesis_gpu/training/benchmark.py)
+
+tests_v2/test_cli_s3.py:93: ImportError
+____________ test_censoring_cannot_be_silently_dropped_for_speedup _____________
+
+    def test_censoring_cannot_be_silently_dropped_for_speedup():
+>       from genesis_gpu.training.benchmark import compare_trials
+E       ImportError: cannot import name 'compare_trials' from 'genesis_gpu.training.benchmark' (/mnt/data/genesis-v2/genesis_gpu/training/benchmark.py)
+
+tests_v2/test_cli_s3.py:109: ImportError
+=========================== short test summary info ============================
+FAILED tests_v2/test_cli_s3.py::test_report_fails_closed_on_stale_qa_ledger - AssertionError: assert 'CPU_SMOKE_CO...IC_VALIDATION' == 'INCOMPLETE_BLOCKED_EVIDENCE'
+  
+  - INCOMPLETE_BLOCKED_EVIDENCE
+  + CPU_SMOKE_COMPLETE_NOT_SCIENTIFIC_VALIDATION
+FAILED tests_v2/test_cli_s3.py::test_optimizer_advantage_checks_strongest_baseline_not_only_adam - ImportError: cannot import name 'compare_trials' from 'genesis_gpu.training.benchmark' (/mnt/data/genesis-v2/genesis_gpu/training/benchmark.py)
+FAILED tests_v2/test_cli_s3.py::test_censoring_cannot_be_silently_dropped_for_speedup - ImportError: cannot import name 'compare_trials' from 'genesis_gpu.training.benchmark' (/mnt/data/genesis-v2/genesis_gpu/training/benchmark.py)
+3 failed, 6 passed in 4.04s
