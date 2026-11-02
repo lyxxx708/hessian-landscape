@@ -216,6 +216,8 @@ Separate fault labels: ENV_BLOCKED, STORAGE_BLOCKED, CUDA/OOM, DATA_LICENSE_BLOC
 13.4. When a tested source change exists and the GitHub CLI is authenticated:
 
 ~~~powershell
+# The following git paths are repository-root-relative. First leave implementation/genesis-v2:
+cd ..\..
 git status --short --branch
 git diff --check
 git add implementation/genesis-v2 research/revalidation
