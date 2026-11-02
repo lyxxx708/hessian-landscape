@@ -1,6 +1,9 @@
 # GENESIS fresh large-scale revalidation — protocol v1
 
-**Date:** 2026-11-02. **Status: DRAFT_NOT_FROZEN / NOT_EXECUTED.** This protocol makes no claim of experimental validation or authorization to spend compute, use private datasets, or expose sealed holdouts.
+**Date:** 2026-11-02. **Status: DRAFT_NOT_FROZEN / NOT_EXECUTED.**
+
+**RTX 4070 Ti local execution override (same day, still not executed):** The operational finite grid, 4 checkpoint fractions, 26 S1 settings × 5 training seeds and five mandatory S2 anchors × 16 new seeds are defined by [LOCAL_4070TI_FULL_V1.json](LOCAL_4070TI_FULL_V1.json), [primary endpoints and freeze rules](PRIMARY_ENDPOINTS_AND_FREEZE_RULES.md) and [Codex local Goal](CODEX_LOCAL_4070TI_GOAL.md). Earlier illustrative sizes or stage counts lower in this document are superseded for the local full-run contract. No scientific run results have been viewed when authoring this override.
+ This protocol makes no claim of experimental validation or authorization to spend compute, use private datasets, or expose sealed holdouts.
 
 ## 0. Retire the old evidence; preserve its provenance
 
