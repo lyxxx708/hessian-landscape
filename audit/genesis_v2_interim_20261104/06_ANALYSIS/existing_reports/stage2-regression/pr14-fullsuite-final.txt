@@ -1,0 +1,25 @@
+......................s................................................. [ 80%]
+.........F.......                                                        [100%]
+================================== FAILURES ===================================
+____________ test_public_data_not_silently_replaced_with_synthetic ____________
+
+tmp_path = WindowsPath('E:/GENESIS/tmp/pytest-pr14-final/test_public_data_not_silently_0')
+
+    def test_public_data_not_silently_replaced_with_synthetic(tmp_path):
+        data=mod('datasets.registry')
+        cfg=default_config('full')
+        run=next(r for r in expand_design(cfg) if r.dataset=='mnist')
+>       with pytest.raises(data.DatasetUnavailable):data.load_bundle(run,cfg,tmp_path)
+E       Failed: DID NOT RAISE DatasetUnavailable
+
+tests_v2\test_training.py:82: Failed
+============================== warnings summary ===============================
+tests_v2/test_adversarial.py: 18 warnings
+  E:\GENESIS\venvs\hessian-landscape-v2\Lib\site-packages\torch\jit\_script.py:1480: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+SKIPPED [1] tests_v2\test_delivery.py:35: Creating a directory symlink requires Windows Developer Mode or privilege: [WinError 1314] �ͻ���û���������Ȩ��: 'E:\\GENESIS\\tmp\\pytest-pr14-final\\test_overlay_idempotent_and_bl0\\outside' -> 'E:\\GENESIS\\tmp\\pytest-pr14-final\\test_overlay_idempotent_and_bl0\\target\\genesis_gpu'
+FAILED tests_v2/test_training.py::test_public_data_not_silently_replaced_with_synthetic
+1 failed, 87 passed, 1 skipped, 18 warnings in 102.57s (0:01:42)

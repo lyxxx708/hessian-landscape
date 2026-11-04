@@ -1,0 +1,31 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+___________ test_repeat_report_manifest_never_contains_stale_receipt ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-26/test_repeat_report_manifest_ne0')
+
+    def test_repeat_report_manifest_never_contains_stale_receipt(tmp_path):
+        from genesis_gpu.reporting.report import generate_report
+        from genesis_gpu.runtime.atomic_io import sha256_file
+        cfg=default_config('smoke')
+        atomic_json(tmp_path/'protocol-lock.json',{'protocol_sha':'fixture','profile':'smoke','runs':[]})
+        generate_report(cfg,tmp_path)
+        atomic_json(tmp_path/'audit'/'INDEPENDENT_VERIFIER_RECEIPT.json',{'status':'QA_FAILED','errors':['new injected error']})
+        generate_report(cfg,tmp_path)
+        for line in (tmp_path/'manifest_sha256.txt').read_text().splitlines():
+            expected,path=line.split('  ',1)
+>           assert sha256_file(tmp_path/path)==expected,path
+E           AssertionError: reports/report_receipt.json
+E           assert 'e629bed4359a...13dc093b8fc40' == '24a1041bbc3f...f0d629d2964c8'
+E             
+E             - 24a1041bbc3fe7b3602b5527c9dfd09e7aa878ed990b773d3bcf0d629d2964c8
+E             + e629bed4359acbd1fc804a4717a7f33ec738bb68662cbc415e413dc093b8fc40
+
+tests_v2/test_cli_s3.py:73: AssertionError
+=========================== short test summary info ============================
+FAILED tests_v2/test_cli_s3.py::test_repeat_report_manifest_never_contains_stale_receipt - AssertionError: reports/report_receipt.json
+assert 'e629bed4359a...13dc093b8fc40' == '24a1041bbc3f...f0d629d2964c8'
+  
+  - 24a1041bbc3fe7b3602b5527c9dfd09e7aa878ed990b773d3bcf0d629d2964c8
+  + e629bed4359acbd1fc804a4717a7f33ec738bb68662cbc415e413dc093b8fc40
+1 failed in 2.14s

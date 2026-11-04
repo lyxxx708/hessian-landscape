@@ -1,0 +1,63 @@
+...FF                                                                    [100%]
+=================================== FAILURES ===================================
+__________________ test_cpu_smoke_launcher_root_flag_is_real ___________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-33/test_cpu_smoke_launcher_root_f0')
+
+    def test_cpu_smoke_launcher_root_flag_is_real(tmp_path):
+        import subprocess,sys
+        root=Path(__file__).parents[1]
+>       completed=subprocess.run([sys.executable,str(root/'scripts'/'run_cpu_smoke.py'),'--help'],capture_output=True,text=True,timeout=15)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_delivery.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/subprocess.py:556: in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.13/subprocess.py:1222: in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+/usr/lib/python3.13/subprocess.py:2129: in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <Popen: returncode: -9 args: ['/opt/pyvenv/bin/python', '/mnt/data/genesis-v...>
+endtime = 3914.558256201, orig_timeout = 15, stdout_seq = [], stderr_seq = []
+skip_check_and_raise = False
+
+    def _check_timeout(self, endtime, orig_timeout, stdout_seq, stderr_seq,
+                       skip_check_and_raise=False):
+        """Convenience for checking if a timeout has expired."""
+        if endtime is None:
+            return
+        if skip_check_and_raise or _time() > endtime:
+>           raise TimeoutExpired(
+                    self.args, orig_timeout,
+                    output=b''.join(stdout_seq) if stdout_seq else None,
+                    stderr=b''.join(stderr_seq) if stderr_seq else None)
+E           subprocess.TimeoutExpired: Command '['/opt/pyvenv/bin/python', '/mnt/data/genesis-v2/scripts/run_cpu_smoke.py', '--help']' timed out after 15 seconds
+
+/usr/lib/python3.13/subprocess.py:1269: TimeoutExpired
+___________________ test_overlay_includes_only_new_workflow ____________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-33/test_overlay_includes_only_new0')
+
+    def test_overlay_includes_only_new_workflow(tmp_path):
+        m=installer();source=tmp_path/'s';target=tmp_path/'t'
+        (source/'.github'/'workflows').mkdir(parents=True);target.mkdir()
+        (source/'.github'/'workflows'/'genesis-v2-cpu.yml').write_text('name: new v2 workflow')
+        (source/'.github'/'workflows'/'old.yml').write_text('do not copy')
+        m.install(source,target,apply=True,portable_test=True)
+>       assert (target/'.github'/'workflows'/'genesis-v2-cpu.yml').exists()
+E       AssertionError: assert False
+E        +  where False = exists()
+E        +    where exists = (((PosixPath('/tmp/pytest-of-root/pytest-33/test_overlay_includes_only_new0/t') / '.github') / 'workflows') / 'genesis-v2-cpu.yml').exists
+
+tests_v2/test_delivery.py:66: AssertionError
+=========================== short test summary info ============================
+FAILED tests_v2/test_delivery.py::test_cpu_smoke_launcher_root_flag_is_real - subprocess.TimeoutExpired: Command '['/opt/pyvenv/bin/python', '/mnt/data/genesis-v2/scripts/run_cpu_smoke.py', '--help']' timed out after 15 seconds
+FAILED tests_v2/test_delivery.py::test_overlay_includes_only_new_workflow - AssertionError: assert False
+ +  where False = exists()
+ +    where exists = (((PosixPath('/tmp/pytest-of-root/pytest-33/test_overlay_includes_only_new0/t') / '.github') / 'workflows') / 'genesis-v2-cpu.yml').exists
+2 failed, 3 passed in 15.15s

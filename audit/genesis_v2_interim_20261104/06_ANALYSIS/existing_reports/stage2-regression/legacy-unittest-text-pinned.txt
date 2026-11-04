@@ -1,0 +1,90 @@
+test_closed_form_plateau_square_orthogonal (test_dln_gauge_reimplementation.TestDLNGauge.test_closed_form_plateau_square_orthogonal) ... ok
+test_derivatives_match_finite_differences (test_dln_gauge_reimplementation.TestDLNGauge.test_derivatives_match_finite_differences) ... ok
+test_gradient_orthogonal_to_gauge (test_dln_gauge_reimplementation.TestDLNGauge.test_gradient_orthogonal_to_gauge) ... ok
+test_bulk_paths_on_e_and_no_c_fallback (test_e_drive_storage_policy.TestLocalStorageContract.test_bulk_paths_on_e_and_no_c_fallback) ... ok
+test_process_scoped_bootstrap_has_e_guard (test_e_drive_storage_policy.TestLocalStorageContract.test_process_scoped_bootstrap_has_e_guard) ... ok
+test_fresh_revalidation_g0 (unittest.loader._FailedTest.test_fresh_revalidation_g0) ... ERROR
+test_p0_repro (unittest.loader._FailedTest.test_p0_repro) ... ERROR
+test_reference_block_metrics (unittest.loader._FailedTest.test_reference_block_metrics) ... ERROR
+test_strategy_directional_utility (unittest.loader._FailedTest.test_strategy_directional_utility) ... ERROR
+test_strict_plateau_audit (unittest.loader._FailedTest.test_strict_plateau_audit) ... ERROR
+
+======================================================================
+ERROR: test_fresh_revalidation_g0 (unittest.loader._FailedTest.test_fresh_revalidation_g0)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_fresh_revalidation_g0
+Traceback (most recent call last):
+  File "E:\GENESIS\toolchains\cpython-3.11.14\python\Lib\unittest\loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\GENESIS\toolchains\cpython-3.11.14\python\Lib\unittest\loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "E:\GENESIS\worktrees\genesis-v2-pr14\tests\test_fresh_revalidation_g0.py", line 4, in <module>
+    from scripts.fresh_revalidation_g0 import cg_spd, dense_utility, sketch_inverse_blocks
+ModuleNotFoundError: No module named 'scripts.fresh_revalidation_g0'
+
+
+======================================================================
+ERROR: test_p0_repro (unittest.loader._FailedTest.test_p0_repro)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_p0_repro
+Traceback (most recent call last):
+  File "E:\GENESIS\toolchains\cpython-3.11.14\python\Lib\unittest\loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\GENESIS\toolchains\cpython-3.11.14\python\Lib\unittest\loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "E:\GENESIS\worktrees\genesis-v2-pr14\tests\test_p0_repro.py", line 4, in <module>
+    from scripts.p0_repro import make_data, matrices, summarize
+ModuleNotFoundError: No module named 'scripts.p0_repro'
+
+
+======================================================================
+ERROR: test_reference_block_metrics (unittest.loader._FailedTest.test_reference_block_metrics)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_reference_block_metrics
+Traceback (most recent call last):
+  File "E:\GENESIS\toolchains\cpython-3.11.14\python\Lib\unittest\loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\GENESIS\toolchains\cpython-3.11.14\python\Lib\unittest\loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "E:\GENESIS\worktrees\genesis-v2-pr14\tests\test_reference_block_metrics.py", line 4, in <module>
+    from scripts.reference_block_metrics import (
+ModuleNotFoundError: No module named 'scripts.reference_block_metrics'
+
+
+======================================================================
+ERROR: test_strategy_directional_utility (unittest.loader._FailedTest.test_strategy_directional_utility)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_strategy_directional_utility
+Traceback (most recent call last):
+  File "E:\GENESIS\toolchains\cpython-3.11.14\python\Lib\unittest\loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\GENESIS\toolchains\cpython-3.11.14\python\Lib\unittest\loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "E:\GENESIS\worktrees\genesis-v2-pr14\tests\test_strategy_directional_utility.py", line 4, in <module>
+    from scripts.strategy_directional_utility import make, jacobian, counterexample, block_solve
+ModuleNotFoundError: No module named 'scripts.strategy_directional_utility'
+
+
+======================================================================
+ERROR: test_strict_plateau_audit (unittest.loader._FailedTest.test_strict_plateau_audit)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_strict_plateau_audit
+Traceback (most recent call last):
+  File "E:\GENESIS\toolchains\cpython-3.11.14\python\Lib\unittest\loader.py", line 419, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\GENESIS\toolchains\cpython-3.11.14\python\Lib\unittest\loader.py", line 362, in _get_module_from_name
+    __import__(name)
+  File "E:\GENESIS\worktrees\genesis-v2-pr14\tests\test_strict_plateau_audit.py", line 4, in <module>
+    from scripts.strict_plateau_audit import audit_norms, block_norms, claim_bounds
+ModuleNotFoundError: No module named 'scripts.strict_plateau_audit'
+
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.127s
+
+FAILED (errors=5)

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "genesis-hessian-v2"
+version = "2.0.0"
+description = "Evidence-preserving local Hessian/GGN research runner"
+requires-python = ">=3.11"
+dependencies = ["torch>=2.6,<2.14", "numpy>=1.26", "scipy>=1.11", "PyYAML>=6", "psutil>=5.9", "safetensors>=0.4", "pandas>=2", "matplotlib>=3.8", "scikit-learn>=1.4"]
+
+[project.optional-dependencies]
+images = ["torchvision>=0.21"]
+parquet = ["pyarrow>=16"]
+test = ["pytest>=8", "pytest-timeout>=2"]
+
+[project.scripts]
+genesis = "genesis_gpu.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["genesis_gpu*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests_v2"]
+addopts = "-ra"
+markers = ["cuda: requires actual CUDA device", "integration: end-to-end tests"]

@@ -1,0 +1,198 @@
+diff --git a/implementation/genesis-v2/DELIVERY_MANIFEST.json b/implementation/genesis-v2/DELIVERY_MANIFEST.json
+index a79d2d6..570a583 100644
+--- a/implementation/genesis-v2/DELIVERY_MANIFEST.json
++++ b/implementation/genesis-v2/DELIVERY_MANIFEST.json
+@@ -33,8 +33,8 @@
+     },
+     {
+       "path": "configs/study_v2.yaml",
+-      "bytes": 1973,
+-      "sha256": "493e06d9321b6fda6378bb5d2df6816e8245f2906e6d221e5c982dc4ce2b1960"
++      "bytes": 2118,
++      "sha256": "abbb5ee783ae166c52f25dcbf048134504369d541be65c551a0d8947aac4ec17"
+     },
+     {
+       "path": "docs/BLUEPRINT_TRACEABILITY.md",
+@@ -323,8 +323,8 @@
+     },
+     {
+       "path": "genesis_gpu/training/checkpoint.py",
+-      "bytes": 4373,
+-      "sha256": "fcfc320abbd8f247377d309e726fdbd2a356891248cb30ebed02d83958011711"
++      "bytes": 4804,
++      "sha256": "8ea9610ffef47ff8aebcc5c0674e9fc7b8174d09dcfa1977fbe9eaa2f64a9c8a"
+     },
+     {
+       "path": "genesis_gpu/training/optimizers.py",
+@@ -393,13 +393,13 @@
+     },
+     {
+       "path": "tests_v2/test_delivery.py",
+-      "bytes": 3834,
+-      "sha256": "889456a2a57cb97d86021314706bcc64cc6077699e0e2130553515299a8096c4"
++      "bytes": 4002,
++      "sha256": "166261b4f9b5f490ab19716695db5d261331e9c737fc0961939e715a1f7e6e5a"
+     },
+     {
+       "path": "tests_v2/test_foundation.py",
+-      "bytes": 3435,
+-      "sha256": "5798addad2c9820b105cbe4cb239676bd49d061001120f875cb336aba720d8bf"
++      "bytes": 3607,
++      "sha256": "44e787542bfcc331158c3bfb27d58cf50ab4f4af89fc9b492f00ce01e9693281"
+     },
+     {
+       "path": "tests_v2/test_offline_import.py",
+@@ -428,13 +428,13 @@
+     },
+     {
+       "path": "tests_v2/test_stage3_source_review.py",
+-      "bytes": 1418,
+-      "sha256": "77eb7b231b191b498cbc097180c38facb09f3b4a7faf67adde6f384d14e377a1"
++      "bytes": 1686,
++      "sha256": "8056953026064b37911da0d5fb4db835dcd50090800c14bd18e7ad87572ef471"
+     },
+     {
+       "path": "tests_v2/test_training.py",
+-      "bytes": 3912,
+-      "sha256": "662a47c576447157c35e0a029c81e1f95b9eb58bd02f54036febeea515eeb8bd"
++      "bytes": 4052,
++      "sha256": "a8eb571b3fe1b85ef68861a7de4b4d687102f73774fdcdde4d231bb971ac9b2e"
+     },
+     {
+       "path": "tests_v2/test_workflow.py",
+diff --git a/implementation/genesis-v2/configs/study_v2.yaml b/implementation/genesis-v2/configs/study_v2.yaml
+index 05fdb5e..0862e3c 100644
+--- a/implementation/genesis-v2/configs/study_v2.yaml
++++ b/implementation/genesis-v2/configs/study_v2.yaml
+@@ -66,10 +66,10 @@ resources:
+   - 1
+ data:
+   text_url: https://www.gutenberg.org/cache/epub/2270/pg2270.txt
+-  text_license: 'Project Gutenberg eBook 2270; 1623 Shakespeare First Folio; catalog public domain in USA; check local jurisdiction and embedded notice before local research use; no raw redistribution'
+-  text_expected_sha256: null
+-  text_license_accepted: false
+-  image_license_accepted: false
++  text_license: 'Project Gutenberg eBook 2270, Shakespeare First Folio (1623); owner authorized local research use on 2026-11-03; retain attribution and embedded notice; no redistribution; rights basis is local-only operator review with Singapore Copyright Act 2021 section 119 inference'
++  text_expected_sha256: f7903c30b83ccaaef85f024746c693a6f7f63c1c926075c998ea67c4732680a4
++  text_license_accepted: true
++  image_license_accepted: true
+   download_timeout_seconds: 120
+ line_search:
+ - 0.0
+diff --git a/implementation/genesis-v2/genesis_gpu/training/checkpoint.py b/implementation/genesis-v2/genesis_gpu/training/checkpoint.py
+index 2d930c6..90d2403 100644
+--- a/implementation/genesis-v2/genesis_gpu/training/checkpoint.py
++++ b/implementation/genesis-v2/genesis_gpu/training/checkpoint.py
+@@ -42,7 +42,10 @@ def save_state(path,state,metadata):
+     try:
+         tensors={};tree=_encode(state,tensors)
+         save_file(tensors,str(tmp/'tensors.safetensors'))
+-        with (tmp/'tensors.safetensors').open('rb') as f:os.fsync(f.fileno())
++        # Windows rejects fsync() on a read-only descriptor. Reopen for update
++        # so the same durability barrier works on both POSIX and Windows.
++        with (tmp/'tensors.safetensors').open('r+b') as f:
++            f.flush();os.fsync(f.fileno())
+         atomic_json(tmp/'metadata.json',{'schema':2,'metadata':metadata,'tree':tree})
+         receipt={'schema':2,'files':[file_receipt(tmp/'tensors.safetensors',tmp),file_receipt(tmp/'metadata.json',tmp)]}
+         atomic_json(tmp/'integrity.json',receipt)
+@@ -61,7 +64,12 @@ def load_state(path,expected_integrity_sha=None):
+         receipt=read_json(path/'integrity.json')
+         if receipt.get('schema')!=2 or not all(verify_receipt(path,r) for r in receipt['files']):
+             raise IntegrityError('Checkpoint bytes changed or incomplete')
+-        meta=read_json(path/'metadata.json');tensors=load_file(str(path/'tensors.safetensors'),device='cpu')
++        meta=read_json(path/'metadata.json')
++        mapped=load_file(str(path/'tensors.safetensors'),device='cpu')
++        # safetensors maps files on Windows; retaining those mappings prevents
++        # immutable-generation cleanup and tamper fixtures from replacing files.
++        tensors={key:value.clone() for key,value in mapped.items()}
++        del mapped
+         return _decode(meta['tree'],tensors),meta['metadata']
+     except IntegrityError:raise
+     except Exception as exc:raise IntegrityError(f'Cannot load verified checkpoint {path}: {exc}') from exc
+diff --git a/implementation/genesis-v2/tests_v2/test_delivery.py b/implementation/genesis-v2/tests_v2/test_delivery.py
+index d700cbe..ef4b468 100644
+--- a/implementation/genesis-v2/tests_v2/test_delivery.py
++++ b/implementation/genesis-v2/tests_v2/test_delivery.py
+@@ -29,7 +29,10 @@ def test_overlay_idempotent_and_blocks_symlink_escape(tmp_path):
+     m=installer();source=tmp_path/'source';target=tmp_path/'target';outside=tmp_path/'outside'
+     (source/'genesis_gpu').mkdir(parents=True);target.mkdir();outside.mkdir()
+     (source/'genesis_gpu'/'core.py').write_text('safe')
+-    (target/'genesis_gpu').symlink_to(outside,target_is_directory=True)
++    try:
++        (target/'genesis_gpu').symlink_to(outside,target_is_directory=True)
++    except (OSError, NotImplementedError) as exc:
++        pytest.skip(f'Creating a directory symlink requires Windows Developer Mode or privilege: {exc}')
+     with pytest.raises(ValueError):m.install(source,target,apply=True,portable_test=True)
+     assert not (outside/'core.py').exists()
+     (target/'genesis_gpu').unlink()
+diff --git a/implementation/genesis-v2/tests_v2/test_foundation.py b/implementation/genesis-v2/tests_v2/test_foundation.py
+index d3a4cf0..eedbdcb 100644
+--- a/implementation/genesis-v2/tests_v2/test_foundation.py
++++ b/implementation/genesis-v2/tests_v2/test_foundation.py
+@@ -1,5 +1,6 @@
+ import importlib
+ from pathlib import Path, PureWindowsPath
++import os
+ import json
+ import pytest
+ import torch
+@@ -73,8 +74,12 @@ def test_storage_guard_rejects_C_and_posix_full(tmp_path):
+     with pytest.raises(guard.StorageBlocked):
+         guard.check_windows_bulk_path(r'C:\GENESIS')
+     assert guard.check_windows_bulk_path(r'E:\GENESIS') == PureWindowsPath(r'E:\GENESIS')
+-    with pytest.raises(guard.StorageBlocked):
+-        guard.prepare_storage(tmp_path, production=True)
++    if os.name != 'nt':
++        with pytest.raises(guard.StorageBlocked):
++            guard.prepare_storage(tmp_path, production=True)
++    else:
++        paths = guard.prepare_storage(tmp_path, production=True, min_free_bytes=0)
++        assert paths['run'].exists()
+     paths = guard.prepare_storage(tmp_path, production=False, min_free_bytes=0)
+     assert paths['run'].exists()
+ 
+diff --git a/implementation/genesis-v2/tests_v2/test_stage3_source_review.py b/implementation/genesis-v2/tests_v2/test_stage3_source_review.py
+index 5fc76ce..f4936ef 100644
+--- a/implementation/genesis-v2/tests_v2/test_stage3_source_review.py
++++ b/implementation/genesis-v2/tests_v2/test_stage3_source_review.py
+@@ -22,13 +22,17 @@ def test_full_text_source_matches_prospective_edition():
+     assert "local" in actual["text_license"].lower()
+ 
+ 
+-def test_data_stays_unapproved_until_review_and_bytes_are_hashed():
+-    for config in (default_config("full"), load_config(ROOT / "configs" / "study_v2.yaml")):
+-        source = config["data"]
+-        assert source["text_expected_sha256"] is None, (
+-            "No fabricated first-download digest; require SHA256 after actual download, before S1 freeze"
+-        )
+-        assert source["text_license_accepted"] is False
+-        assert source["image_license_accepted"] is False
+-        assert config["s1_seeds"] == 5
+-        assert config["s2_seeds"] == 16
++def test_full_data_sources_are_owner_authorized_and_bytes_are_pinned():
++    default = default_config("full")
++    actual = load_config(ROOT / "configs" / "study_v2.yaml")
++    # Generic defaults stay unapproved; this study config records its actual owner decisions.
++    assert default["data"]["text_expected_sha256"] is None
++    assert default["data"]["text_license_accepted"] is False
++    source = actual["data"]
++    assert source["text_expected_sha256"] == "f7903c30b83ccaaef85f024746c693a6f7f63c1c926075c998ea67c4732680a4"
++    assert source["text_license_accepted"] is True
++    assert source["image_license_accepted"] is True
++    assert "owner authorized local research" in source["text_license"]
++    assert "no redistribution" in source["text_license"]
++    assert actual["s1_seeds"] == 5
++    assert actual["s2_seeds"] == 16
+diff --git a/implementation/genesis-v2/tests_v2/test_training.py b/implementation/genesis-v2/tests_v2/test_training.py
+index c3fe3dc..e4d998f 100644
+--- a/implementation/genesis-v2/tests_v2/test_training.py
++++ b/implementation/genesis-v2/tests_v2/test_training.py
+@@ -78,6 +78,8 @@ def test_each_model_trains_and_reloads_checkpoint(tmp_path,family):
+ def test_public_data_not_silently_replaced_with_synthetic(tmp_path):
+     data=mod('datasets.registry')
+     cfg=default_config('full')
++    # Isolate this missing-data guard from any owner-imported full datasets on E:.
++    cfg['storage_root']=str(tmp_path/'isolated-storage')
+     run=next(r for r in expand_design(cfg) if r.dataset=='mnist')
+     with pytest.raises(data.DatasetUnavailable):data.load_bundle(run,cfg,tmp_path)
+ 

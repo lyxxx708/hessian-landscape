@@ -1,0 +1,363 @@
+diff --git a/implementation/genesis-v2/DELIVERY_MANIFEST.json b/implementation/genesis-v2/DELIVERY_MANIFEST.json
+index a79d2d6..570a583 100644
+--- a/implementation/genesis-v2/DELIVERY_MANIFEST.json
++++ b/implementation/genesis-v2/DELIVERY_MANIFEST.json
+@@ -33,8 +33,8 @@
+     },
+     {
+       "path": "configs/study_v2.yaml",
+-      "bytes": 1973,
+-      "sha256": "493e06d9321b6fda6378bb5d2df6816e8245f2906e6d221e5c982dc4ce2b1960"
++      "bytes": 2118,
++      "sha256": "abbb5ee783ae166c52f25dcbf048134504369d541be65c551a0d8947aac4ec17"
+     },
+     {
+       "path": "docs/BLUEPRINT_TRACEABILITY.md",
+@@ -323,8 +323,8 @@
+     },
+     {
+       "path": "genesis_gpu/training/checkpoint.py",
+-      "bytes": 4373,
+-      "sha256": "fcfc320abbd8f247377d309e726fdbd2a356891248cb30ebed02d83958011711"
++      "bytes": 4804,
++      "sha256": "8ea9610ffef47ff8aebcc5c0674e9fc7b8174d09dcfa1977fbe9eaa2f64a9c8a"
+     },
+     {
+       "path": "genesis_gpu/training/optimizers.py",
+@@ -393,13 +393,13 @@
+     },
+     {
+       "path": "tests_v2/test_delivery.py",
+-      "bytes": 3834,
+-      "sha256": "889456a2a57cb97d86021314706bcc64cc6077699e0e2130553515299a8096c4"
++      "bytes": 4002,
++      "sha256": "166261b4f9b5f490ab19716695db5d261331e9c737fc0961939e715a1f7e6e5a"
+     },
+     {
+       "path": "tests_v2/test_foundation.py",
+-      "bytes": 3435,
+-      "sha256": "5798addad2c9820b105cbe4cb239676bd49d061001120f875cb336aba720d8bf"
++      "bytes": 3607,
++      "sha256": "44e787542bfcc331158c3bfb27d58cf50ab4f4af89fc9b492f00ce01e9693281"
+     },
+     {
+       "path": "tests_v2/test_offline_import.py",
+@@ -428,13 +428,13 @@
+     },
+     {
+       "path": "tests_v2/test_stage3_source_review.py",
+-      "bytes": 1418,
+-      "sha256": "77eb7b231b191b498cbc097180c38facb09f3b4a7faf67adde6f384d14e377a1"
++      "bytes": 1686,
++      "sha256": "8056953026064b37911da0d5fb4db835dcd50090800c14bd18e7ad87572ef471"
+     },
+     {
+       "path": "tests_v2/test_training.py",
+-      "bytes": 3912,
+-      "sha256": "662a47c576447157c35e0a029c81e1f95b9eb58bd02f54036febeea515eeb8bd"
++      "bytes": 4052,
++      "sha256": "a8eb571b3fe1b85ef68861a7de4b4d687102f73774fdcdde4d231bb971ac9b2e"
+     },
+     {
+       "path": "tests_v2/test_workflow.py",
+diff --git a/implementation/genesis-v2/configs/study_v2.yaml b/implementation/genesis-v2/configs/study_v2.yaml
+index 05fdb5e..0862e3c 100644
+--- a/implementation/genesis-v2/configs/study_v2.yaml
++++ b/implementation/genesis-v2/configs/study_v2.yaml
+@@ -66,10 +66,10 @@ resources:
+   - 1
+ data:
+   text_url: https://www.gutenberg.org/cache/epub/2270/pg2270.txt
+-  text_license: 'Project Gutenberg eBook 2270; 1623 Shakespeare First Folio; catalog public domain in USA; check local jurisdiction and embedded notice before local research use; no raw redistribution'
+-  text_expected_sha256: null
+-  text_license_accepted: false
+-  image_license_accepted: false
++  text_license: 'Project Gutenberg eBook 2270, Shakespeare First Folio (1623); owner authorized local research use on 2026-11-03; retain attribution and embedded notice; no redistribution; rights basis is local-only operator review with Singapore Copyright Act 2021 section 119 inference'
++  text_expected_sha256: f7903c30b83ccaaef85f024746c693a6f7f63c1c926075c998ea67c4732680a4
++  text_license_accepted: true
++  image_license_accepted: true
+   download_timeout_seconds: 120
+ line_search:
+ - 0.0
+diff --git a/implementation/genesis-v2/genesis_gpu/runtime/measurement.py b/implementation/genesis-v2/genesis_gpu/runtime/measurement.py
+index 4e7e5d0..18499ba 100644
+--- a/implementation/genesis-v2/genesis_gpu/runtime/measurement.py
++++ b/implementation/genesis-v2/genesis_gpu/runtime/measurement.py
+@@ -88,7 +88,7 @@ def measure_job(payload,cfg,root,job_id,protocol_sha,callback=None):
+     solver=cfg['solver']
+     utility,vectors=evaluate_utility(op,damping,schema=payload['schema'],rtol=solver['rtol'],max_iter=solver['max_iter'],
+         validation=val,line_search=cfg['line_search'],stability_factor=solver['stability_factor'],delta_stability=solver['delta_stability'],
+-        preconditioner_probes=solver['preconditioner_probes'],short_steps=solver['short_cg_steps'],callback=callback)
++        preconditioner_probes=solver['preconditioner_probes'],short_steps=solver['short_cg_steps'],callback=callback,cg_restart=solver['cg_restart'])
+     destination.mkdir(parents=True,exist_ok=True);artifacts=[]
+     # Scalar identities are sufficient for every quadratic metric; keep vector subset for independent replay.
+     save_vectors=payload['tier']=='C_DEEP' or payload['checkpoint_index']==3 and pv['seed_index']==0
+@@ -100,7 +100,7 @@ def measure_job(payload,cfg,root,job_id,protocol_sha,callback=None):
+     if payload['tier'].startswith('C'):
+         ids=op.layout.group_indices(payload['schema'],device=op.theta.device)
+         rtol=max(solver['rtol']*solver['stability_factor'],5*torch.finfo(op.theta.dtype).eps)
+-        solve=lambda z:cg(lambda v:op.matvec(v,damping),z,rtol=rtol,max_iter=solver['max_iter']*2,callback=callback)
++        solve=lambda z:cg(lambda v:op.matvec(v,damping),z,rtol=rtol,max_iter=solver['max_iter']*2,callback=callback,restart=solver['cg_restart'])
+         probe_seed=seed_for('INVERSE_BLOCK_PROBES_V2',pv['seed'],pv['checkpoint_index'],payload['gamma'],payload['schema'])
+         schedule=cfg['probes']['schedule']
+         sketch=estimate_blocks(solve,op.raw_ggn,ids,damping,dtype=op.theta.dtype,device=op.theta.device,seed=probe_seed,
+diff --git a/implementation/genesis-v2/genesis_gpu/science/utility.py b/implementation/genesis-v2/genesis_gpu/science/utility.py
+index 0d1d729..28d6330 100644
+--- a/implementation/genesis-v2/genesis_gpu/science/utility.py
++++ b/implementation/genesis-v2/genesis_gpu/science/utility.py
+@@ -83,25 +83,26 @@ def cheap_block_energy(op,schema='coarse',probes=2,seed=20261102,callback=None):
+ 
+ def evaluate_utility(op,damping,*,schema='coarse',rtol=1e-5,max_iter=1000,validation=None,
+                      line_search=(0.,.01,.03,.1,.3,1.,3.),stability_factor=.1,delta_stability=.005,
+-                     preconditioner_probes=0,short_steps=8,callback=None):
++                     preconditioner_probes=0,short_steps=8,callback=None,cg_restart=None):
+     if damping<=0:raise ValueError('Positive SPD damping required')
+     g=op.gradient();start_count=op.matvec_count
+     if float(g.norm())<=1e-12:
+         return {'status':'INELIGIBLE_ZERO_GRADIENT','delta':None,'eta':None},{}
++    options={} if cg_restart is None else {'restart':cg_restart}
+     diagonal=None;pre_receipt=None
+     if preconditioner_probes:
+         diagonal,pre_receipt=hutchinson_diagonal(op,damping,preconditioner_probes)
+     pre=None if diagonal is None else lambda v:v/diagonal
+     Q=lambda v:op.matvec(v,damping)
+-    first=cg(Q,-g,rtol=rtol,max_iter=max_iter,preconditioner=pre,callback=callback)
+-    block1,br1=block_solve(op,-g,damping,schema,rtol=rtol,max_iter=max_iter,diagonal=diagonal,callback=callback)
++    first=cg(Q,-g,rtol=rtol,max_iter=max_iter,preconditioner=pre,callback=callback,**options)
++    block1,br1=block_solve(op,-g,damping,schema,rtol=rtol,max_iter=max_iter,diagonal=diagonal,callback=callback,**options)
+     receipt={'full_solve':first.receipt(),'block_solves':[s.receipt() for s in br1],'preconditioner':pre_receipt}
+     if not first.converged or not all(s.converged for s in br1):
+         return {**receipt,'status':'NUMERIC_UNRESOLVED','reason':'ORACLE_SOLVE_FAILED','delta':None,'eta':None},{}
+     v1=quadratic_utility(g,first.direction,block1,Q(block1))
+     tight=max(rtol*stability_factor,5*torch.finfo(g.dtype).eps)
+-    second=cg(Q,-g,rtol=tight,max_iter=max_iter*2,preconditioner=pre,callback=callback)
+-    block2,br2=block_solve(op,-g,damping,schema,rtol=tight,max_iter=max_iter*2,diagonal=diagonal,callback=callback)
++    second=cg(Q,-g,rtol=tight,max_iter=max_iter*2,preconditioner=pre,callback=callback,**options)
++    block2,br2=block_solve(op,-g,damping,schema,rtol=tight,max_iter=max_iter*2,diagonal=diagonal,callback=callback,**options)
+     receipt.update(tight_full_solve=second.receipt(),tight_block_solves=[s.receipt() for s in br2],tight_rtol=tight)
+     if not second.converged or not all(s.converged for s in br2):
+         return {**receipt,'status':'NUMERIC_UNRESOLVED','reason':'TIGHT_ORACLE_FAILED','delta':None,'eta':None},{}
+@@ -115,11 +116,11 @@ def evaluate_utility(op,damping,*,schema='coarse',rtol=1e-5,max_iter=1000,valida
+         result.update(status='NUMERIC_UNRESOLVED',reason='TOLERANCE_SENSITIVITY')
+     result.update(task_response_metrics(op,full,block,validation))
+     residual=g+result['alpha_Q']*qb
+-    dinv_res,rr=block_solve(op,residual,damping,schema,rtol=tight,max_iter=max_iter*2,diagonal=diagonal,callback=callback)
++    dinv_res,rr=block_solve(op,residual,damping,schema,rtol=tight,max_iter=max_iter*2,diagonal=diagonal,callback=callback,**options)
+     den=float(-g@block);num=float(residual@dinv_res)
+     result['cheap_rho']=math.sqrt(max(0.,num)/den) if all(s.converged for s in rr) and num>=-1e-12*den else None
+     result['rho_block_solve_receipts']=[s.receipt() for s in rr]
+-    short=cg(Q,-g,rtol=tight,max_iter=short_steps,callback=callback)
++    short=cg(Q,-g,rtol=tight,max_iter=short_steps,callback=callback,**options)
+     result['short_cg']=short.receipt()
+     result['short_cg_quadratic_gain']=float(-g@short.direction-.5*short.direction@Q(short.direction))
+     # A separate reference receives the measured matvec budget of the precise
+@@ -129,7 +130,7 @@ def evaluate_utility(op,damping,*,schema='coarse',rtol=1e-5,max_iter=1000,valida
+     result['block_energy_proxy']=energy_proxy
+     budget=max(4,sum(r.matvecs for r in br2)+sum(r.matvecs for r in rr)+2+short.matvecs+energy_proxy['matvecs'])
+     matched_iters=max(1,int((budget-2)*20/21))
+-    matched=cg(Q,-g,rtol=tight,max_iter=matched_iters,callback=callback,true_every=20)
++    matched=cg(Q,-g,rtol=tight,max_iter=matched_iters,callback=callback,true_every=20,**options)
+     result['matched_cg']={'matvec_budget':budget,'solve':matched.receipt(),
+                           'budget_definition':'tight block solves + rho block solves + short CG + block-energy proxy + two Q actions',
+                           'wall_clock_equivalence_claimed':False}
+diff --git a/implementation/genesis-v2/genesis_gpu/solvers/cg.py b/implementation/genesis-v2/genesis_gpu/solvers/cg.py
+index 1b0c1f2..317c3e2 100644
+--- a/implementation/genesis-v2/genesis_gpu/solvers/cg.py
++++ b/implementation/genesis-v2/genesis_gpu/solvers/cg.py
+@@ -5,7 +5,7 @@ import torch
+ from genesis_gpu.contracts import SolveResult
+ 
+ 
+-def cg(apply, rhs, *, rtol=1e-5, max_iter=1000, preconditioner=None, x0=None, callback=None, true_every=20):
++def cg(apply, rhs, *, rtol=1e-5, max_iter=1000, preconditioner=None, x0=None, callback=None, true_every=20, restart='periodic'):
+     if rhs.ndim!=1 or not rhs.numel() or not torch.isfinite(rhs).all() or not 0<rtol<1 or max_iter<1:
+         raise ValueError('Invalid CG inputs')
+     started=time.perf_counter(); calls=0
+@@ -52,7 +52,8 @@ def cg(apply, rhs, *, rtol=1e-5, max_iter=1000, preconditioner=None, x0=None, ca
+             z=M(r);new_rz=float(r@z)
+             if new_rz<=0:
+                 status='BREAKDOWN';break
+-            p=z.clone() if refresh else z+(new_rz/rz)*p
++            reset=refresh if restart=='periodic' else estimated<=rtol
++            p=z.clone() if reset else z+(new_rz/rz)*p
+             rz=new_rz
+     absolute=float((A(x)-rhs).norm())
+     rel=absolute/norm_b
+@@ -61,12 +62,12 @@ def cg(apply, rhs, *, rtol=1e-5, max_iter=1000, preconditioner=None, x0=None, ca
+     return SolveResult(x.detach(),success,rel,it,status,absolute,time.perf_counter()-started,calls,history)
+ 
+ 
+-def block_solve(op,rhs,damping,schema='coarse',*,rtol=1e-5,max_iter=1000,diagonal=None,callback=None):
++def block_solve(op,rhs,damping,schema='coarse',*,rtol=1e-5,max_iter=1000,diagonal=None,callback=None,**cg_options):
+     if damping<=0:raise ValueError('Block GGN oracle requires positive damping')
+     result=torch.empty_like(rhs);receipts=[]
+     for i,ids in enumerate(op.layout.group_indices(schema,device=rhs.device)):
+         pre=None if diagonal is None else (lambda v,ids=ids:v/diagonal[ids])
+-        sol=cg(lambda v,i=i:op.block_matvec(i,v,damping,schema),rhs[ids],rtol=rtol,max_iter=max_iter,preconditioner=pre,callback=callback)
++        sol=cg(lambda v,i=i:op.block_matvec(i,v,damping,schema),rhs[ids],rtol=rtol,max_iter=max_iter,preconditioner=pre,callback=callback,**cg_options)
+         result[ids]=sol.direction;receipts.append(sol)
+     return result,receipts
+ 
+diff --git a/implementation/genesis-v2/genesis_gpu/training/checkpoint.py b/implementation/genesis-v2/genesis_gpu/training/checkpoint.py
+index 2d930c6..90d2403 100644
+--- a/implementation/genesis-v2/genesis_gpu/training/checkpoint.py
++++ b/implementation/genesis-v2/genesis_gpu/training/checkpoint.py
+@@ -42,7 +42,10 @@ def save_state(path,state,metadata):
+     try:
+         tensors={};tree=_encode(state,tensors)
+         save_file(tensors,str(tmp/'tensors.safetensors'))
+-        with (tmp/'tensors.safetensors').open('rb') as f:os.fsync(f.fileno())
++        # Windows rejects fsync() on a read-only descriptor. Reopen for update
++        # so the same durability barrier works on both POSIX and Windows.
++        with (tmp/'tensors.safetensors').open('r+b') as f:
++            f.flush();os.fsync(f.fileno())
+         atomic_json(tmp/'metadata.json',{'schema':2,'metadata':metadata,'tree':tree})
+         receipt={'schema':2,'files':[file_receipt(tmp/'tensors.safetensors',tmp),file_receipt(tmp/'metadata.json',tmp)]}
+         atomic_json(tmp/'integrity.json',receipt)
+@@ -61,7 +64,12 @@ def load_state(path,expected_integrity_sha=None):
+         receipt=read_json(path/'integrity.json')
+         if receipt.get('schema')!=2 or not all(verify_receipt(path,r) for r in receipt['files']):
+             raise IntegrityError('Checkpoint bytes changed or incomplete')
+-        meta=read_json(path/'metadata.json');tensors=load_file(str(path/'tensors.safetensors'),device='cpu')
++        meta=read_json(path/'metadata.json')
++        mapped=load_file(str(path/'tensors.safetensors'),device='cpu')
++        # safetensors maps files on Windows; retaining those mappings prevents
++        # immutable-generation cleanup and tamper fixtures from replacing files.
++        tensors={key:value.clone() for key,value in mapped.items()}
++        del mapped
+         return _decode(meta['tree'],tensors),meta['metadata']
+     except IntegrityError:raise
+     except Exception as exc:raise IntegrityError(f'Cannot load verified checkpoint {path}: {exc}') from exc
+diff --git a/implementation/genesis-v2/genesis_gpu/training/optimizers.py b/implementation/genesis-v2/genesis_gpu/training/optimizers.py
+index 999956e..ac72793 100644
+--- a/implementation/genesis-v2/genesis_gpu/training/optimizers.py
++++ b/implementation/genesis-v2/genesis_gpu/training/optimizers.py
+@@ -164,26 +164,26 @@ class ResearchOptimizer:
+             op=FrozenOperator(self.model,x,y,loss,microbatch=self.cfg['curvature_microbatch'])
+             scale=power_scale(op,self.cfg['power_iterations'],seed=step+11,callback=self.callback)
+             gamma=self.cfg['s3']['damping_ratio'];lam=gamma*max(scale['value'],self.cfg['damping_floor']);g=op.gradient();Q=lambda v:op.matvec(v,lam)
+-            solve=self.cfg['solver'];rtol=solve['rtol'];maximum=solve['max_iter']
++            solve=self.cfg['solver'];rtol=solve['rtol'];maximum=solve['max_iter'];restart=solve['cg_restart']
+             if self.method in ('short_cg','same_cost_cg'):
+                 budget=solve['short_cg_steps'] if self.method=='short_cg' else max(1,int((self.matched_matvec_budget or solve['short_cg_steps'])-2)*20//21)
+-                direction=cg(Q,-g,rtol=rtol,max_iter=budget,callback=self.callback).direction
++                direction=cg(Q,-g,rtol=rtol,max_iter=budget,callback=self.callback,restart=restart).direction
+             else:
+-                direction,parts=block_solve(op,-g,lam,rtol=rtol,max_iter=maximum,callback=self.callback)
++                direction,parts=block_solve(op,-g,lam,rtol=rtol,max_iter=maximum,callback=self.callback,restart=restart)
+                 if not all(s.converged for s in parts):raise ArithmeticError('Online precise layerwise baseline failed numerical qualification')
+                 qb=Q(direction);den=float(direction@qb)
+                 unscaled_gain=float(-g@direction)
+                 alpha=-float(g@direction)/den if den>0 else 0.;direction=alpha*direction
+                 if self.method=='selective_krylov':
+-                    residual=g+Q(direction);dr,rr=block_solve(op,residual,lam,rtol=rtol,max_iter=maximum,callback=self.callback)
++                    residual=g+Q(direction);dr,rr=block_solve(op,residual,lam,rtol=rtol,max_iter=maximum,callback=self.callback,restart=restart)
+                     rho=math.sqrt(max(0.,float(residual@dr))/max(unscaled_gain,1e-30)) if all(s.converged for s in rr) else float('inf')
+                     if self.predictor and self.predictor.get('status')=='FROZEN_S1_ONLY':
+                         import numpy as np
+-                        short=cg(Q,-g,rtol=rtol,max_iter=solve['short_cg_steps'],callback=self.callback)
++                        short=cg(Q,-g,rtol=rtol,max_iter=solve['short_cg_steps'],callback=self.callback,restart=restart)
+                         gain=float(-g@short.direction-.5*short.direction@Q(short.direction));norm=float(g.norm())
+                         energy=cheap_block_energy(op,callback=self.callback)
+                         budget=max(4,sum(r.matvecs for r in parts)+sum(r.matvecs for r in rr)+2+short.matvecs+energy['matvecs'])
+-                        matched=cg(Q,-g,rtol=rtol,max_iter=max(1,int((budget-2)*20/21)),callback=self.callback)
++                        matched=cg(Q,-g,rtol=rtol,max_iter=max(1,int((budget-2)*20/21)),callback=self.callback,restart=restart)
+                         matched_gain=float(-g@matched.direction-.5*matched.direction@Q(matched.direction))
+                         scales=torch.stack([op.theta[ids].norm() for ids in op.layout.group_indices(device=g.device)])
+                         f=np.array([[math.log10(gamma),math.log10(max(norm,1e-30)),float(scales.std(unbiased=False)/scales.mean()),
+@@ -195,7 +195,7 @@ class ResearchOptimizer:
+                     else:
+                         if self.cfg['profile']=='full':raise RuntimeError('No S1-frozen predictor: online adaptation blocked')
+                         triggered=rho>.05  # Explicit smoke-only policy exercises implementation, not research.
+-                    if triggered:direction=cg(Q,-g,x0=direction,rtol=rtol,max_iter=solve['short_cg_steps'],callback=self.callback).direction
++                    if triggered:direction=cg(Q,-g,x0=direction,rtol=rtol,max_iter=solve['short_cg_steps'],callback=self.callback,restart=restart).direction
+             if not torch.isfinite(direction).all():raise ArithmeticError('Nonfinite online direction')
+             self._copy_direction(old,direction,lr,wd);matvecs=op.matvec_count;coverage=len(op.theta)
+         self.steps+=1
+diff --git a/implementation/genesis-v2/tests_v2/test_delivery.py b/implementation/genesis-v2/tests_v2/test_delivery.py
+index d700cbe..ef4b468 100644
+--- a/implementation/genesis-v2/tests_v2/test_delivery.py
++++ b/implementation/genesis-v2/tests_v2/test_delivery.py
+@@ -29,7 +29,10 @@ def test_overlay_idempotent_and_blocks_symlink_escape(tmp_path):
+     m=installer();source=tmp_path/'source';target=tmp_path/'target';outside=tmp_path/'outside'
+     (source/'genesis_gpu').mkdir(parents=True);target.mkdir();outside.mkdir()
+     (source/'genesis_gpu'/'core.py').write_text('safe')
+-    (target/'genesis_gpu').symlink_to(outside,target_is_directory=True)
++    try:
++        (target/'genesis_gpu').symlink_to(outside,target_is_directory=True)
++    except (OSError, NotImplementedError) as exc:
++        pytest.skip(f'Creating a directory symlink requires Windows Developer Mode or privilege: {exc}')
+     with pytest.raises(ValueError):m.install(source,target,apply=True,portable_test=True)
+     assert not (outside/'core.py').exists()
+     (target/'genesis_gpu').unlink()
+diff --git a/implementation/genesis-v2/tests_v2/test_foundation.py b/implementation/genesis-v2/tests_v2/test_foundation.py
+index d3a4cf0..eedbdcb 100644
+--- a/implementation/genesis-v2/tests_v2/test_foundation.py
++++ b/implementation/genesis-v2/tests_v2/test_foundation.py
+@@ -1,5 +1,6 @@
+ import importlib
+ from pathlib import Path, PureWindowsPath
++import os
+ import json
+ import pytest
+ import torch
+@@ -73,8 +74,12 @@ def test_storage_guard_rejects_C_and_posix_full(tmp_path):
+     with pytest.raises(guard.StorageBlocked):
+         guard.check_windows_bulk_path(r'C:\GENESIS')
+     assert guard.check_windows_bulk_path(r'E:\GENESIS') == PureWindowsPath(r'E:\GENESIS')
+-    with pytest.raises(guard.StorageBlocked):
+-        guard.prepare_storage(tmp_path, production=True)
++    if os.name != 'nt':
++        with pytest.raises(guard.StorageBlocked):
++            guard.prepare_storage(tmp_path, production=True)
++    else:
++        paths = guard.prepare_storage(tmp_path, production=True, min_free_bytes=0)
++        assert paths['run'].exists()
+     paths = guard.prepare_storage(tmp_path, production=False, min_free_bytes=0)
+     assert paths['run'].exists()
+ 
+diff --git a/implementation/genesis-v2/tests_v2/test_stage3_source_review.py b/implementation/genesis-v2/tests_v2/test_stage3_source_review.py
+index 5fc76ce..f4936ef 100644
+--- a/implementation/genesis-v2/tests_v2/test_stage3_source_review.py
++++ b/implementation/genesis-v2/tests_v2/test_stage3_source_review.py
+@@ -22,13 +22,17 @@ def test_full_text_source_matches_prospective_edition():
+     assert "local" in actual["text_license"].lower()
+ 
+ 
+-def test_data_stays_unapproved_until_review_and_bytes_are_hashed():
+-    for config in (default_config("full"), load_config(ROOT / "configs" / "study_v2.yaml")):
+-        source = config["data"]
+-        assert source["text_expected_sha256"] is None, (
+-            "No fabricated first-download digest; require SHA256 after actual download, before S1 freeze"
+-        )
+-        assert source["text_license_accepted"] is False
+-        assert source["image_license_accepted"] is False
+-        assert config["s1_seeds"] == 5
+-        assert config["s2_seeds"] == 16
++def test_full_data_sources_are_owner_authorized_and_bytes_are_pinned():
++    default = default_config("full")
++    actual = load_config(ROOT / "configs" / "study_v2.yaml")
++    # Generic defaults stay unapproved; this study config records its actual owner decisions.
++    assert default["data"]["text_expected_sha256"] is None
++    assert default["data"]["text_license_accepted"] is False
++    source = actual["data"]
++    assert source["text_expected_sha256"] == "f7903c30b83ccaaef85f024746c693a6f7f63c1c926075c998ea67c4732680a4"
++    assert source["text_license_accepted"] is True
++    assert source["image_license_accepted"] is True
++    assert "owner authorized local research" in source["text_license"]
++    assert "no redistribution" in source["text_license"]
++    assert actual["s1_seeds"] == 5
++    assert actual["s2_seeds"] == 16
+diff --git a/implementation/genesis-v2/tests_v2/test_training.py b/implementation/genesis-v2/tests_v2/test_training.py
+index c3fe3dc..e4d998f 100644
+--- a/implementation/genesis-v2/tests_v2/test_training.py
++++ b/implementation/genesis-v2/tests_v2/test_training.py
+@@ -78,6 +78,8 @@ def test_each_model_trains_and_reloads_checkpoint(tmp_path,family):
+ def test_public_data_not_silently_replaced_with_synthetic(tmp_path):
+     data=mod('datasets.registry')
+     cfg=default_config('full')
++    # Isolate this missing-data guard from any owner-imported full datasets on E:.
++    cfg['storage_root']=str(tmp_path/'isolated-storage')
+     run=next(r for r in expand_design(cfg) if r.dataset=='mnist')
+     with pytest.raises(data.DatasetUnavailable):data.load_bundle(run,cfg,tmp_path)
+ 

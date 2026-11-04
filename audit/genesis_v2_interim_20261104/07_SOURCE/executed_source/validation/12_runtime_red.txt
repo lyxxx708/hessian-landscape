@@ -1,0 +1,292 @@
+FFFFFF                                                                   [100%]
+=================================== FAILURES ===================================
+_________ test_queue_idempotency_dependencies_and_immutable_completion _________
+
+name = 'runtime.queue'
+
+    def mod(name):
+>       try:return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_runtime.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.runtime.queue'
+import_ = <function _gcd_import at 0x7fe0c54a04a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.runtime.queue'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-7/test_queue_idempotency_depende0')
+
+    def test_queue_idempotency_dependencies_and_immutable_completion(tmp_path):
+>       Store=mod('runtime.queue').JobStore
+              ^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_runtime.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime.queue'
+
+    def mod(name):
+        try:return importlib.import_module('genesis_gpu.'+name)
+>       except ModuleNotFoundError as exc:pytest.fail(f'Required runtime missing: {name}: {exc}')
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: Required runtime missing: runtime.queue: No module named 'genesis_gpu.runtime.queue'
+
+tests_v2/test_runtime.py:12: Failed
+___________________ test_queue_no_stealing_from_live_process ___________________
+
+name = 'runtime.queue'
+
+    def mod(name):
+>       try:return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_runtime.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.runtime.queue'
+import_ = <function _gcd_import at 0x7fe0c54a04a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.runtime.queue'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-7/test_queue_no_stealing_from_li0')
+
+    def test_queue_no_stealing_from_live_process(tmp_path):
+>       Store=mod('runtime.queue').JobStore
+              ^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_runtime.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime.queue'
+
+    def mod(name):
+        try:return importlib.import_module('genesis_gpu.'+name)
+>       except ModuleNotFoundError as exc:pytest.fail(f'Required runtime missing: {name}: {exc}')
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: Required runtime missing: runtime.queue: No module named 'genesis_gpu.runtime.queue'
+
+tests_v2/test_runtime.py:12: Failed
+___________________________ test_single_writer_lock ____________________________
+
+name = 'runtime.resources'
+
+    def mod(name):
+>       try:return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_runtime.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.runtime.resources'
+import_ = <function _gcd_import at 0x7fe0c54a04a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.runtime.resources'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-7/test_single_writer_lock0')
+
+    def test_single_writer_lock(tmp_path):
+>       Lock=mod('runtime.resources').StudyLock
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_runtime.py:41: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime.resources'
+
+    def mod(name):
+        try:return importlib.import_module('genesis_gpu.'+name)
+>       except ModuleNotFoundError as exc:pytest.fail(f'Required runtime missing: {name}: {exc}')
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: Required runtime missing: runtime.resources: No module named 'genesis_gpu.runtime.resources'
+
+tests_v2/test_runtime.py:12: Failed
+________________ test_freeze_requires_g0_and_rejects_cfg_change ________________
+
+name = 'study.freeze'
+
+    def mod(name):
+>       try:return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_runtime.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.study.freeze'
+import_ = <function _gcd_import at 0x7fe0c54a04a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.study.freeze'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-7/test_freeze_requires_g0_and_re0')
+
+    def test_freeze_requires_g0_and_rejects_cfg_change(tmp_path):
+>       lifecycle=mod('study.freeze');g0=mod('audit.g0')
+                  ^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_runtime.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'study.freeze'
+
+    def mod(name):
+        try:return importlib.import_module('genesis_gpu.'+name)
+>       except ModuleNotFoundError as exc:pytest.fail(f'Required runtime missing: {name}: {exc}')
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: Required runtime missing: study.freeze: No module named 'genesis_gpu.study.freeze'
+
+tests_v2/test_runtime.py:12: Failed
+__________________ test_production_refuses_cpu_and_earlier_g0 __________________
+
+name = 'study.freeze'
+
+    def mod(name):
+>       try:return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_runtime.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.study.freeze'
+import_ = <function _gcd_import at 0x7fe0c54a04a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.study.freeze'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-7/test_production_refuses_cpu_an0')
+
+    def test_production_refuses_cpu_and_earlier_g0(tmp_path):
+>       lifecycle=mod('study.freeze')
+                  ^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_runtime.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'study.freeze'
+
+    def mod(name):
+        try:return importlib.import_module('genesis_gpu.'+name)
+>       except ModuleNotFoundError as exc:pytest.fail(f'Required runtime missing: {name}: {exc}')
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: Required runtime missing: study.freeze: No module named 'genesis_gpu.study.freeze'
+
+tests_v2/test_runtime.py:12: Failed
+_______________________ test_s2_unlock_not_a_flag_bypass _______________________
+
+name = 'study.freeze'
+
+    def mod(name):
+>       try:return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_runtime.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.study.freeze'
+import_ = <function _gcd_import at 0x7fe0c54a04a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.study.freeze'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-7/test_s2_unlock_not_a_flag_bypa0')
+
+    def test_s2_unlock_not_a_flag_bypass(tmp_path):
+>       lifecycle=mod('study.freeze')
+                  ^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_runtime.py:70: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'study.freeze'
+
+    def mod(name):
+        try:return importlib.import_module('genesis_gpu.'+name)
+>       except ModuleNotFoundError as exc:pytest.fail(f'Required runtime missing: {name}: {exc}')
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: Required runtime missing: study.freeze: No module named 'genesis_gpu.study.freeze'
+
+tests_v2/test_runtime.py:12: Failed
+=========================== short test summary info ============================
+FAILED tests_v2/test_runtime.py::test_queue_idempotency_dependencies_and_immutable_completion - Failed: Required runtime missing: runtime.queue: No module named 'genesis_gpu.runtime.queue'
+FAILED tests_v2/test_runtime.py::test_queue_no_stealing_from_live_process - Failed: Required runtime missing: runtime.queue: No module named 'genesis_gpu.runtime.queue'
+FAILED tests_v2/test_runtime.py::test_single_writer_lock - Failed: Required runtime missing: runtime.resources: No module named 'genesis_gpu.runtime.resources'
+FAILED tests_v2/test_runtime.py::test_freeze_requires_g0_and_rejects_cfg_change - Failed: Required runtime missing: study.freeze: No module named 'genesis_gpu.study.freeze'
+FAILED tests_v2/test_runtime.py::test_production_refuses_cpu_and_earlier_g0 - Failed: Required runtime missing: study.freeze: No module named 'genesis_gpu.study.freeze'
+FAILED tests_v2/test_runtime.py::test_s2_unlock_not_a_flag_bypass - Failed: Required runtime missing: study.freeze: No module named 'genesis_gpu.study.freeze'
+6 failed in 1.11s
