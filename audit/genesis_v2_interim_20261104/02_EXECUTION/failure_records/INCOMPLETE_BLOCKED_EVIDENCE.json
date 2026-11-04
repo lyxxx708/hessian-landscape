@@ -1,0 +1,58 @@
+{
+  "state": "INCOMPLETE_BLOCKED_EVIDENCE",
+  "recorded_utc": "2026-11-02T17:02:36.131298+00:00",
+  "repository": "lyxxx708/hessian-landscape",
+  "pr14": "open draft; unmerged; remote head 12c240e1a22445b6fd6a50dfbe8552815de1fb71",
+  "worktree": "E:\\GENESIS\\worktrees\\genesis-v2-pr14",
+  "execution_branch": "codex/genesis-v2-pr14-offline-import",
+  "head_sha": "12c240e1a22445b6fd6a50dfbe8552815de1fb71",
+  "base_branch_divergence_vs_fresh_revalidation": "0\t15",
+  "source_manifest": {
+    "entries": 146,
+    "verified": true,
+    "mismatches": []
+  },
+  "software_qa": {
+    "v2": "88 passed, 1 skipped (Windows symlink privilege unavailable), 0 failed after test data-root isolation",
+    "legacy": "25 passed, 0 failed",
+    "compileall": "passed"
+  },
+  "image_data": "IMAGE_DATASETS_READY_TEXT_PENDING; C source unchanged; E prepared data and receipts verified",
+  "hard_gate": {
+    "stage": "Stage 3 text corpus owner/operator authorization and completed data manifest",
+    "reason": "Exact Gutenberg #2270 bytes are now present on E: as a quarantined candidate with SHA256 and notice review, but project policy requires a separate owner/operator decision for local research use, attribution and no redistribution; no prepared text split/full manifest exists.",
+    "effect": "DATA_READY, CUDA G0, freeze, S1/S2/S3 and scientific verification are not achieved"
+  },
+  "planned_scope": {
+    "S1_training": 130,
+    "S2_training": 96,
+    "S1_dry_run_jobs": 3250,
+    "S2_dry_run_jobs": 2400,
+    "science_jobs_executed": 0
+  },
+  "cuda": {
+    "device_seen_by_doctor": "NVIDIA GeForce RTX 4070 Ti, 12 GiB",
+    "doctor": "ENV_READY",
+    "G0": "NOT_RUN"
+  },
+  "github": "PR #14 remains open draft and unmerged; no new commit pushed; main untouched",
+  "pending_uncommitted_source_repairs": "M implementation/genesis-v2/DELIVERY_MANIFEST.json\n M implementation/genesis-v2/genesis_gpu/training/checkpoint.py\n M implementation/genesis-v2/tests_v2/test_delivery.py\n M implementation/genesis-v2/tests_v2/test_foundation.py\n M implementation/genesis-v2/tests_v2/test_training.py",
+  "safe_resume_commands": [
+    "cd E:\\GENESIS\\worktrees\\genesis-v2-pr14\\implementation\\genesis-v2",
+    ". .\\scripts\\genesis_env.ps1 -Root E:\\GENESIS",
+    "$Py = 'E:\\GENESIS\\venvs\\hessian-landscape-v2\\Scripts\\python.exe'",
+    "Complete the exact text corpus local-use/notice decision and pin source bytes plus SHA256; store authorized bytes only under E:\\GENESIS and create the full three-source manifest.",
+    "& $Py -m genesis_gpu --config configs\\study_v2.yaml --root E:\\GENESIS\\runs\\genesis_full_v2 doctor",
+    "& $Py -m genesis_gpu --config configs\\study_v2.yaml --root E:\\GENESIS\\runs\\genesis_full_v2 g0 --all --save-reference",
+    "After G0 passes, freeze; execute S1=130, adjudicate S1, then mandatory S2=96, conditional S3, independent verify and reports."
+  ],
+  "text_candidate": {
+    "status": "CANDIDATE_DOWNLOADED_NOT_PREPARED",
+    "bytes": 4658981,
+    "sha256": "f7903c30b83ccaaef85f024746c693a6f7f63c1c926075c998ea67c4732680a4",
+    "prepared": false,
+    "owner_authorized": false,
+    "evidence": "E:\\GENESIS\\evidence\\stage3-image-import\\gutenberg_text_candidate_rights.json"
+  },
+  "network_note": "Initial TLS errors were transient; bounded verified HTTPS retry succeeded. No TLS bypass or alternate mirror used."
+}

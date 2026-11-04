@@ -1,0 +1,27 @@
+.........FF                                                              [100%]
+=================================== FAILURES ===================================
+____ test_cheap_block_energy_baseline_counts_work_and_does_not_use_inverse _____
+
+    def test_cheap_block_energy_baseline_counts_work_and_does_not_use_inverse():
+>       from genesis_gpu.science.utility import cheap_block_energy
+E       ImportError: cannot import name 'cheap_block_energy' from 'genesis_gpu.science.utility' (/mnt/data/genesis-v2/genesis_gpu/science/utility.py)
+
+tests_v2/test_science.py:147: ImportError
+______ test_predictor_includes_matched_cost_and_block_energy_competitors _______
+
+    def test_predictor_includes_matched_cost_and_block_energy_competitors():
+        from genesis_gpu.science.predictor import FEATURES,BASELINES
+>       assert 'matched_gain_per_gradient_sq' in FEATURES
+E       AssertionError: assert 'matched_gain_per_gradient_sq' in ('log_gamma', 'log_gradient', 'layer_scale_cv', 'log_condition_proxy', 'short_gain_per_gradient_sq', 'cheap_rho')
+
+tests_v2/test_science.py:157: AssertionError
+=============================== warnings summary ===============================
+tests_v2/test_science.py: 18 warnings
+  /opt/pyvenv/lib/python3.13/site-packages/torch/jit/_script.py:1480: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests_v2/test_science.py::test_cheap_block_energy_baseline_counts_work_and_does_not_use_inverse - ImportError: cannot import name 'cheap_block_energy' from 'genesis_gpu.science.utility' (/mnt/data/genesis-v2/genesis_gpu/science/utility.py)
+FAILED tests_v2/test_science.py::test_predictor_includes_matched_cost_and_block_energy_competitors - AssertionError: assert 'matched_gain_per_gradient_sq' in ('log_gamma', 'log_gradient', 'layer_scale_cv', 'log_condition_proxy', 'short_gain_per_gradient_sq', 'cheap_rho')
+2 failed, 9 passed, 18 warnings in 3.19s

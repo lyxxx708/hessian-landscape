@@ -1,0 +1,73 @@
+FFFFF                                                                    [100%]
+=================================== FAILURES ===================================
+________________________ test_cli_help_and_finite_plan _________________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-16/test_cli_help_and_finite_plan0')
+capsys = <_pytest.capture.CaptureFixture object at 0x7fd6db73f8c0>
+
+    def test_cli_help_and_finite_plan(tmp_path,capsys):
+>       from genesis_gpu.cli import main
+E       ModuleNotFoundError: No module named 'genesis_gpu.cli'
+
+tests_v2/test_cli_s3.py:11: ModuleNotFoundError
+______________ test_s3_no_go_is_evidence_bound_not_fake_benchmark ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-16/test_s3_no_go_is_evidence_boun0')
+
+    def test_s3_no_go_is_evidence_bound_not_fake_benchmark(tmp_path):
+>       from genesis_gpu.training.benchmark import run_benchmark
+E       ModuleNotFoundError: No module named 'genesis_gpu.training.benchmark'
+
+tests_v2/test_cli_s3.py:23: ModuleNotFoundError
+________________ test_budget_censor_is_not_training_completion _________________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-16/test_budget_censor_is_not_trai0')
+
+    def test_budget_censor_is_not_training_completion(tmp_path):
+        from genesis_gpu.training.trainer import train_run
+        cfg=default_config('smoke');cfg['storage_root']=str(tmp_path)
+        run=expand_design(cfg)[0]
+>       r=train_run(run,cfg,tmp_path,wall_budget_seconds=0.)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: train_run() got an unexpected keyword argument 'wall_budget_seconds'
+
+tests_v2/test_cli_s3.py:37: TypeError
+_____________ test_cpu_g0_failure_cannot_leave_stale_green_receipt _____________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-16/test_cpu_g0_failure_cannot_lea0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x7fd6dba2b950>
+
+    def test_cpu_g0_failure_cannot_leave_stale_green_receipt(tmp_path,monkeypatch):
+        from genesis_gpu.audit.g0 import run_g0
+        import genesis_gpu.audit.g0 as g0
+        cfg=default_config('smoke');cfg['storage_root']=str(tmp_path)
+        atomic_json(tmp_path/'audit'/'g0_receipt.json',{'status':'CPU_SMOKE_G0_VALID'})
+        def broken(*a,**k):raise RuntimeError('injected derivative defect')
+        monkeypatch.setattr(g0,'dense_reference',broken)
+        with pytest.raises(RuntimeError):run_g0(cfg,tmp_path)
+>       assert json.loads((tmp_path/'audit'/'g0_receipt.json').read_text())['status']=='G0_FAILED'
+E       AssertionError: assert 'CPU_SMOKE_G0_VALID' == 'G0_FAILED'
+E         
+E         - G0_FAILED
+E         + CPU_SMOKE_G0_VALID
+
+tests_v2/test_cli_s3.py:51: AssertionError
+_____________ test_final_report_cannot_declare_science_without_qa ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-16/test_final_report_cannot_decla0')
+
+    def test_final_report_cannot_declare_science_without_qa(tmp_path):
+>       from genesis_gpu.reporting.report import generate_report
+E       ModuleNotFoundError: No module named 'genesis_gpu.reporting.report'
+
+tests_v2/test_cli_s3.py:55: ModuleNotFoundError
+=========================== short test summary info ============================
+FAILED tests_v2/test_cli_s3.py::test_cli_help_and_finite_plan - ModuleNotFoundError: No module named 'genesis_gpu.cli'
+FAILED tests_v2/test_cli_s3.py::test_s3_no_go_is_evidence_bound_not_fake_benchmark - ModuleNotFoundError: No module named 'genesis_gpu.training.benchmark'
+FAILED tests_v2/test_cli_s3.py::test_budget_censor_is_not_training_completion - TypeError: train_run() got an unexpected keyword argument 'wall_budget_seconds'
+FAILED tests_v2/test_cli_s3.py::test_cpu_g0_failure_cannot_leave_stale_green_receipt - AssertionError: assert 'CPU_SMOKE_G0_VALID' == 'G0_FAILED'
+  
+  - G0_FAILED
+  + CPU_SMOKE_G0_VALID
+FAILED tests_v2/test_cli_s3.py::test_final_report_cannot_declare_science_without_qa - ModuleNotFoundError: No module named 'genesis_gpu.reporting.report'
+5 failed in 2.03s

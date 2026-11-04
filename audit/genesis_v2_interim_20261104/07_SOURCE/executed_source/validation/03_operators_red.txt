@@ -1,0 +1,478 @@
+FFFFFFFFF                                                                [100%]
+=================================== FAILURES ===================================
+_______________ test_matrix_free_matches_independent_dense[mse] ________________
+
+name = 'models.registry'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_operators.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.models.registry'
+import_ = <function _gcd_import at 0x7f60744dc4a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.models.registry'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+kind = 'mse'
+
+    @pytest.mark.parametrize('kind', ['mse', 'ce'])
+    def test_matrix_free_matches_independent_dense(kind):
+>       _, _, _, op = make_op(kind)
+                      ^^^^^^^^^^^^^
+
+tests_v2/test_operators.py:26: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests_v2/test_operators.py:17: in make_op
+    model = mod('models.registry').build_model(spec, 31).double()
+            ^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'models.registry'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.' + name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required v2 module missing: {name}: {exc}')
+E           Failed: Required v2 module missing: models.registry: No module named 'genesis_gpu.models.registry'
+
+tests_v2/test_operators.py:11: Failed
+________________ test_matrix_free_matches_independent_dense[ce] ________________
+
+name = 'models.registry'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_operators.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.models.registry'
+import_ = <function _gcd_import at 0x7f60744dc4a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.models.registry'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+kind = 'ce'
+
+    @pytest.mark.parametrize('kind', ['mse', 'ce'])
+    def test_matrix_free_matches_independent_dense(kind):
+>       _, _, _, op = make_op(kind)
+                      ^^^^^^^^^^^^^
+
+tests_v2/test_operators.py:26: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests_v2/test_operators.py:17: in make_op
+    model = mod('models.registry').build_model(spec, 31).double()
+            ^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'models.registry'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.' + name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required v2 module missing: {name}: {exc}')
+E           Failed: Required v2 module missing: models.registry: No module named 'genesis_gpu.models.registry'
+
+tests_v2/test_operators.py:11: Failed
+_______________ test_microbatch_sum_matches_whole_operator[mse] ________________
+
+name = 'models.registry'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_operators.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.models.registry'
+import_ = <function _gcd_import at 0x7f60744dc4a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.models.registry'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+kind = 'mse'
+
+    @pytest.mark.parametrize('kind', ['mse', 'ce'])
+    def test_microbatch_sum_matches_whole_operator(kind):
+>       _, _, _, a = make_op(kind)
+                     ^^^^^^^^^^^^^
+
+tests_v2/test_operators.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests_v2/test_operators.py:17: in make_op
+    model = mod('models.registry').build_model(spec, 31).double()
+            ^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'models.registry'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.' + name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required v2 module missing: {name}: {exc}')
+E           Failed: Required v2 module missing: models.registry: No module named 'genesis_gpu.models.registry'
+
+tests_v2/test_operators.py:11: Failed
+________________ test_microbatch_sum_matches_whole_operator[ce] ________________
+
+name = 'models.registry'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_operators.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.models.registry'
+import_ = <function _gcd_import at 0x7f60744dc4a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.models.registry'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+kind = 'ce'
+
+    @pytest.mark.parametrize('kind', ['mse', 'ce'])
+    def test_microbatch_sum_matches_whole_operator(kind):
+>       _, _, _, a = make_op(kind)
+                     ^^^^^^^^^^^^^
+
+tests_v2/test_operators.py:39: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests_v2/test_operators.py:17: in make_op
+    model = mod('models.registry').build_model(spec, 31).double()
+            ^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'models.registry'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.' + name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required v2 module missing: {name}: {exc}')
+E           Failed: Required v2 module missing: models.registry: No module named 'genesis_gpu.models.registry'
+
+tests_v2/test_operators.py:11: Failed
+_______________ test_snapshot_isolated_from_model_batch_mutation _______________
+
+name = 'models.registry'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_operators.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.models.registry'
+import_ = <function _gcd_import at 0x7f60744dc4a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.models.registry'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_snapshot_isolated_from_model_batch_mutation():
+>       model, x, y, op = make_op()
+                          ^^^^^^^^^
+
+tests_v2/test_operators.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests_v2/test_operators.py:17: in make_op
+    model = mod('models.registry').build_model(spec, 31).double()
+            ^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'models.registry'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.' + name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required v2 module missing: {name}: {exc}')
+E           Failed: Required v2 module missing: models.registry: No module named 'genesis_gpu.models.registry'
+
+tests_v2/test_operators.py:11: Failed
+_________________ test_same_snapshot_repeatability_and_adjoint _________________
+
+name = 'models.registry'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_operators.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.models.registry'
+import_ = <function _gcd_import at 0x7f60744dc4a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.models.registry'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_same_snapshot_repeatability_and_adjoint():
+>       _, _, _, op = make_op('ce')
+                      ^^^^^^^^^^^^^
+
+tests_v2/test_operators.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests_v2/test_operators.py:17: in make_op
+    model = mod('models.registry').build_model(spec, 31).double()
+            ^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'models.registry'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.' + name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required v2 module missing: {name}: {exc}')
+E           Failed: Required v2 module missing: models.registry: No module named 'genesis_gpu.models.registry'
+
+tests_v2/test_operators.py:11: Failed
+__________________ test_block_matvec_and_shared_weight_layout __________________
+
+name = 'models.registry'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_operators.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.models.registry'
+import_ = <function _gcd_import at 0x7f60744dc4a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.models.registry'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_block_matvec_and_shared_weight_layout():
+        spec = ModelSpec('transformer', 2, 4, 4, 4, heads=1, context=4, vocab_size=7, tie_weights=True)
+>       model = mod('models.registry').build_model(spec, 3).double()
+                ^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_operators.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'models.registry'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.' + name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required v2 module missing: {name}: {exc}')
+E           Failed: Required v2 module missing: models.registry: No module named 'genesis_gpu.models.registry'
+
+tests_v2/test_operators.py:11: Failed
+________________ test_resnet_has_all_parameters_in_both_schemas ________________
+
+name = 'models.registry'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_operators.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.models.registry'
+import_ = <function _gcd_import at 0x7f60744dc4a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.models.registry'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_resnet_has_all_parameters_in_both_schemas():
+        spec = ModelSpec('resnet', 8, 2, 192, 3, image_size=8, normalization='groupnorm')
+>       model = mod('models.registry').build_model(spec, 8).double()
+                ^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_operators.py:87: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'models.registry'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.' + name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required v2 module missing: {name}: {exc}')
+E           Failed: Required v2 module missing: models.registry: No module named 'genesis_gpu.models.registry'
+
+tests_v2/test_operators.py:11: Failed
+__________________ test_reverse_mode_fallback_matches_forward __________________
+
+name = 'models.registry'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_operators.py:9: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.models.registry'
+import_ = <function _gcd_import at 0x7f60744dc4a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.models.registry'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_reverse_mode_fallback_matches_forward():
+>       _, _, _, op = make_op('ce')
+                      ^^^^^^^^^^^^^
+
+tests_v2/test_operators.py:99: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests_v2/test_operators.py:17: in make_op
+    model = mod('models.registry').build_model(spec, 31).double()
+            ^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'models.registry'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.' + name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required v2 module missing: {name}: {exc}')
+E           Failed: Required v2 module missing: models.registry: No module named 'genesis_gpu.models.registry'
+
+tests_v2/test_operators.py:11: Failed
+=========================== short test summary info ============================
+FAILED tests_v2/test_operators.py::test_matrix_free_matches_independent_dense[mse] - Failed: Required v2 module missing: models.registry: No module named 'genesis_gpu.models.registry'
+FAILED tests_v2/test_operators.py::test_matrix_free_matches_independent_dense[ce] - Failed: Required v2 module missing: models.registry: No module named 'genesis_gpu.models.registry'
+FAILED tests_v2/test_operators.py::test_microbatch_sum_matches_whole_operator[mse] - Failed: Required v2 module missing: models.registry: No module named 'genesis_gpu.models.registry'
+FAILED tests_v2/test_operators.py::test_microbatch_sum_matches_whole_operator[ce] - Failed: Required v2 module missing: models.registry: No module named 'genesis_gpu.models.registry'
+FAILED tests_v2/test_operators.py::test_snapshot_isolated_from_model_batch_mutation - Failed: Required v2 module missing: models.registry: No module named 'genesis_gpu.models.registry'
+FAILED tests_v2/test_operators.py::test_same_snapshot_repeatability_and_adjoint - Failed: Required v2 module missing: models.registry: No module named 'genesis_gpu.models.registry'
+FAILED tests_v2/test_operators.py::test_block_matvec_and_shared_weight_layout - Failed: Required v2 module missing: models.registry: No module named 'genesis_gpu.models.registry'
+FAILED tests_v2/test_operators.py::test_resnet_has_all_parameters_in_both_schemas - Failed: Required v2 module missing: models.registry: No module named 'genesis_gpu.models.registry'
+FAILED tests_v2/test_operators.py::test_reverse_mode_fallback_matches_forward - Failed: Required v2 module missing: models.registry: No module named 'genesis_gpu.models.registry'
+9 failed in 1.51s

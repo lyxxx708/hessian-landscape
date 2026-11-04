@@ -1,0 +1,326 @@
+FFFFFF                                                                   [100%]
+=================================== FAILURES ===================================
+________________________ test_mse_and_ce_loss_contract _________________________
+
+name = 'contracts'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_foundation.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.contracts'
+import_ = <function _gcd_import at 0x7fca699184a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.contracts'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_mse_and_ce_loss_contract():
+>       LossSpec = mod('contracts').LossSpec
+                   ^^^^^^^^^^^^^^^^
+
+tests_v2/test_foundation.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'contracts'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.' + name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required v2 module not implemented: {name}: {exc}')
+E           Failed: Required v2 module not implemented: contracts: No module named 'genesis_gpu.contracts'
+
+tests_v2/test_foundation.py:12: Failed
+________________ test_loss_metric_matches_dense_output_hessian _________________
+
+name = 'contracts'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_foundation.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.contracts'
+import_ = <function _gcd_import at 0x7fca699184a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.contracts'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_loss_metric_matches_dense_output_hessian():
+>       spec = mod('contracts').LossSpec('ce')
+               ^^^^^^^^^^^^^^^^
+
+tests_v2/test_foundation.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'contracts'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.' + name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required v2 module not implemented: {name}: {exc}')
+E           Failed: Required v2 module not implemented: contracts: No module named 'genesis_gpu.contracts'
+
+tests_v2/test_foundation.py:12: Failed
+_____________________ test_plan_counts_and_seed_isolation ______________________
+
+name = 'study.design'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_foundation.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.study', import_ = <function _gcd_import at 0x7fca699184a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.study'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+    def test_plan_counts_and_seed_isolation():
+>       d = mod('study.design')
+            ^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_foundation.py:42: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'study.design'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.' + name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required v2 module not implemented: {name}: {exc}')
+E           Failed: Required v2 module not implemented: study.design: No module named 'genesis_gpu.study'
+
+tests_v2/test_foundation.py:12: Failed
+_______________________ test_atomic_artifact_hash_tamper _______________________
+
+name = 'runtime.atomic_io'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_foundation.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.runtime', import_ = <function _gcd_import at 0x7fca699184a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.runtime'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-0/test_atomic_artifact_hash_tamp0')
+
+    def test_atomic_artifact_hash_tamper(tmp_path):
+>       io = mod('runtime.atomic_io')
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_foundation.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime.atomic_io'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.' + name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required v2 module not implemented: {name}: {exc}')
+E           Failed: Required v2 module not implemented: runtime.atomic_io: No module named 'genesis_gpu.runtime'
+
+tests_v2/test_foundation.py:12: Failed
+_________________ test_storage_guard_rejects_C_and_posix_full __________________
+
+name = 'env.storage_guard'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_foundation.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.env', import_ = <function _gcd_import at 0x7fca699184a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.env'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-0/test_storage_guard_rejects_C_a0')
+
+    def test_storage_guard_rejects_C_and_posix_full(tmp_path):
+>       guard = mod('env.storage_guard')
+                ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_foundation.py:72: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'env.storage_guard'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.' + name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required v2 module not implemented: {name}: {exc}')
+E           Failed: Required v2 module not implemented: env.storage_guard: No module named 'genesis_gpu.env'
+
+tests_v2/test_foundation.py:12: Failed
+____________________ test_json_rejects_nan_and_path_escape _____________________
+
+name = 'runtime.atomic_io'
+
+    def mod(name):
+        try:
+>           return importlib.import_module('genesis_gpu.' + name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_foundation.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1310: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.runtime', import_ = <function _gcd_import at 0x7fca699184a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.runtime'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-0/test_json_rejects_nan_and_path0')
+
+    def test_json_rejects_nan_and_path_escape(tmp_path):
+>       io = mod('runtime.atomic_io')
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_foundation.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'runtime.atomic_io'
+
+    def mod(name):
+        try:
+            return importlib.import_module('genesis_gpu.' + name)
+        except ModuleNotFoundError as exc:
+>           pytest.fail(f'Required v2 module not implemented: {name}: {exc}')
+E           Failed: Required v2 module not implemented: runtime.atomic_io: No module named 'genesis_gpu.runtime'
+
+tests_v2/test_foundation.py:12: Failed
+=========================== short test summary info ============================
+FAILED tests_v2/test_foundation.py::test_mse_and_ce_loss_contract - Failed: Required v2 module not implemented: contracts: No module named 'genesis_gpu.contracts'
+FAILED tests_v2/test_foundation.py::test_loss_metric_matches_dense_output_hessian - Failed: Required v2 module not implemented: contracts: No module named 'genesis_gpu.contracts'
+FAILED tests_v2/test_foundation.py::test_plan_counts_and_seed_isolation - Failed: Required v2 module not implemented: study.design: No module named 'genesis_gpu.study'
+FAILED tests_v2/test_foundation.py::test_atomic_artifact_hash_tamper - Failed: Required v2 module not implemented: runtime.atomic_io: No module named 'genesis_gpu.runtime'
+FAILED tests_v2/test_foundation.py::test_storage_guard_rejects_C_and_posix_full - Failed: Required v2 module not implemented: env.storage_guard: No module named 'genesis_gpu.env'
+FAILED tests_v2/test_foundation.py::test_json_rejects_nan_and_path_escape - Failed: Required v2 module not implemented: runtime.atomic_io: No module named 'genesis_gpu.runtime'
+6 failed in 1.39s

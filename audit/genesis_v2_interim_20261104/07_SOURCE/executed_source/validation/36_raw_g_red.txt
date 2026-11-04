@@ -1,0 +1,26 @@
+F                                                                        [100%]
+=================================== FAILURES ===================================
+____________ test_block_probe_matches_dense_and_identity_correction ____________
+
+    def test_block_probe_matches_dense_and_identity_correction():
+        sketch=mod('sketches.block_probe').estimate_blocks
+        from genesis_gpu.solvers.cg import cg
+        n=6;dtype=torch.float64
+        G=.2*torch.ones(n,n,dtype=dtype);lam=.5;Q=G+lam*torch.eye(n,dtype=dtype)
+        ids=[torch.arange(0,2),torch.arange(2,4),torch.arange(4,6)]
+        result=sketch(lambda x:cg(lambda z:Q@z,x,rtol=1e-12,max_iter=40),lambda x:G@x,ids,lam,
+                      dtype=dtype,device='cpu',seed=41,schedule=[128],relative_halfwidth=1.,bootstrap=100,independent_final=True)
+        R=torch.linalg.inv(Q);C=R-torch.eye(n,dtype=dtype)/lam
+        exact=np.array([[float((R[i][:,j]**2).sum()) for j in ids] for i in ids])
+        np.testing.assert_allclose(result['energy_mean'],exact,rtol=.4,atol=.03)
+        exact_c=np.array([[float((C[i][:,j]**2).sum()) for j in ids] for i in ids])
+        np.testing.assert_allclose(result['correction_energy_mean'],exact_c,rtol=.4,atol=.03)
+        exact_g=np.array([[float((G[i][:,j]**2).sum()) for j in ids] for i in ids])
+>       np.testing.assert_allclose(result['GGN_energy_mean'],exact_g,rtol=.4,atol=.03)
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'GGN_energy_mean'
+
+tests_v2/test_science.py:120: KeyError
+=========================== short test summary info ============================
+FAILED tests_v2/test_science.py::test_block_probe_matches_dense_and_identity_correction - KeyError: 'GGN_energy_mean'
+1 failed in 1.44s

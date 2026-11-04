@@ -1,0 +1,43 @@
+.......s..FF                                                             [100%]
+=================================== FAILURES ===================================
+__________ test_g0_includes_independent_random_estimator_calibration ___________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-28/test_g0_includes_independent_r0')
+
+    def test_g0_includes_independent_random_estimator_calibration(tmp_path):
+        from genesis_gpu.audit.g0 import run_g0
+        cfg=default_config('smoke');cfg['root']=str(tmp_path);cfg['storage_root']=str(tmp_path)
+        r=run_g0(cfg,tmp_path)
+        c=next((c for c in r['checks'] if c.get('case')=='block_estimator_ensemble'),None)
+>       assert c is not None and c['passed']
+E       assert (None is not None)
+
+tests_v2/test_adversarial.py:120: AssertionError
+________ test_gauge_control_reports_curvature_change_not_just_function _________
+
+    def test_gauge_control_reports_curvature_change_not_just_function():
+        from genesis_gpu.science.mechanism import dln_gauge_controls
+        from genesis_gpu.models.registry import build_model
+        from genesis_gpu.contracts import ModelSpec,LossSpec
+        from genesis_gpu.curvature.operators import FrozenOperator
+        torch.manual_seed(871)
+        m=build_model(ModelSpec('dln',3,2,2,2),7).double()
+        op=FrozenOperator(m,torch.randn(3,2,dtype=torch.float64),torch.randn(3,2,dtype=torch.float64),LossSpec('mse'))
+        rows=dln_gauge_controls(op,scales=(2.,))
+        assert rows[0]['relative_output_drift']<1e-12
+>       assert rows[0]['curvature_control']['GGNv_relative_change']>1e-3
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       KeyError: 'curvature_control'
+
+tests_v2/test_adversarial.py:134: KeyError
+=============================== warnings summary ===============================
+tests_v2/test_adversarial.py: 18 warnings
+  /opt/pyvenv/lib/python3.13/site-packages/torch/jit/_script.py:1480: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+SKIPPED [1] tests_v2/test_adversarial.py:74: Actual CUDA device required; not replaced by CPU
+FAILED tests_v2/test_adversarial.py::test_g0_includes_independent_random_estimator_calibration - assert (None is not None)
+FAILED tests_v2/test_adversarial.py::test_gauge_control_reports_curvature_change_not_just_function - KeyError: 'curvature_control'
+2 failed, 9 passed, 1 skipped, 18 warnings in 10.61s

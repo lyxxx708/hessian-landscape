@@ -1,0 +1,59 @@
+FFFF...s                                                                 [100%]
+=================================== FAILURES ===================================
+_______________ test_production_rejects_unqualified_probe_policy _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-19/test_production_rejects_unqual0')
+
+    def test_production_rejects_unqualified_probe_policy(tmp_path):
+        import yaml
+        cfg=default_config('full');cfg['probes']['independent_final']=False
+        path=tmp_path/'bad.yaml';path.write_text(yaml.safe_dump(cfg))
+>       with pytest.raises(ValueError):load_config(path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+tests_v2/test_adversarial.py:15: Failed
+_______________ test_invalid_solver_settings_rejected_before_gpu _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-19/test_invalid_solver_settings_r0')
+
+    def test_invalid_solver_settings_rejected_before_gpu(tmp_path):
+        import yaml
+        for group,key,value in [('solver','rtol',float('nan')),('probes','schedule',[16,8]),('resources','disk_reserve_gib',-1)]:
+            cfg=default_config('smoke');cfg[group][key]=value
+            path=tmp_path/'bad.yaml';path.write_text(yaml.safe_dump(cfg))
+>           with pytest.raises(ValueError):load_config(path)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+E           Failed: DID NOT RAISE <class 'ValueError'>
+
+tests_v2/test_adversarial.py:23: Failed
+___________ test_seed_coverage_failure_never_becomes_structural_pass ___________
+
+    def test_seed_coverage_failure_never_becomes_structural_pass():
+        from genesis_gpu.study.statistics import summarize_structure
+        cfg=default_config('full');records=[]
+        for gamma in cfg['damping_ratios']:
+            records.append({'provenance':{'setting_id':'transformer_d8','checkpoint_index':3,'seed':42},'schema':'coarse','gamma':gamma,
+                            'structure':{'status':'NUMERIC_VALID','raw_profile':{'tail_status':'ELIGIBLE','tail_amplitude':.5,'tail_cv':.0},
+                                         'order_null':{'p_flatness':.001}}})
+>       r=summarize_structure(records,cfg,planned_counts={'transformer_d8':16})
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: summarize_structure() got an unexpected keyword argument 'planned_counts'
+
+tests_v2/test_adversarial.py:33: TypeError
+_____________ test_scheduler_detects_live_global_device_ownership ______________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-19/test_scheduler_detects_live_gl0')
+
+    def test_scheduler_detects_live_global_device_ownership(tmp_path):
+>       from genesis_gpu.runtime.resources import DeviceLock
+E       ImportError: cannot import name 'DeviceLock' from 'genesis_gpu.runtime.resources' (/mnt/data/genesis-v2/genesis_gpu/runtime/resources.py)
+
+tests_v2/test_adversarial.py:39: ImportError
+=========================== short test summary info ============================
+SKIPPED [1] tests_v2/test_adversarial.py:74: Actual CUDA device required; not replaced by CPU
+FAILED tests_v2/test_adversarial.py::test_production_rejects_unqualified_probe_policy - Failed: DID NOT RAISE <class 'ValueError'>
+FAILED tests_v2/test_adversarial.py::test_invalid_solver_settings_rejected_before_gpu - Failed: DID NOT RAISE <class 'ValueError'>
+FAILED tests_v2/test_adversarial.py::test_seed_coverage_failure_never_becomes_structural_pass - TypeError: summarize_structure() got an unexpected keyword argument 'planned_counts'
+FAILED tests_v2/test_adversarial.py::test_scheduler_detects_live_global_device_ownership - ImportError: cannot import name 'DeviceLock' from 'genesis_gpu.runtime.resources' (/mnt/data/genesis-v2/genesis_gpu/runtime/resources.py)
+4 failed, 3 passed, 1 skipped in 2.67s

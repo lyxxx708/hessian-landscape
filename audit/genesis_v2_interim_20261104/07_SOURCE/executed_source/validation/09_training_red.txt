@@ -1,0 +1,395 @@
+FFFFFFFF                                                                 [100%]
+=================================== FAILURES ===================================
+_____________ test_synthetic_fixed_teacher_and_deterministic_batch _____________
+
+name = 'datasets.registry'
+
+    def mod(name):
+>       try:return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_training.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.datasets.registry'
+import_ = <function _gcd_import at 0x7f4d534dc4a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.datasets.registry'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-4/test_synthetic_fixed_teacher_a0')
+
+    def test_synthetic_fixed_teacher_and_deterministic_batch(tmp_path):
+        cfg,r=small_run()
+>       data=mod('datasets.registry').load_bundle(r,cfg,tmp_path)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_training.py:22: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'datasets.registry'
+
+    def mod(name):
+        try:return importlib.import_module('genesis_gpu.'+name)
+>       except ModuleNotFoundError as exc:pytest.fail(f'Required module missing: {name}: {exc}')
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: Required module missing: datasets.registry: No module named 'genesis_gpu.datasets.registry'
+
+tests_v2/test_training.py:12: Failed
+__________________ test_safe_checkpoint_roundtrip_and_tamper ___________________
+
+name = 'training.checkpoint'
+
+    def mod(name):
+>       try:return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_training.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.training.checkpoint'
+import_ = <function _gcd_import at 0x7f4d534dc4a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.training.checkpoint'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-4/test_safe_checkpoint_roundtrip0')
+
+    def test_safe_checkpoint_roundtrip_and_tamper(tmp_path):
+>       checkpoints=mod('training.checkpoint')
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_training.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'training.checkpoint'
+
+    def mod(name):
+        try:return importlib.import_module('genesis_gpu.'+name)
+>       except ModuleNotFoundError as exc:pytest.fail(f'Required module missing: {name}: {exc}')
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: Required module missing: training.checkpoint: No module named 'genesis_gpu.training.checkpoint'
+
+tests_v2/test_training.py:12: Failed
+__________________ test_resume_is_identical_to_uninterrupted ___________________
+
+name = 'training.trainer'
+
+    def mod(name):
+>       try:return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_training.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.training.trainer'
+import_ = <function _gcd_import at 0x7f4d534dc4a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.training.trainer'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-4/test_resume_is_identical_to_un0')
+
+    def test_resume_is_identical_to_uninterrupted(tmp_path):
+>       trainer=mod('training.trainer');checkpoint=mod('training.checkpoint')
+                ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_training.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'training.trainer'
+
+    def mod(name):
+        try:return importlib.import_module('genesis_gpu.'+name)
+>       except ModuleNotFoundError as exc:pytest.fail(f'Required module missing: {name}: {exc}')
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: Required module missing: training.trainer: No module named 'genesis_gpu.training.trainer'
+
+tests_v2/test_training.py:12: Failed
+______________ test_each_model_trains_and_reloads_checkpoint[dln] ______________
+
+name = 'training.trainer'
+
+    def mod(name):
+>       try:return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_training.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.training.trainer'
+import_ = <function _gcd_import at 0x7f4d534dc4a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.training.trainer'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-4/test_each_model_trains_and_rel0')
+family = 'dln'
+
+    @pytest.mark.parametrize('family',['dln','resnet','transformer'])
+    def test_each_model_trains_and_reloads_checkpoint(tmp_path,family):
+>       trainer=mod('training.trainer');checkpoint=mod('training.checkpoint')
+                ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_training.py:66: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'training.trainer'
+
+    def mod(name):
+        try:return importlib.import_module('genesis_gpu.'+name)
+>       except ModuleNotFoundError as exc:pytest.fail(f'Required module missing: {name}: {exc}')
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: Required module missing: training.trainer: No module named 'genesis_gpu.training.trainer'
+
+tests_v2/test_training.py:12: Failed
+____________ test_each_model_trains_and_reloads_checkpoint[resnet] _____________
+
+name = 'training.trainer'
+
+    def mod(name):
+>       try:return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_training.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.training.trainer'
+import_ = <function _gcd_import at 0x7f4d534dc4a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.training.trainer'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-4/test_each_model_trains_and_rel1')
+family = 'resnet'
+
+    @pytest.mark.parametrize('family',['dln','resnet','transformer'])
+    def test_each_model_trains_and_reloads_checkpoint(tmp_path,family):
+>       trainer=mod('training.trainer');checkpoint=mod('training.checkpoint')
+                ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_training.py:66: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'training.trainer'
+
+    def mod(name):
+        try:return importlib.import_module('genesis_gpu.'+name)
+>       except ModuleNotFoundError as exc:pytest.fail(f'Required module missing: {name}: {exc}')
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: Required module missing: training.trainer: No module named 'genesis_gpu.training.trainer'
+
+tests_v2/test_training.py:12: Failed
+__________ test_each_model_trains_and_reloads_checkpoint[transformer] __________
+
+name = 'training.trainer'
+
+    def mod(name):
+>       try:return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_training.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.training.trainer'
+import_ = <function _gcd_import at 0x7f4d534dc4a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.training.trainer'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-4/test_each_model_trains_and_rel2')
+family = 'transformer'
+
+    @pytest.mark.parametrize('family',['dln','resnet','transformer'])
+    def test_each_model_trains_and_reloads_checkpoint(tmp_path,family):
+>       trainer=mod('training.trainer');checkpoint=mod('training.checkpoint')
+                ^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_training.py:66: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'training.trainer'
+
+    def mod(name):
+        try:return importlib.import_module('genesis_gpu.'+name)
+>       except ModuleNotFoundError as exc:pytest.fail(f'Required module missing: {name}: {exc}')
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: Required module missing: training.trainer: No module named 'genesis_gpu.training.trainer'
+
+tests_v2/test_training.py:12: Failed
+____________ test_public_data_not_silently_replaced_with_synthetic _____________
+
+name = 'datasets.registry'
+
+    def mod(name):
+>       try:return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_training.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.datasets.registry'
+import_ = <function _gcd_import at 0x7f4d534dc4a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.datasets.registry'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-4/test_public_data_not_silently_0')
+
+    def test_public_data_not_silently_replaced_with_synthetic(tmp_path):
+>       data=mod('datasets.registry')
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_training.py:79: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'datasets.registry'
+
+    def mod(name):
+        try:return importlib.import_module('genesis_gpu.'+name)
+>       except ModuleNotFoundError as exc:pytest.fail(f'Required module missing: {name}: {exc}')
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: Required module missing: datasets.registry: No module named 'genesis_gpu.datasets.registry'
+
+tests_v2/test_training.py:12: Failed
+________________________ test_masked_text_budget_exact _________________________
+
+name = 'datasets.registry'
+
+    def mod(name):
+>       try:return importlib.import_module('genesis_gpu.'+name)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_training.py:11: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+/usr/lib/python3.13/importlib/__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'genesis_gpu.datasets.registry'
+import_ = <function _gcd_import at 0x7f4d534dc4a0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'genesis_gpu.datasets.registry'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-4/test_masked_text_budget_exact0')
+
+    def test_masked_text_budget_exact(tmp_path):
+>       data=mod('datasets.registry');cfg,r=small_run('transformer')
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2/test_training.py:86: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+name = 'datasets.registry'
+
+    def mod(name):
+        try:return importlib.import_module('genesis_gpu.'+name)
+>       except ModuleNotFoundError as exc:pytest.fail(f'Required module missing: {name}: {exc}')
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: Required module missing: datasets.registry: No module named 'genesis_gpu.datasets.registry'
+
+tests_v2/test_training.py:12: Failed
+=========================== short test summary info ============================
+FAILED tests_v2/test_training.py::test_synthetic_fixed_teacher_and_deterministic_batch - Failed: Required module missing: datasets.registry: No module named 'genesis_gpu.datasets.registry'
+FAILED tests_v2/test_training.py::test_safe_checkpoint_roundtrip_and_tamper - Failed: Required module missing: training.checkpoint: No module named 'genesis_gpu.training.checkpoint'
+FAILED tests_v2/test_training.py::test_resume_is_identical_to_uninterrupted - Failed: Required module missing: training.trainer: No module named 'genesis_gpu.training.trainer'
+FAILED tests_v2/test_training.py::test_each_model_trains_and_reloads_checkpoint[dln] - Failed: Required module missing: training.trainer: No module named 'genesis_gpu.training.trainer'
+FAILED tests_v2/test_training.py::test_each_model_trains_and_reloads_checkpoint[resnet] - Failed: Required module missing: training.trainer: No module named 'genesis_gpu.training.trainer'
+FAILED tests_v2/test_training.py::test_each_model_trains_and_reloads_checkpoint[transformer] - Failed: Required module missing: training.trainer: No module named 'genesis_gpu.training.trainer'
+FAILED tests_v2/test_training.py::test_public_data_not_silently_replaced_with_synthetic - Failed: Required module missing: datasets.registry: No module named 'genesis_gpu.datasets.registry'
+FAILED tests_v2/test_training.py::test_masked_text_budget_exact - Failed: Required module missing: datasets.registry: No module named 'genesis_gpu.datasets.registry'
+8 failed in 1.29s

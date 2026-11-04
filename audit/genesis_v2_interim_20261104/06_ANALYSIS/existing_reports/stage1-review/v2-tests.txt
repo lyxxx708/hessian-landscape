@@ -1,0 +1,406 @@
+.............FF.......F.............................................FFFF [ 88%]
+F...FF...                                                                [100%]
+================================== FAILURES ===================================
+_____________ test_s3_no_go_is_evidence_bound_not_fake_benchmark ______________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_s3_no_go_is_evidence_boun0')
+
+    def test_s3_no_go_is_evidence_bound_not_fake_benchmark(tmp_path):
+        from genesis_gpu.training.benchmark import run_benchmark
+        cfg=default_config('smoke')
+        atomic_json(tmp_path/'protocol-lock.json',{'protocol_sha':'test','runs':[]})
+        atomic_json(tmp_path/'audit'/'s2_adjudication.json',{'protocol_sha':'test','execution_complete':True,'s3_gate_pass':False})
+>       r=run_benchmark(cfg,tmp_path)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2\test_cli_s3.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+genesis_gpu\training\benchmark.py:141: in run_benchmark
+    control=_negative_control(cfg,root)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+genesis_gpu\training\benchmark.py:82: in _negative_control
+    results.append(_trial(run,method,control_cfg,subroot))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+genesis_gpu\training\benchmark.py:35: in _trial
+    receipt=train_run(run,cfg,root,optimizer_factory=factory,callback=guard,wall_budget_seconds=wall_budget)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+genesis_gpu\training\trainer.py:98: in train_run
+    pin();save_resume(base/'resume',state_now(),meta_now())
+    ^^^^^
+genesis_gpu\training\trainer.py:93: in pin
+    else:integrity=save_state(path,state_now(),meta_now())['integrity_sha']
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_s3_no_go_is_evidence_boun0/benchmark/negative_control/checkpoints/s3-negative-adamw/step_000000000')
+state = {'model': OrderedDict([('layers.0.weight', tensor([[-0.0055,  0.9500],
+        [ 0.9500,  0.0055]], dtype=torch.float6....}]}, 'factors': {}, ...}, 'rng': tensor([185, 145, 182,  ...,   0,   0,   0], dtype=torch.uint8), 'cuda_rng': [], ...}
+metadata = {'run_spec_sha': 'bd4e77f9d3f00f567a4039870f1246d26eef45547a3807f059001b64eec52930', 'data_sha': 'bfe0865267172c430d62b5ddfdd17e9bac372f3f91abf60d2eb51cef374462dd', 'profile': 'smoke', 'wall_budget_seconds': None, ...}
+
+    def save_state(path,state,metadata):
+        path=Path(path)
+        if path.exists():raise FileExistsError(f'Immutable checkpoint already exists: {path}')
+        path.parent.mkdir(parents=True,exist_ok=True)
+        tmp=path.parent/('.'+path.name+'.'+uuid.uuid4().hex+'.partial');tmp.mkdir()
+        try:
+            tensors={};tree=_encode(state,tensors)
+            save_file(tensors,str(tmp/'tensors.safetensors'))
+>           with (tmp/'tensors.safetensors').open('rb') as f:os.fsync(f.fileno())
+                                                             ^^^^^^^^^^^^^^^^^^^^
+E           OSError: [Errno 9] Bad file descriptor
+
+genesis_gpu\training\checkpoint.py:45: OSError
+________________ test_budget_censor_is_not_training_completion ________________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_budget_censor_is_not_trai0')
+
+    def test_budget_censor_is_not_training_completion(tmp_path):
+        from genesis_gpu.training.trainer import train_run
+        cfg=default_config('smoke');cfg['storage_root']=str(tmp_path)
+        run=expand_design(cfg)[0]
+>       r=train_run(run,cfg,tmp_path,wall_budget_seconds=0.)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2\test_cli_s3.py:37: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+genesis_gpu\training\trainer.py:98: in train_run
+    pin();save_resume(base/'resume',state_now(),meta_now())
+    ^^^^^
+genesis_gpu\training\trainer.py:93: in pin
+    else:integrity=save_state(path,state_now(),meta_now())['integrity_sha']
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_budget_censor_is_not_trai0/checkpoints/s1-smoke_dln-s00-78b52b588861a987/step_000000000')
+state = {'model': OrderedDict([('layers.0.weight', tensor([[ 0.9297,  0.1954],
+        [ 0.1954, -0.9297]], dtype=torch.float6...eight_decay': 0.0, ...}]}, 'rng': tensor([135, 169,  97,  ...,   0,   0,   0], dtype=torch.uint8), 'cuda_rng': [], ...}
+metadata = {'run_spec_sha': 'd32b892b845550f65cde546b16405fd8a20df18dfa21511ac3b374835fd15c4b', 'data_sha': '87305714b289ef814bcbd5121913e3e74040339d5358fd609bd063f1f00ae2d0', 'profile': 'smoke', 'wall_budget_seconds': 0.0, ...}
+
+    def save_state(path,state,metadata):
+        path=Path(path)
+        if path.exists():raise FileExistsError(f'Immutable checkpoint already exists: {path}')
+        path.parent.mkdir(parents=True,exist_ok=True)
+        tmp=path.parent/('.'+path.name+'.'+uuid.uuid4().hex+'.partial');tmp.mkdir()
+        try:
+            tensors={};tree=_encode(state,tensors)
+            save_file(tensors,str(tmp/'tensors.safetensors'))
+>           with (tmp/'tensors.safetensors').open('rb') as f:os.fsync(f.fileno())
+                                                             ^^^^^^^^^^^^^^^^^^^^
+E           OSError: [Errno 9] Bad file descriptor
+
+genesis_gpu\training\checkpoint.py:45: OSError
+______________ test_overlay_idempotent_and_blocks_symlink_escape ______________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_overlay_idempotent_and_bl0')
+
+    def test_overlay_idempotent_and_blocks_symlink_escape(tmp_path):
+        m=installer();source=tmp_path/'source';target=tmp_path/'target';outside=tmp_path/'outside'
+        (source/'genesis_gpu').mkdir(parents=True);target.mkdir();outside.mkdir()
+        (source/'genesis_gpu'/'core.py').write_text('safe')
+>       (target/'genesis_gpu').symlink_to(outside,target_is_directory=True)
+
+tests_v2\test_delivery.py:32: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_overlay_idempotent_and_bl0/target/genesis_gpu')
+target = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_overlay_idempotent_and_bl0/outside')
+target_is_directory = True
+
+    def symlink_to(self, target, target_is_directory=False):
+        """
+        Make this path a symlink pointing to the target path.
+        Note the order of arguments (link, target) is the reverse of os.symlink.
+        """
+        if not hasattr(os, "symlink"):
+            raise NotImplementedError("os.symlink() not available on this system")
+>       os.symlink(target, self, target_is_directory)
+E       OSError: [WinError 1314] �ͻ���û���������Ȩ��: 'C:\\Users\\<user>\\AppData\\Local\\Temp\\pytest-of-<user>\\pytest-1749\\test_overlay_idempotent_and_bl0\\outside' -> 'C:\\Users\\<user>\\AppData\\Local\\Temp\\pytest-of-<user>\\pytest-1749\\test_overlay_idempotent_and_bl0\\target\\genesis_gpu'
+
+E:\GENESIS\toolchains\cpython-3.11.14\python\Lib\pathlib.py:1198: OSError
+__________________ test_safe_checkpoint_roundtrip_and_tamper __________________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_safe_checkpoint_roundtrip0')
+
+    def test_safe_checkpoint_roundtrip_and_tamper(tmp_path):
+        checkpoints=mod('training.checkpoint')
+        state={'weights':{'a':torch.arange(6).reshape(2,3)},'optimizer':{0:{'exp_avg':torch.ones(2)}},'step':3,
+               'rng':torch.get_rng_state(),'tuple':(1,'ok',None)}
+        path=tmp_path/'check'
+>       checkpoints.save_state(path,state,{'run_id':'demo','step':3})
+
+tests_v2\test_training.py:36: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_safe_checkpoint_roundtrip0/check')
+state = {'weights': {'a': tensor([[0, 1, 2],
+        [3, 4, 5]])}, 'optimizer': {0: {'exp_avg': tensor([1., 1.])}}, 'step': 3, 'rng': tensor([32,  0,  0,  ...,  0,  0,  0], dtype=torch.uint8), ...}
+metadata = {'run_id': 'demo', 'step': 3}
+
+    def save_state(path,state,metadata):
+        path=Path(path)
+        if path.exists():raise FileExistsError(f'Immutable checkpoint already exists: {path}')
+        path.parent.mkdir(parents=True,exist_ok=True)
+        tmp=path.parent/('.'+path.name+'.'+uuid.uuid4().hex+'.partial');tmp.mkdir()
+        try:
+            tensors={};tree=_encode(state,tensors)
+            save_file(tensors,str(tmp/'tensors.safetensors'))
+>           with (tmp/'tensors.safetensors').open('rb') as f:os.fsync(f.fileno())
+                                                             ^^^^^^^^^^^^^^^^^^^^
+E           OSError: [Errno 9] Bad file descriptor
+
+genesis_gpu\training\checkpoint.py:45: OSError
+__________________ test_resume_is_identical_to_uninterrupted __________________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_resume_is_identical_to_un0')
+
+    def test_resume_is_identical_to_uninterrupted(tmp_path):
+        trainer=mod('training.trainer');checkpoint=mod('training.checkpoint')
+        cfg,run=small_run('mlp')
+        a=tmp_path/'a';b=tmp_path/'b'
+>       full=trainer.train_run(run,cfg,a)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2\test_training.py:50: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+genesis_gpu\training\trainer.py:98: in train_run
+    pin();save_resume(base/'resume',state_now(),meta_now())
+    ^^^^^
+genesis_gpu\training\trainer.py:93: in pin
+    else:integrity=save_state(path,state_now(),meta_now())['integrity_sha']
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_resume_is_identical_to_un0/a/checkpoints/s1-smoke_mlp-s00-51b33914400f3bdf/step_000000000')
+state = {'model': OrderedDict([('layers.0.weight', tensor([[ 0.1778, -0.4672, -0.0648,  0.3705],
+        [ 0.4162, -0.2840,  0...eight_decay': 0.0, ...}]}, 'rng': tensor([223,  59,  15,  ...,   0,   0,   0], dtype=torch.uint8), 'cuda_rng': [], ...}
+metadata = {'run_spec_sha': '057574c668806ce3c4866cce8ff4473d84c7742c5620176073526cdb3e7d65fc', 'data_sha': '2626c2332bc3e36cf3bac939985344a7b7b4477012b0dac7dd6faf1edc1fc46c', 'profile': 'smoke', 'wall_budget_seconds': None, ...}
+
+    def save_state(path,state,metadata):
+        path=Path(path)
+        if path.exists():raise FileExistsError(f'Immutable checkpoint already exists: {path}')
+        path.parent.mkdir(parents=True,exist_ok=True)
+        tmp=path.parent/('.'+path.name+'.'+uuid.uuid4().hex+'.partial');tmp.mkdir()
+        try:
+            tensors={};tree=_encode(state,tensors)
+            save_file(tensors,str(tmp/'tensors.safetensors'))
+>           with (tmp/'tensors.safetensors').open('rb') as f:os.fsync(f.fileno())
+                                                             ^^^^^^^^^^^^^^^^^^^^
+E           OSError: [Errno 9] Bad file descriptor
+
+genesis_gpu\training\checkpoint.py:45: OSError
+_____________ test_each_model_trains_and_reloads_checkpoint[dln] ______________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_each_model_trains_and_rel0')
+family = 'dln'
+
+    @pytest.mark.parametrize('family',['dln','resnet','transformer'])
+    def test_each_model_trains_and_reloads_checkpoint(tmp_path,family):
+        trainer=mod('training.trainer');checkpoint=mod('training.checkpoint')
+        cfg,run=small_run(family)
+>       receipt=trainer.train_run(run,cfg,tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2\test_training.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+genesis_gpu\training\trainer.py:98: in train_run
+    pin();save_resume(base/'resume',state_now(),meta_now())
+    ^^^^^
+genesis_gpu\training\trainer.py:93: in pin
+    else:integrity=save_state(path,state_now(),meta_now())['integrity_sha']
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_each_model_trains_and_rel0/checkpoints/s1-smoke_dln-s00-78b52b588861a987/step_000000000')
+state = {'model': OrderedDict([('layers.0.weight', tensor([[ 0.9297,  0.1954],
+        [ 0.1954, -0.9297]], dtype=torch.float6...eight_decay': 0.0, ...}]}, 'rng': tensor([135, 169,  97,  ...,   0,   0,   0], dtype=torch.uint8), 'cuda_rng': [], ...}
+metadata = {'run_spec_sha': 'd32b892b845550f65cde546b16405fd8a20df18dfa21511ac3b374835fd15c4b', 'data_sha': '87305714b289ef814bcbd5121913e3e74040339d5358fd609bd063f1f00ae2d0', 'profile': 'smoke', 'wall_budget_seconds': None, ...}
+
+    def save_state(path,state,metadata):
+        path=Path(path)
+        if path.exists():raise FileExistsError(f'Immutable checkpoint already exists: {path}')
+        path.parent.mkdir(parents=True,exist_ok=True)
+        tmp=path.parent/('.'+path.name+'.'+uuid.uuid4().hex+'.partial');tmp.mkdir()
+        try:
+            tensors={};tree=_encode(state,tensors)
+            save_file(tensors,str(tmp/'tensors.safetensors'))
+>           with (tmp/'tensors.safetensors').open('rb') as f:os.fsync(f.fileno())
+                                                             ^^^^^^^^^^^^^^^^^^^^
+E           OSError: [Errno 9] Bad file descriptor
+
+genesis_gpu\training\checkpoint.py:45: OSError
+____________ test_each_model_trains_and_reloads_checkpoint[resnet] ____________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_each_model_trains_and_rel1')
+family = 'resnet'
+
+    @pytest.mark.parametrize('family',['dln','resnet','transformer'])
+    def test_each_model_trains_and_reloads_checkpoint(tmp_path,family):
+        trainer=mod('training.trainer');checkpoint=mod('training.checkpoint')
+        cfg,run=small_run(family)
+>       receipt=trainer.train_run(run,cfg,tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2\test_training.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+genesis_gpu\training\trainer.py:98: in train_run
+    pin();save_resume(base/'resume',state_now(),meta_now())
+    ^^^^^
+genesis_gpu\training\trainer.py:93: in pin
+    else:integrity=save_state(path,state_now(),meta_now())['integrity_sha']
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_each_model_trains_and_rel1/checkpoints/s1-smoke_resnet-s00-1760b715a634f42d/step_000000000')
+state = {'model': OrderedDict([('stem.0.weight', tensor([[[[ 0.1305, -0.0139, -0.1247],
+          [-0.0958, -0.0061, -0.1210],...eight_decay': 0.0, ...}]}, 'rng': tensor([ 45, 244,  52,  ...,   0,   0,   0], dtype=torch.uint8), 'cuda_rng': [], ...}
+metadata = {'run_spec_sha': 'aa1f44667c63ae7ff481155f1ce578333cb4b93ce65b65b8a5d0b21787989b1b', 'data_sha': 'aa6cbf283b70876dab3f2d6b033ccb1d2a0975568aae84b5ab34dcd4e9add5b3', 'profile': 'smoke', 'wall_budget_seconds': None, ...}
+
+    def save_state(path,state,metadata):
+        path=Path(path)
+        if path.exists():raise FileExistsError(f'Immutable checkpoint already exists: {path}')
+        path.parent.mkdir(parents=True,exist_ok=True)
+        tmp=path.parent/('.'+path.name+'.'+uuid.uuid4().hex+'.partial');tmp.mkdir()
+        try:
+            tensors={};tree=_encode(state,tensors)
+            save_file(tensors,str(tmp/'tensors.safetensors'))
+>           with (tmp/'tensors.safetensors').open('rb') as f:os.fsync(f.fileno())
+                                                             ^^^^^^^^^^^^^^^^^^^^
+E           OSError: [Errno 9] Bad file descriptor
+
+genesis_gpu\training\checkpoint.py:45: OSError
+_________ test_each_model_trains_and_reloads_checkpoint[transformer] __________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_each_model_trains_and_rel2')
+family = 'transformer'
+
+    @pytest.mark.parametrize('family',['dln','resnet','transformer'])
+    def test_each_model_trains_and_reloads_checkpoint(tmp_path,family):
+        trainer=mod('training.trainer');checkpoint=mod('training.checkpoint')
+        cfg,run=small_run(family)
+>       receipt=trainer.train_run(run,cfg,tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2\test_training.py:68: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+genesis_gpu\training\trainer.py:98: in train_run
+    pin();save_resume(base/'resume',state_now(),meta_now())
+    ^^^^^
+genesis_gpu\training\trainer.py:93: in pin
+    else:integrity=save_state(path,state_now(),meta_now())['integrity_sha']
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_each_model_trains_and_rel2/checkpoints/s1-smoke_transformer-s00-2ca516c372b45106/step_000000000')
+state = {'model': OrderedDict([('position', tensor([[ 0.0334,  0.0301,  0.0059,  0.0059],
+        [ 0.0169, -0.0324, -0.0361, ...eight_decay': 0.0, ...}]}, 'rng': tensor([  6,  81, 180,  ...,   0,   0,   0], dtype=torch.uint8), 'cuda_rng': [], ...}
+metadata = {'run_spec_sha': '35cb23d90f439a462a281d56eb77507b0864f61d9d46c08b59d4d0956e62f810', 'data_sha': '8d4a7437e9b22e7ec102655c50bd6e66a71abe9757613a3299c94ce0480ef017', 'profile': 'smoke', 'wall_budget_seconds': None, ...}
+
+    def save_state(path,state,metadata):
+        path=Path(path)
+        if path.exists():raise FileExistsError(f'Immutable checkpoint already exists: {path}')
+        path.parent.mkdir(parents=True,exist_ok=True)
+        tmp=path.parent/('.'+path.name+'.'+uuid.uuid4().hex+'.partial');tmp.mkdir()
+        try:
+            tensors={};tree=_encode(state,tensors)
+            save_file(tensors,str(tmp/'tensors.safetensors'))
+>           with (tmp/'tensors.safetensors').open('rb') as f:os.fsync(f.fileno())
+                                                             ^^^^^^^^^^^^^^^^^^^^
+E           OSError: [Errno 9] Bad file descriptor
+
+genesis_gpu\training\checkpoint.py:45: OSError
+_______________ test_one_real_checkpoint_measurement_and_replay _______________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_one_real_checkpoint_measu0')
+
+    def test_one_real_checkpoint_measurement_and_replay(tmp_path):
+        from genesis_gpu.training.trainer import train_run
+        from genesis_gpu.runtime.measurement import measure_job, rebuild_snapshot
+        cfg=default_config('smoke');cfg['root']=str(tmp_path);cfg['storage_root']=str(tmp_path)
+>       run=expand_design(cfg)[0];receipt=train_run(run,cfg,tmp_path)
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2\test_workflow.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+genesis_gpu\training\trainer.py:98: in train_run
+    pin();save_resume(base/'resume',state_now(),meta_now())
+    ^^^^^
+genesis_gpu\training\trainer.py:93: in pin
+    else:integrity=save_state(path,state_now(),meta_now())['integrity_sha']
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_one_real_checkpoint_measu0/checkpoints/s1-smoke_dln-s00-78b52b588861a987/step_000000000')
+state = {'model': OrderedDict([('layers.0.weight', tensor([[ 0.9297,  0.1954],
+        [ 0.1954, -0.9297]], dtype=torch.float6...eight_decay': 0.0, ...}]}, 'rng': tensor([135, 169,  97,  ...,   0,   0,   0], dtype=torch.uint8), 'cuda_rng': [], ...}
+metadata = {'run_spec_sha': 'd32b892b845550f65cde546b16405fd8a20df18dfa21511ac3b374835fd15c4b', 'data_sha': '87305714b289ef814bcbd5121913e3e74040339d5358fd609bd063f1f00ae2d0', 'profile': 'smoke', 'wall_budget_seconds': None, ...}
+
+    def save_state(path,state,metadata):
+        path=Path(path)
+        if path.exists():raise FileExistsError(f'Immutable checkpoint already exists: {path}')
+        path.parent.mkdir(parents=True,exist_ok=True)
+        tmp=path.parent/('.'+path.name+'.'+uuid.uuid4().hex+'.partial');tmp.mkdir()
+        try:
+            tensors={};tree=_encode(state,tensors)
+            save_file(tensors,str(tmp/'tensors.safetensors'))
+>           with (tmp/'tensors.safetensors').open('rb') as f:os.fsync(f.fileno())
+                                                             ^^^^^^^^^^^^^^^^^^^^
+E           OSError: [Errno 9] Bad file descriptor
+
+genesis_gpu\training\checkpoint.py:45: OSError
+________________ test_structural_job_keeps_all_probe_evidence _________________
+
+tmp_path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_structural_job_keeps_all_0')
+
+    def test_structural_job_keeps_all_probe_evidence(tmp_path):
+        from genesis_gpu.training.trainer import train_run
+        from genesis_gpu.runtime.measurement import measure_job
+        cfg=default_config('smoke');cfg['root']=str(tmp_path);cfg['storage_root']=str(tmp_path)
+>       run=expand_design(cfg)[0];train_run(run,cfg,tmp_path)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2\test_workflow.py:41: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+genesis_gpu\training\trainer.py:98: in train_run
+    pin();save_resume(base/'resume',state_now(),meta_now())
+    ^^^^^
+genesis_gpu\training\trainer.py:93: in pin
+    else:integrity=save_state(path,state_now(),meta_now())['integrity_sha']
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/<user>/AppData/Local/Temp/pytest-of-<user>/pytest-1749/test_structural_job_keeps_all_0/checkpoints/s1-smoke_dln-s00-78b52b588861a987/step_000000000')
+state = {'model': OrderedDict([('layers.0.weight', tensor([[ 0.9297,  0.1954],
+        [ 0.1954, -0.9297]], dtype=torch.float6...eight_decay': 0.0, ...}]}, 'rng': tensor([135, 169,  97,  ...,   0,   0,   0], dtype=torch.uint8), 'cuda_rng': [], ...}
+metadata = {'run_spec_sha': 'd32b892b845550f65cde546b16405fd8a20df18dfa21511ac3b374835fd15c4b', 'data_sha': '87305714b289ef814bcbd5121913e3e74040339d5358fd609bd063f1f00ae2d0', 'profile': 'smoke', 'wall_budget_seconds': None, ...}
+
+    def save_state(path,state,metadata):
+        path=Path(path)
+        if path.exists():raise FileExistsError(f'Immutable checkpoint already exists: {path}')
+        path.parent.mkdir(parents=True,exist_ok=True)
+        tmp=path.parent/('.'+path.name+'.'+uuid.uuid4().hex+'.partial');tmp.mkdir()
+        try:
+            tensors={};tree=_encode(state,tensors)
+            save_file(tensors,str(tmp/'tensors.safetensors'))
+>           with (tmp/'tensors.safetensors').open('rb') as f:os.fsync(f.fileno())
+                                                             ^^^^^^^^^^^^^^^^^^^^
+E           OSError: [Errno 9] Bad file descriptor
+
+genesis_gpu\training\checkpoint.py:45: OSError
+============================== warnings summary ===============================
+tests_v2/test_adversarial.py: 18 warnings
+  E:\GENESIS\venvs\hessian-landscape-v2\Lib\site-packages\torch\jit\_script.py:1480: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests_v2/test_cli_s3.py::test_s3_no_go_is_evidence_bound_not_fake_benchmark
+FAILED tests_v2/test_cli_s3.py::test_budget_censor_is_not_training_completion
+FAILED tests_v2/test_delivery.py::test_overlay_idempotent_and_blocks_symlink_escape
+FAILED tests_v2/test_training.py::test_safe_checkpoint_roundtrip_and_tamper
+FAILED tests_v2/test_training.py::test_resume_is_identical_to_uninterrupted
+FAILED tests_v2/test_training.py::test_each_model_trains_and_reloads_checkpoint[dln]
+FAILED tests_v2/test_training.py::test_each_model_trains_and_reloads_checkpoint[resnet]
+FAILED tests_v2/test_training.py::test_each_model_trains_and_reloads_checkpoint[transformer]
+FAILED tests_v2/test_workflow.py::test_one_real_checkpoint_measurement_and_replay
+FAILED tests_v2/test_workflow.py::test_structural_job_keeps_all_probe_evidence
+10 failed, 71 passed, 18 warnings in 30.78s

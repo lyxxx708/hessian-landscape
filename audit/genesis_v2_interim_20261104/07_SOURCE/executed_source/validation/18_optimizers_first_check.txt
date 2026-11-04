@@ -1,0 +1,20 @@
+.......F                                                                 [100%]
+=================================== FAILURES ===================================
+______________ test_independent_artifact_audit_detects_tampering _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-13/test_independent_artifact_audi0')
+
+    def test_independent_artifact_audit_detects_tampering(tmp_path):
+>       from genesis_gpu.audit.verify import verify_study
+E       ModuleNotFoundError: No module named 'genesis_gpu.audit.verify'
+
+tests_v2/test_optimizers_audit.py:40: ModuleNotFoundError
+=============================== warnings summary ===============================
+tests_v2/test_optimizers_audit.py: 18 warnings
+  /opt/pyvenv/lib/python3.13/site-packages/torch/jit/_script.py:1480: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ============================
+FAILED tests_v2/test_optimizers_audit.py::test_independent_artifact_audit_detects_tampering - ModuleNotFoundError: No module named 'genesis_gpu.audit.verify'
+1 failed, 7 passed, 18 warnings in 3.52s

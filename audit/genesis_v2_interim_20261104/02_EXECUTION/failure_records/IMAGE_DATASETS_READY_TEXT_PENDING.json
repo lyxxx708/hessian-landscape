@@ -1,0 +1,160 @@
+{
+  "recorded_utc": "2026-11-02T16:28:46.993871+00:00",
+  "gate": "IMAGE_DATASETS_READY_TEXT_PENDING",
+  "data_ready": false,
+  "cuda_g0": "NOT_RUN_TEXT_DATA_GATE",
+  "s1": "NOT_RUN_TEXT_DATA_GATE",
+  "s2": "NOT_RUN_TEXT_DATA_GATE",
+  "s1_plan_training_runs": 130,
+  "s1_plan_measurement_jobs": 3120,
+  "s1_plan_structure_jobs": 728,
+  "s1_plan_all_jobs": 3250,
+  "s2_plan_training_runs": 96,
+  "s2_plan_measurement_jobs": 2304,
+  "s2_plan_structure_jobs": 912,
+  "s2_plan_all_jobs": 2400,
+  "image_import_status": "IMAGE_DATASETS_READY_TEXT_PENDING",
+  "mnist_counts": [
+    55000,
+    5000,
+    10000
+  ],
+  "cifar10_counts": [
+    45000,
+    5000,
+    10000
+  ],
+  "prepared_safetensors": {
+    "mnist": {
+      "manifest_counts": [
+        55000,
+        5000,
+        10000
+      ],
+      "manifest_data_sha": "5bd8a564582b26e4fa4e265821718e4c4a614df0f7658408da846eec193a2b7d",
+      "actual_data_sha": "5bd8a564582b26e4fa4e265821718e4c4a614df0f7658408da846eec193a2b7d",
+      "sha_match": true,
+      "tensor_shapes": {
+        "test_x": [
+          10000,
+          1,
+          28,
+          28
+        ],
+        "test_y": [
+          10000
+        ],
+        "train_ids": [
+          55000
+        ],
+        "train_x": [
+          55000,
+          1,
+          28,
+          28
+        ],
+        "train_y": [
+          55000
+        ],
+        "validation_ids": [
+          5000
+        ],
+        "validation_x": [
+          5000,
+          1,
+          28,
+          28
+        ],
+        "validation_y": [
+          5000
+        ]
+      },
+      "tensor_dtypes": {
+        "test_x": "torch.uint8",
+        "test_y": "torch.int64",
+        "train_ids": "torch.int64",
+        "train_x": "torch.uint8",
+        "train_y": "torch.int64",
+        "validation_ids": "torch.int64",
+        "validation_x": "torch.uint8",
+        "validation_y": "torch.int64"
+      },
+      "expected_counts": [
+        55000,
+        5000,
+        10000
+      ],
+      "counts_match": true
+    },
+    "cifar10": {
+      "manifest_counts": [
+        45000,
+        5000,
+        10000
+      ],
+      "manifest_data_sha": "9a1689d6e274f6aa0411ed2c5e6239d7e001800a9b4d0be3f1ad254fd1906615",
+      "actual_data_sha": "9a1689d6e274f6aa0411ed2c5e6239d7e001800a9b4d0be3f1ad254fd1906615",
+      "sha_match": true,
+      "tensor_shapes": {
+        "test_x": [
+          10000,
+          3,
+          32,
+          32
+        ],
+        "test_y": [
+          10000
+        ],
+        "train_ids": [
+          45000
+        ],
+        "train_x": [
+          45000,
+          3,
+          32,
+          32
+        ],
+        "train_y": [
+          45000
+        ],
+        "validation_ids": [
+          5000
+        ],
+        "validation_x": [
+          5000,
+          3,
+          32,
+          32
+        ],
+        "validation_y": [
+          5000
+        ]
+      },
+      "tensor_dtypes": {
+        "test_x": "torch.uint8",
+        "test_y": "torch.int64",
+        "train_ids": "torch.int64",
+        "train_x": "torch.uint8",
+        "train_y": "torch.int64",
+        "validation_ids": "torch.int64",
+        "validation_x": "torch.uint8",
+        "validation_y": "torch.int64"
+      },
+      "expected_counts": [
+        45000,
+        5000,
+        10000
+      ],
+      "counts_match": true
+    }
+  },
+  "C_sources_unchanged": true,
+  "C_source_files": 12,
+  "C_source_total_bytes": 197808836,
+  "source_manifest_entries": 146,
+  "source_manifest_mismatches": [],
+  "legacy_tests": "25 passed",
+  "v2_tests": "88 passed, 1 symlink-permission skip",
+  "protocol_lock_absent": true,
+  "text_corpus": "Gutenberg #2270 is configured candidate; local-use rights/embedded notice review and pinned hash not complete"
+}

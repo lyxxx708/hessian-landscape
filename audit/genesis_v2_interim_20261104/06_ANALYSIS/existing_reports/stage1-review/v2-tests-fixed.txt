@@ -1,0 +1,125 @@
+......................s........F....................................FF.. [ 88%]
+.........                                                                [100%]
+================================== FAILURES ===================================
+_________________ test_storage_guard_rejects_C_and_posix_full _________________
+
+tmp_path = WindowsPath('E:/GENESIS/tmp/pytest-stage1-fixed/test_storage_guard_rejects_C_a0')
+
+    def test_storage_guard_rejects_C_and_posix_full(tmp_path):
+        guard = mod('env.storage_guard')
+        with pytest.raises(guard.StorageBlocked):
+            guard.check_windows_bulk_path(r'C:\GENESIS')
+        assert guard.check_windows_bulk_path(r'E:\GENESIS') == PureWindowsPath(r'E:\GENESIS')
+>       with pytest.raises(guard.StorageBlocked):
+E       Failed: DID NOT RAISE StorageBlocked
+
+tests_v2\test_foundation.py:76: Failed
+__________________ test_safe_checkpoint_roundtrip_and_tamper __________________
+
+tmp_path = WindowsPath('E:/GENESIS/tmp/pytest-stage1-fixed/test_safe_checkpoint_roundtrip0')
+
+    def test_safe_checkpoint_roundtrip_and_tamper(tmp_path):
+        checkpoints=mod('training.checkpoint')
+        state={'weights':{'a':torch.arange(6).reshape(2,3)},'optimizer':{0:{'exp_avg':torch.ones(2)}},'step':3,
+               'rng':torch.get_rng_state(),'tuple':(1,'ok',None)}
+        path=tmp_path/'check'
+        checkpoints.save_state(path,state,{'run_id':'demo','step':3})
+        restored,meta=checkpoints.load_state(path)
+        assert restored['step']==3 and restored['tuple']==(1,'ok',None)
+        assert torch.equal(restored['weights']['a'],state['weights']['a'])
+        assert torch.equal(restored['optimizer'][0]['exp_avg'],torch.ones(2))
+        assert meta['run_id']=='demo'
+>       p=path/'tensors.safetensors';p.write_bytes(p.read_bytes()[:-2]+b'!!')
+                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2\test_training.py:42: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+E:\GENESIS\toolchains\cpython-3.11.14\python\Lib\pathlib.py:1067: in write_bytes
+    with self.open(mode='wb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('E:/GENESIS/tmp/pytest-stage1-fixed/test_safe_checkpoint_roundtrip0/check/tensors.safetensors')
+mode = 'wb', buffering = -1, encoding = None, errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       OSError: [Errno 22] Invalid argument: 'E:\\GENESIS\\tmp\\pytest-stage1-fixed\\test_safe_checkpoint_roundtrip0\\check\\tensors.safetensors'
+
+E:\GENESIS\toolchains\cpython-3.11.14\python\Lib\pathlib.py:1044: OSError
+__________________ test_resume_is_identical_to_uninterrupted __________________
+
+tmp_path = WindowsPath('E:/GENESIS/tmp/pytest-stage1-fixed/test_resume_is_identical_to_un0')
+
+    def test_resume_is_identical_to_uninterrupted(tmp_path):
+        trainer=mod('training.trainer');checkpoint=mod('training.checkpoint')
+        cfg,run=small_run('mlp')
+        a=tmp_path/'a';b=tmp_path/'b'
+        full=trainer.train_run(run,cfg,a)
+        partial=trainer.train_run(run,cfg,b,stop_after_step=1)
+        assert partial['status']=='INTERRUPTED'
+>       resumed=trainer.train_run(run,cfg,b)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests_v2\test_training.py:53: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+genesis_gpu\training\trainer.py:144: in train_run
+    save_resume(base/'resume',state_now(),meta_now())
+genesis_gpu\training\checkpoint.py:84: in save_resume
+    shutil.rmtree(old_path)
+E:\GENESIS\toolchains\cpython-3.11.14\python\Lib\shutil.py:787: in rmtree
+    return _rmtree_unsafe(path, onerror)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E:\GENESIS\toolchains\cpython-3.11.14\python\Lib\shutil.py:634: in _rmtree_unsafe
+    onerror(os.unlink, fullname, sys.exc_info())
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('E:/GENESIS/tmp/pytest-stage1-fixed/test_resume_is_identical_to_un0/b/checkpoints/s1-smoke_mlp-s00-51b33914400f3bdf/resume/g-32f85886cd8f41d190fa3d81963f060d')
+onerror = <function rmtree.<locals>.onerror at 0x0000024A94325260>
+
+    def _rmtree_unsafe(path, onerror):
+        try:
+            with os.scandir(path) as scandir_it:
+                entries = list(scandir_it)
+        except OSError:
+            onerror(os.scandir, path, sys.exc_info())
+            entries = []
+        for entry in entries:
+            fullname = entry.path
+            if _rmtree_isdir(entry):
+                try:
+                    if entry.is_symlink():
+                        # This can only happen if someone replaces
+                        # a directory with a symlink after the call to
+                        # os.scandir or entry.is_dir above.
+                        raise OSError("Cannot call rmtree on a symbolic link")
+                except OSError:
+                    onerror(os.path.islink, fullname, sys.exc_info())
+                    continue
+                _rmtree_unsafe(fullname, onerror)
+            else:
+                try:
+>                   os.unlink(fullname)
+E                   PermissionError: [WinError 5] �ܾ����ʡ�: 'E:\\GENESIS\\tmp\\pytest-stage1-fixed\\test_resume_is_identical_to_un0\\b\\checkpoints\\s1-smoke_mlp-s00-51b33914400f3bdf\\resume\\g-32f85886cd8f41d190fa3d81963f060d\\tensors.safetensors'
+
+E:\GENESIS\toolchains\cpython-3.11.14\python\Lib\shutil.py:632: PermissionError
+============================== warnings summary ===============================
+tests_v2/test_adversarial.py: 18 warnings
+  E:\GENESIS\venvs\hessian-landscape-v2\Lib\site-packages\torch\jit\_script.py:1480: DeprecationWarning: `torch.jit.script` is deprecated. Please switch to `torch.compile` or `torch.export`.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+SKIPPED [1] tests_v2\test_delivery.py:35: Creating a directory symlink requires Windows Developer Mode or privilege: [WinError 1314] �ͻ���û���������Ȩ��: 'E:\\GENESIS\\tmp\\pytest-stage1-fixed\\test_overlay_idempotent_and_bl0\\outside' -> 'E:\\GENESIS\\tmp\\pytest-stage1-fixed\\test_overlay_idempotent_and_bl0\\target\\genesis_gpu'
+FAILED tests_v2/test_foundation.py::test_storage_guard_rejects_C_and_posix_full
+FAILED tests_v2/test_training.py::test_safe_checkpoint_roundtrip_and_tamper
+FAILED tests_v2/test_training.py::test_resume_is_identical_to_uninterrupted
+3 failed, 77 passed, 1 skipped, 18 warnings in 63.27s (0:01:03)

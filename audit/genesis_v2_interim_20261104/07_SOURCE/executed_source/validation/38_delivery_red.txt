@@ -1,0 +1,73 @@
+FFF                                                                      [100%]
+=================================== FAILURES ===================================
+_______ test_overlay_preserves_existing_historical_and_rejects_conflict ________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-30/test_overlay_preserves_existin0')
+
+    def test_overlay_preserves_existing_historical_and_rejects_conflict(tmp_path):
+>       m=installer();source=tmp_path/'source';target=tmp_path/'target'
+          ^^^^^^^^^^^
+
+tests_v2/test_delivery.py:14: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def installer():
+        path=Path(__file__).parents[1]/'scripts'/'install_genesis_v2_overlay.py'
+>       assert path.exists(),'safe overlay installer missing'
+E       AssertionError: safe overlay installer missing
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/mnt/data/genesis-v2/scripts/install_genesis_v2_overlay.py').exists
+
+tests_v2/test_delivery.py:8: AssertionError
+______________ test_overlay_idempotent_and_blocks_symlink_escape _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-30/test_overlay_idempotent_and_bl0')
+
+    def test_overlay_idempotent_and_blocks_symlink_escape(tmp_path):
+>       m=installer();source=tmp_path/'source';target=tmp_path/'target';outside=tmp_path/'outside'
+          ^^^^^^^^^^^
+
+tests_v2/test_delivery.py:29: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+    def installer():
+        path=Path(__file__).parents[1]/'scripts'/'install_genesis_v2_overlay.py'
+>       assert path.exists(),'safe overlay installer missing'
+E       AssertionError: safe overlay installer missing
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/mnt/data/genesis-v2/scripts/install_genesis_v2_overlay.py').exists
+
+tests_v2/test_delivery.py:8: AssertionError
+_______ test_windows_entrypoints_keep_e_storage_and_never_kill_unrelated _______
+
+    def test_windows_entrypoints_keep_e_storage_and_never_kill_unrelated():
+        root=Path(__file__).parents[1]/'scripts'
+        for name in ['genesis_env.ps1','genesis_bootstrap.ps1','genesis_launch.ps1','genesis_status.ps1','genesis_resume.ps1','genesis_stop.ps1']:
+            text=(root/name).read_text()
+>           assert 'genesis_env.ps1' in text or name=='genesis_env.ps1'
+E           assert ('genesis_env.ps1' in "[CmdletBinding()]\nparam([string]$Root='E:\\GENESIS',[string]$RunRoot='E:\\GENESIS\\runs\\genesis_full_v2',[string]$C...(Join-Path $PSScriptRoot 'genesis_launch.ps1') -Root $Root -RunRoot $RunRoot -Config $Config -Foreground:$Foreground\n" or 'genesis_resume.ps1' == 'genesis_env.ps1'
+E             
+E             - genesis_env.ps1
+E             ?          ^^
+E             + genesis_resume.ps1
+E             ?         + ^^^^)
+
+tests_v2/test_delivery.py:45: AssertionError
+=========================== short test summary info ============================
+FAILED tests_v2/test_delivery.py::test_overlay_preserves_existing_historical_and_rejects_conflict - AssertionError: safe overlay installer missing
+assert False
+ +  where False = exists()
+ +    where exists = PosixPath('/mnt/data/genesis-v2/scripts/install_genesis_v2_overlay.py').exists
+FAILED tests_v2/test_delivery.py::test_overlay_idempotent_and_blocks_symlink_escape - AssertionError: safe overlay installer missing
+assert False
+ +  where False = exists()
+ +    where exists = PosixPath('/mnt/data/genesis-v2/scripts/install_genesis_v2_overlay.py').exists
+FAILED tests_v2/test_delivery.py::test_windows_entrypoints_keep_e_storage_and_never_kill_unrelated - assert ('genesis_env.ps1' in "[CmdletBinding()]\nparam([string]$Root='E:\\GENESIS',[string]$RunRoot='E:\\GENESIS\\runs\\genesis_full_v2',[string]$C...(Join-Path $PSScriptRoot 'genesis_launch.ps1') -Root $Root -RunRoot $RunRoot -Config $Config -Foreground:$Foreground\n" or 'genesis_resume.ps1' == 'genesis_env.ps1'
+  
+  - genesis_env.ps1
+  ?          ^^
+  + genesis_resume.ps1
+  ?         + ^^^^)
+3 failed in 0.06s

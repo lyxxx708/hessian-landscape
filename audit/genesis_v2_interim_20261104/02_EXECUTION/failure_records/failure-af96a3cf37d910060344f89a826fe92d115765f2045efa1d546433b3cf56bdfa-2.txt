@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "E:\GENESIS\worktrees\genesis-v2-pr14\implementation\genesis-v2\genesis_gpu\runtime\scheduler.py", line 76, in run_stage
+    run=RunSpec.from_dict(job['payload']['run']);r=train_run(run,cfg,root,callback=guard)
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "E:\GENESIS\worktrees\genesis-v2-pr14\implementation\genesis-v2\genesis_gpu\training\trainer.py", line 69, in train_run
+    if any(meta.get(k)!=v for k,v in expected.items()):raise IntegrityError('Resume provenance mismatch')
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+genesis_gpu.training.checkpoint.IntegrityError: Resume provenance mismatch

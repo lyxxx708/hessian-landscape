@@ -1,0 +1,94 @@
+FFFFFFFF                                                                 [100%]
+=================================== FAILURES ===================================
+___________ test_window_smoothing_preserves_sum_and_constant_updates ___________
+
+    def test_window_smoothing_preserves_sum_and_constant_updates():
+>       from genesis_gpu.training.optimizers import window_smooth
+E       ModuleNotFoundError: No module named 'genesis_gpu.training.optimizers'
+
+tests_v2/test_optimizers_audit.py:11: ModuleNotFoundError
+_______ test_online_baselines_take_real_step_and_roundtrip_state[adamw] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-12/test_online_baselines_take_rea0')
+name = 'adamw'
+
+    @pytest.mark.parametrize('name',['adamw','gradient_smoothing','kfac','layerwise_gn','short_cg','selective_krylov'])
+    def test_online_baselines_take_real_step_and_roundtrip_state(tmp_path,name):
+>       from genesis_gpu.training.optimizers import ResearchOptimizer
+E       ModuleNotFoundError: No module named 'genesis_gpu.training.optimizers'
+
+tests_v2/test_optimizers_audit.py:24: ModuleNotFoundError
+_ test_online_baselines_take_real_step_and_roundtrip_state[gradient_smoothing] _
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-12/test_online_baselines_take_rea1')
+name = 'gradient_smoothing'
+
+    @pytest.mark.parametrize('name',['adamw','gradient_smoothing','kfac','layerwise_gn','short_cg','selective_krylov'])
+    def test_online_baselines_take_real_step_and_roundtrip_state(tmp_path,name):
+>       from genesis_gpu.training.optimizers import ResearchOptimizer
+E       ModuleNotFoundError: No module named 'genesis_gpu.training.optimizers'
+
+tests_v2/test_optimizers_audit.py:24: ModuleNotFoundError
+________ test_online_baselines_take_real_step_and_roundtrip_state[kfac] ________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-12/test_online_baselines_take_rea2')
+name = 'kfac'
+
+    @pytest.mark.parametrize('name',['adamw','gradient_smoothing','kfac','layerwise_gn','short_cg','selective_krylov'])
+    def test_online_baselines_take_real_step_and_roundtrip_state(tmp_path,name):
+>       from genesis_gpu.training.optimizers import ResearchOptimizer
+E       ModuleNotFoundError: No module named 'genesis_gpu.training.optimizers'
+
+tests_v2/test_optimizers_audit.py:24: ModuleNotFoundError
+____ test_online_baselines_take_real_step_and_roundtrip_state[layerwise_gn] ____
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-12/test_online_baselines_take_rea3')
+name = 'layerwise_gn'
+
+    @pytest.mark.parametrize('name',['adamw','gradient_smoothing','kfac','layerwise_gn','short_cg','selective_krylov'])
+    def test_online_baselines_take_real_step_and_roundtrip_state(tmp_path,name):
+>       from genesis_gpu.training.optimizers import ResearchOptimizer
+E       ModuleNotFoundError: No module named 'genesis_gpu.training.optimizers'
+
+tests_v2/test_optimizers_audit.py:24: ModuleNotFoundError
+______ test_online_baselines_take_real_step_and_roundtrip_state[short_cg] ______
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-12/test_online_baselines_take_rea4')
+name = 'short_cg'
+
+    @pytest.mark.parametrize('name',['adamw','gradient_smoothing','kfac','layerwise_gn','short_cg','selective_krylov'])
+    def test_online_baselines_take_real_step_and_roundtrip_state(tmp_path,name):
+>       from genesis_gpu.training.optimizers import ResearchOptimizer
+E       ModuleNotFoundError: No module named 'genesis_gpu.training.optimizers'
+
+tests_v2/test_optimizers_audit.py:24: ModuleNotFoundError
+__ test_online_baselines_take_real_step_and_roundtrip_state[selective_krylov] __
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-12/test_online_baselines_take_rea5')
+name = 'selective_krylov'
+
+    @pytest.mark.parametrize('name',['adamw','gradient_smoothing','kfac','layerwise_gn','short_cg','selective_krylov'])
+    def test_online_baselines_take_real_step_and_roundtrip_state(tmp_path,name):
+>       from genesis_gpu.training.optimizers import ResearchOptimizer
+E       ModuleNotFoundError: No module named 'genesis_gpu.training.optimizers'
+
+tests_v2/test_optimizers_audit.py:24: ModuleNotFoundError
+______________ test_independent_artifact_audit_detects_tampering _______________
+
+tmp_path = PosixPath('/tmp/pytest-of-root/pytest-12/test_independent_artifact_audi0')
+
+    def test_independent_artifact_audit_detects_tampering(tmp_path):
+>       from genesis_gpu.audit.verify import verify_study
+E       ModuleNotFoundError: No module named 'genesis_gpu.audit.verify'
+
+tests_v2/test_optimizers_audit.py:40: ModuleNotFoundError
+=========================== short test summary info ============================
+FAILED tests_v2/test_optimizers_audit.py::test_window_smoothing_preserves_sum_and_constant_updates - ModuleNotFoundError: No module named 'genesis_gpu.training.optimizers'
+FAILED tests_v2/test_optimizers_audit.py::test_online_baselines_take_real_step_and_roundtrip_state[adamw] - ModuleNotFoundError: No module named 'genesis_gpu.training.optimizers'
+FAILED tests_v2/test_optimizers_audit.py::test_online_baselines_take_real_step_and_roundtrip_state[gradient_smoothing] - ModuleNotFoundError: No module named 'genesis_gpu.training.optimizers'
+FAILED tests_v2/test_optimizers_audit.py::test_online_baselines_take_real_step_and_roundtrip_state[kfac] - ModuleNotFoundError: No module named 'genesis_gpu.training.optimizers'
+FAILED tests_v2/test_optimizers_audit.py::test_online_baselines_take_real_step_and_roundtrip_state[layerwise_gn] - ModuleNotFoundError: No module named 'genesis_gpu.training.optimizers'
+FAILED tests_v2/test_optimizers_audit.py::test_online_baselines_take_real_step_and_roundtrip_state[short_cg] - ModuleNotFoundError: No module named 'genesis_gpu.training.optimizers'
+FAILED tests_v2/test_optimizers_audit.py::test_online_baselines_take_real_step_and_roundtrip_state[selective_krylov] - ModuleNotFoundError: No module named 'genesis_gpu.training.optimizers'
+FAILED tests_v2/test_optimizers_audit.py::test_independent_artifact_audit_detects_tampering - ModuleNotFoundError: No module named 'genesis_gpu.audit.verify'
+8 failed in 1.12s
