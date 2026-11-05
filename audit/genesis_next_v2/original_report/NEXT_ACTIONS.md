@@ -1,0 +1,6 @@
+# Next actions
+
+1. **Nonlinear S1 checkpoints are the blocker** (126 SOURCE_NOT_READY conditions). v2 trains them only after ~1,900 pending jobs (MLP from queue ordinal 1876). Options for the owner: (a) wait; (b) explicitly authorize reordering the v2 queue (pause via `genesis_stop.ps1`, reorder, resume with `genesis_resume.ps1`, OMP=2) — not done, changes v2; (c) a separately-labelled supplement training MLP/ResNet seeds outside the S1 set (not part of the frozen panel).
+2. When any `training_receipt.json` becomes COMPLETE, rerun the `drive` command (see REPRODUCIBILITY.md). Q0 for each family is seed 1 / checkpoint 3 and gates (family, γ) individually. Dense limits (2048 params) will force the matrix-free alternate-operator path for MLP/ResNet/Transformer; E2 spectral items become NOT_EVALUABLE there. Transformer FP64 cost is unmeasured — a GPU window (cooperative stop/resume) will be needed; 1800 s timeout keeps it from blocking others.
+3. Missing DLN seed: `dln_d4_w16_orthogonal_balanced_c1` seed 0 (v2 training FAILED, no replacement).
+4. Design caveat to resolve before a paper: null-energy fraction is partly mechanical (∝ nullity/γ); use gradient-weighted quantities (n99, effective gain directions) as the primary structure measure.

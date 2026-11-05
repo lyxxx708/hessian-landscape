@@ -1,0 +1,77 @@
+test_immutable_result_id_collision_is_rejected (test_workflow.PlanTests.test_immutable_result_id_collision_is_rejected) ... ERROR
+test_lock_never_overwrites (test_workflow.PlanTests.test_lock_never_overwrites) ... ERROR
+test_missing_setting_is_not_silently_dropped (test_workflow.PlanTests.test_missing_setting_is_not_silently_dropped) ... ERROR
+test_native_commandline_gates_v2 (test_workflow.PlanTests.test_native_commandline_gates_v2) ... ERROR
+test_plan_is_s1_only_and_does_not_replace_missing (test_workflow.PlanTests.test_plan_is_s1_only_and_does_not_replace_missing) ... ERROR
+test_s2_config_forbidden (test_workflow.PlanTests.test_s2_config_forbidden) ... ERROR
+test_source_hash_mismatch_blocks_import (test_workflow.PlanTests.test_source_hash_mismatch_blocks_import) ... ERROR
+test_final_result_not_independent_seed_inflation (test_workflow.SummaryTests.test_final_result_not_independent_seed_inflation) ... ERROR
+
+======================================================================
+ERROR: test_immutable_result_id_collision_is_rejected (test_workflow.PlanTests.test_immutable_result_id_collision_is_rejected)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/GENESIS_NEXT_v1/tests/test_workflow.py", line 48, in test_immutable_result_id_collision_is_rejected
+    from genesis_next.planning import validate_result_identity
+ModuleNotFoundError: No module named 'genesis_next.planning'
+
+======================================================================
+ERROR: test_lock_never_overwrites (test_workflow.PlanTests.test_lock_never_overwrites)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/GENESIS_NEXT_v1/tests/test_workflow.py", line 39, in test_lock_never_overwrites
+    from genesis_next.safety import execution_lock
+ModuleNotFoundError: No module named 'genesis_next.safety'
+
+======================================================================
+ERROR: test_missing_setting_is_not_silently_dropped (test_workflow.PlanTests.test_missing_setting_is_not_silently_dropped)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/GENESIS_NEXT_v1/tests/test_workflow.py", line 18, in test_missing_setting_is_not_silently_dropped
+    from genesis_next.planning import make_plan
+ModuleNotFoundError: No module named 'genesis_next.planning'
+
+======================================================================
+ERROR: test_native_commandline_gates_v2 (test_workflow.PlanTests.test_native_commandline_gates_v2)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/GENESIS_NEXT_v1/tests/test_workflow.py", line 32, in test_native_commandline_gates_v2
+    from genesis_next.safety import source_processes
+ModuleNotFoundError: No module named 'genesis_next.safety'
+
+======================================================================
+ERROR: test_plan_is_s1_only_and_does_not_replace_missing (test_workflow.PlanTests.test_plan_is_s1_only_and_does_not_replace_missing)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/GENESIS_NEXT_v1/tests/test_workflow.py", line 7, in test_plan_is_s1_only_and_does_not_replace_missing
+    from genesis_next.planning import make_plan
+ModuleNotFoundError: No module named 'genesis_next.planning'
+
+======================================================================
+ERROR: test_s2_config_forbidden (test_workflow.PlanTests.test_s2_config_forbidden)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/GENESIS_NEXT_v1/tests/test_workflow.py", line 22, in test_s2_config_forbidden
+    from genesis_next.planning import make_plan
+ModuleNotFoundError: No module named 'genesis_next.planning'
+
+======================================================================
+ERROR: test_source_hash_mismatch_blocks_import (test_workflow.PlanTests.test_source_hash_mismatch_blocks_import)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/GENESIS_NEXT_v1/tests/test_workflow.py", line 26, in test_source_hash_mismatch_blocks_import
+    from genesis_next.planning import verify_source
+ModuleNotFoundError: No module named 'genesis_next.planning'
+
+======================================================================
+ERROR: test_final_result_not_independent_seed_inflation (test_workflow.SummaryTests.test_final_result_not_independent_seed_inflation)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/GENESIS_NEXT_v1/tests/test_workflow.py", line 53, in test_final_result_not_independent_seed_inflation
+    from genesis_next.reporting import summarize_rows
+ModuleNotFoundError: No module named 'genesis_next.reporting'
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.002s
+
+FAILED (errors=8)
