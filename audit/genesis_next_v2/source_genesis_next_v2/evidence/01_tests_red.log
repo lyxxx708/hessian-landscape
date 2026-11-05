@@ -1,0 +1,50 @@
+test_dense_cpu_and_budget (test_core.CGTests.test_dense_cpu_and_budget) ... ERROR
+test_indefinite_operator_not_success (test_core.CGTests.test_indefinite_operator_not_success) ... ERROR
+test_wrong_rhs_can_have_small_residual (test_core.CGTests.test_wrong_rhs_can_have_small_residual) ... ERROR
+setUpClass (test_core.IOTests) ... ERROR
+setUpClass (test_core.NumericTests) ... ERROR
+
+======================================================================
+ERROR: test_dense_cpu_and_budget (test_core.CGTests.test_dense_cpu_and_budget)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/GENESIS_NEXT_v1/tests/test_core.py", line 109, in test_dense_cpu_and_budget
+    from genesis_next.solvers import cg
+ModuleNotFoundError: No module named 'genesis_next.solvers'
+
+======================================================================
+ERROR: test_indefinite_operator_not_success (test_core.CGTests.test_indefinite_operator_not_success)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/GENESIS_NEXT_v1/tests/test_core.py", line 122, in test_indefinite_operator_not_success
+    from genesis_next.solvers import cg
+ModuleNotFoundError: No module named 'genesis_next.solvers'
+
+======================================================================
+ERROR: test_wrong_rhs_can_have_small_residual (test_core.CGTests.test_wrong_rhs_can_have_small_residual)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/GENESIS_NEXT_v1/tests/test_core.py", line 128, in test_wrong_rhs_can_have_small_residual
+    from genesis_next.solvers import cg
+ModuleNotFoundError: No module named 'genesis_next.solvers'
+
+======================================================================
+ERROR: setUpClass (test_core.IOTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/GENESIS_NEXT_v1/tests/test_core.py", line 59, in setUpClass
+    from genesis_next import io_utils
+ImportError: cannot import name 'io_utils' from 'genesis_next' (unknown location)
+
+======================================================================
+ERROR: setUpClass (test_core.NumericTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/GENESIS_NEXT_v1/tests/test_core.py", line 10, in setUpClass
+    from genesis_next import numerics
+ImportError: cannot import name 'numerics' from 'genesis_next' (unknown location)
+
+----------------------------------------------------------------------
+Ran 3 tests in 1.320s
+
+FAILED (errors=5)

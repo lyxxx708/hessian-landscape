@@ -1,0 +1,4173 @@
+{
+  "schema": 1,
+  "study_id": "genesis_next_v2",
+  "created_at": "2026-11-05T15:37:38.785295+00:00",
+  "config": {
+    "schema_version": 1,
+    "study_id": "genesis_next_v2",
+    "evidence_commit": "629032110fa51affc7f4e96cdb75f0c40070a9fe",
+    "source_stage": "s1",
+    "settings": [
+      "dln_d4_w16_orthogonal_balanced_c1",
+      "dln_d4_w16_random_unbalanced_c100",
+      "dln_d8_w16_orthogonal_balanced_c1",
+      "dln_d8_w16_random_unbalanced_c100",
+      "mlp_d6_relu",
+      "resnet20_gn",
+      "transformer_d4",
+      "transformer_d8"
+    ],
+    "seed_indices": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "checkpoints": [
+      1,
+      3
+    ],
+    "gammas": [
+      0.001,
+      0.01,
+      0.1
+    ],
+    "group_schema": "coarse",
+    "analysis_dtype": "float64",
+    "cg_steps": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "reference_rtol": 1e-08,
+    "max_iterations": 2000,
+    "dense_parameter_limit": 2048,
+    "dense_output_limit": 4096,
+    "rank_relative_tolerances": [
+      1e-10,
+      1e-08,
+      1e-06
+    ],
+    "operator_crosscheck_rtol": 1e-06,
+    "reference_solution_rtol": 1e-05,
+    "reference_delta_atol": 1e-05,
+    "zero_gradient_norm": 1e-12,
+    "utility_energy_target": 0.99,
+    "gauge_scales": [
+      0.5,
+      2.0,
+      10.0
+    ],
+    "gauge_seed_index": 1,
+    "gauge_checkpoint": 3,
+    "gauge_coordinate_rtol": 1e-07,
+    "threads": 2,
+    "state_timeout_seconds": 1800,
+    "max_states_per_invocation": 80,
+    "memory_target_gib": 9.5,
+    "bootstrap_replicates": 2000,
+    "bootstrap_seed": 20261105,
+    "missing_policy": "NO_REPLACEMENT_NO_S2_NO_ZERO_IMPUTATION",
+    "inference_status": "POSTHOC_S1_EXPLORATORY_NOT_CONFIRMATION",
+    "reference_input_policy": "V2_FP32_BATCH_LIFTED_TO_FP64",
+    "native_fp64_data_is_secondary": true,
+    "evidence_class_note": "POSTHOC_S1_EXPLORATORY_NOT_CONFIRMATION; inherits NEXT v1 sample frame; no S2"
+  },
+  "inputs": {
+    "bundle": "E:\\GENESIS\\handoff\\audit_snapshot_20261104_201035",
+    "source": "E:\\GENESIS\\handoff\\audit_snapshot_20261104_201035\\07_SOURCE\\executed_source",
+    "run_root": "E:\\GENESIS\\runs\\genesis_full_v2",
+    "protocol_lock_sha256": "f9f4868297d359bf0538ac0ba6e64e3e8087911699150f6a0b33ed11fca41263",
+    "bundle_manifest_sha256": "25a76f34dbd9b7223194fad5e02ae53c26788367bf583b992a2b22e86f54cc3e"
+  },
+  "code": {
+    "files": [
+      {
+        "path": "genesis_next/__init__.py",
+        "sha256": "1fa754a66240d6fcc793b62ee8681863626494bae7c37f0745b5e6c43d63174e"
+      },
+      {
+        "path": "genesis_next/__main__.py",
+        "sha256": "417e366360001a90165ea111850f75a2d41d4841b76e4e0f4339cc4a5403c936"
+      },
+      {
+        "path": "genesis_next/assay.py",
+        "sha256": "0915283325ef48452aad1a38878ef0fccc8d64c9084146ee2d6779e7e5bbc643"
+      },
+      {
+        "path": "genesis_next/cli.py",
+        "sha256": "15f63216b836a9c15b976d87a0fbd04a5e83a77ab871c7d041245e4ed2053f77"
+      },
+      {
+        "path": "genesis_next/demo.py",
+        "sha256": "24a6702c07a22f516e331358f13b675ed9ddc047f9fb3cf95d3f7b5c196980b9"
+      },
+      {
+        "path": "genesis_next/io_utils.py",
+        "sha256": "f9eaa64a552d65912072ea0f727aa651b2e13a7ca13aa9a01c4cea0c678c5074"
+      },
+      {
+        "path": "genesis_next/ledger.py",
+        "sha256": "e3e9a56a30777d2f48908337f2284c6cfe3cd4fc6ef60a0c71a01ad8a81968e6"
+      },
+      {
+        "path": "genesis_next/numerics.py",
+        "sha256": "749f0ebdad71413c2ba56cc57a4d8d45b323dd023c755b5ce09bffa34608854c"
+      },
+      {
+        "path": "genesis_next/planning.py",
+        "sha256": "ba49e54ad1c9c4354e8bfdca4795e73574e62c2fbce2de8d66f8e786c9f270b3"
+      },
+      {
+        "path": "genesis_next/reporting.py",
+        "sha256": "a0d4a44d22bd6d7d9ea4a9b00e2a5e9ce78023eac3ce476dc30b11e410d26446"
+      },
+      {
+        "path": "genesis_next/safety.py",
+        "sha256": "5d7c4ad7a577c305ba65cede096e4570e7824d112220724ef8d73121b4c871f3"
+      },
+      {
+        "path": "genesis_next/snapshot.py",
+        "sha256": "6ac40f97d9f01a6ff0acbf951da6a83de3ef9b302585b845336a1f0410c5b82a"
+      },
+      {
+        "path": "genesis_next/solvers.py",
+        "sha256": "ef4667c285e764742de1c64b5656c2fdbd98db23673d99dcaa5679581d2a88b9"
+      }
+    ]
+  },
+  "environment": {
+    "python": "3.11.14",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "packages": {
+      "numpy": "2.4.6",
+      "torch": "2.10.0+cu128",
+      "scipy": "1.17.1",
+      "safetensors": "0.8.0",
+      "scikit-learn": "1.9.1"
+    },
+    "thread_environment": {
+      "OMP_NUM_THREADS": "2",
+      "OPENBLAS_NUM_THREADS": "2",
+      "MKL_NUM_THREADS": "2",
+      "CUBLAS_WORKSPACE_CONFIG": ":4096:8"
+    }
+  },
+  "plan": {
+    "status": "PLANNED_NOT_EXECUTED",
+    "states": [
+      {
+        "state_id": "158c09f6f975a9a1071f0269",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": true,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_orthogonal_balanced_c1-s00-44e78b87532803bf",
+          "seed": 4965090527531238335,
+          "seed_index": 0,
+          "setting_id": "dln_d4_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "6ea308d147d713d4a4116ad3",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": true,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_orthogonal_balanced_c1-s00-44e78b87532803bf",
+          "seed": 4965090527531238335,
+          "seed_index": 0,
+          "setting_id": "dln_d4_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "2a40c51ac45cf7d0c3e4a4e6",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_orthogonal_balanced_c1-s01-639f8301d7f8a890",
+          "seed": 7178600374993463440,
+          "seed_index": 1,
+          "setting_id": "dln_d4_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "41c00898702cd94a601323e1",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_orthogonal_balanced_c1-s01-639f8301d7f8a890",
+          "seed": 7178600374993463440,
+          "seed_index": 1,
+          "setting_id": "dln_d4_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "d5e4ba22214c24cc8485a52f",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_orthogonal_balanced_c1-s02-26337b61ea7e3500",
+          "seed": 2752679457729688832,
+          "seed_index": 2,
+          "setting_id": "dln_d4_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "9abaf3efc6fd414e1646a5f9",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_orthogonal_balanced_c1-s02-26337b61ea7e3500",
+          "seed": 2752679457729688832,
+          "seed_index": 2,
+          "setting_id": "dln_d4_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "c531633fa6315117c9fc820d",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_orthogonal_balanced_c1-s03-4809d2e5b7d6cb42",
+          "seed": 5190911929594858306,
+          "seed_index": 3,
+          "setting_id": "dln_d4_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "888c17c283ec4f36e6e64552",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_orthogonal_balanced_c1-s03-4809d2e5b7d6cb42",
+          "seed": 5190911929594858306,
+          "seed_index": 3,
+          "setting_id": "dln_d4_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "aea3f400df6ab5fe43a65058",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_orthogonal_balanced_c1-s04-1a05cd6e63c41768",
+          "seed": 1875130693873571688,
+          "seed_index": 4,
+          "setting_id": "dln_d4_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "f7af9ff98d04544dc98a726f",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_orthogonal_balanced_c1-s04-1a05cd6e63c41768",
+          "seed": 1875130693873571688,
+          "seed_index": 4,
+          "setting_id": "dln_d4_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "78111daa81cd7cdb260dffe0",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": true,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_random_unbalanced_c100-s00-5cacac1943df1d91",
+          "seed": 6677901571996458385,
+          "seed_index": 0,
+          "setting_id": "dln_d4_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "ea4f1946a5d924290562284d",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": true,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_random_unbalanced_c100-s00-5cacac1943df1d91",
+          "seed": 6677901571996458385,
+          "seed_index": 0,
+          "setting_id": "dln_d4_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "d147244a9493fec7ab16059b",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_random_unbalanced_c100-s01-7f8794c3b1e0a6ac",
+          "seed": 9189477132896609964,
+          "seed_index": 1,
+          "setting_id": "dln_d4_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "a4c04020556272090dd57d6e",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_random_unbalanced_c100-s01-7f8794c3b1e0a6ac",
+          "seed": 9189477132896609964,
+          "seed_index": 1,
+          "setting_id": "dln_d4_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "755b18c4cb57540b083313fd",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_random_unbalanced_c100-s02-69cc60e2ec19a15a",
+          "seed": 7623574796971385178,
+          "seed_index": 2,
+          "setting_id": "dln_d4_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "50b2caa0e7174f916d112de8",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_random_unbalanced_c100-s02-69cc60e2ec19a15a",
+          "seed": 7623574796971385178,
+          "seed_index": 2,
+          "setting_id": "dln_d4_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "6f850af946fdd114b3465423",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_random_unbalanced_c100-s03-602790a9408347fe",
+          "seed": 6928665608339015678,
+          "seed_index": 3,
+          "setting_id": "dln_d4_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "334ec2fab96ad5aea62d23a5",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_random_unbalanced_c100-s03-602790a9408347fe",
+          "seed": 6928665608339015678,
+          "seed_index": 3,
+          "setting_id": "dln_d4_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "90db9cd69e1fef98eedb56ab",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_random_unbalanced_c100-s04-0a0348355cbf61d7",
+          "seed": 721499759335924183,
+          "seed_index": 4,
+          "setting_id": "dln_d4_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "150d0155dd895070232fa28f",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d4_w16_random_unbalanced_c100-s04-0a0348355cbf61d7",
+          "seed": 721499759335924183,
+          "seed_index": 4,
+          "setting_id": "dln_d4_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "bdabefd5c3ed5836875d51db",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": true,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_orthogonal_balanced_c1-s00-6e0ce7320d3529b3",
+          "seed": 7929967246048569779,
+          "seed_index": 0,
+          "setting_id": "dln_d8_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "ce8a1b38880c132fc0f7f508",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": true,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_orthogonal_balanced_c1-s00-6e0ce7320d3529b3",
+          "seed": 7929967246048569779,
+          "seed_index": 0,
+          "setting_id": "dln_d8_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "445517dc652e3a6ba8f4535f",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_orthogonal_balanced_c1-s01-33bb81235db0d7fc",
+          "seed": 3727715105474926588,
+          "seed_index": 1,
+          "setting_id": "dln_d8_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "ac9b5e6f8c652bcf48cce99d",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_orthogonal_balanced_c1-s01-33bb81235db0d7fc",
+          "seed": 3727715105474926588,
+          "seed_index": 1,
+          "setting_id": "dln_d8_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "22361965e21376d345d771dd",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_orthogonal_balanced_c1-s02-584526af9a81264f",
+          "seed": 6360532584383981135,
+          "seed_index": 2,
+          "setting_id": "dln_d8_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "251adb3c3d5acd56b3640277",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_orthogonal_balanced_c1-s02-584526af9a81264f",
+          "seed": 6360532584383981135,
+          "seed_index": 2,
+          "setting_id": "dln_d8_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "18803a2a45feee5df8b52d3e",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_orthogonal_balanced_c1-s03-012d1c21d104787c",
+          "seed": 84754899556137084,
+          "seed_index": 3,
+          "setting_id": "dln_d8_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "d3ed4ec608dac740016fbe5f",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_orthogonal_balanced_c1-s03-012d1c21d104787c",
+          "seed": 84754899556137084,
+          "seed_index": 3,
+          "setting_id": "dln_d8_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "ff5b0a451c7784d59f30c397",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_orthogonal_balanced_c1-s04-39b73afa983da359",
+          "seed": 4158857628870353753,
+          "seed_index": 4,
+          "setting_id": "dln_d8_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "414c44c443802a85b244761f",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_orthogonal_balanced_c1-s04-39b73afa983da359",
+          "seed": 4158857628870353753,
+          "seed_index": 4,
+          "setting_id": "dln_d8_w16_orthogonal_balanced_c1",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "6fd921fb457dc2965d7f888f",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": true,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_random_unbalanced_c100-s00-470aed20e424ba51",
+          "seed": 5119164651982338641,
+          "seed_index": 0,
+          "setting_id": "dln_d8_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "3cef90b0ca1c214c2034a01b",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": true,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_random_unbalanced_c100-s00-470aed20e424ba51",
+          "seed": 5119164651982338641,
+          "seed_index": 0,
+          "setting_id": "dln_d8_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "e1b64945af448c20df282156",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_random_unbalanced_c100-s01-1f0d397d56f8883b",
+          "seed": 2237507800365828155,
+          "seed_index": 1,
+          "setting_id": "dln_d8_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "bc76a054d439fb197500f022",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_random_unbalanced_c100-s01-1f0d397d56f8883b",
+          "seed": 2237507800365828155,
+          "seed_index": 1,
+          "setting_id": "dln_d8_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "0c4e9be6311f0bf46728284e",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_random_unbalanced_c100-s02-6224ba8b6ec0c521",
+          "seed": 7071982422899868961,
+          "seed_index": 2,
+          "setting_id": "dln_d8_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "e7d64f9e18d1e7cee14f1ffa",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_random_unbalanced_c100-s02-6224ba8b6ec0c521",
+          "seed": 7071982422899868961,
+          "seed_index": 2,
+          "setting_id": "dln_d8_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "18e8f696b0e0d648f9c1329e",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_random_unbalanced_c100-s03-2408a92a8faafe36",
+          "seed": 2596511185443159606,
+          "seed_index": 3,
+          "setting_id": "dln_d8_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "3f3807101c0af56eba06c976",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_random_unbalanced_c100-s03-2408a92a8faafe36",
+          "seed": 2596511185443159606,
+          "seed_index": 3,
+          "setting_id": "dln_d8_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "76925caa7e448496e3593495",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_random_unbalanced_c100-s04-68c81af1ff4ecd30",
+          "seed": 7550314401959431472,
+          "seed_index": 4,
+          "setting_id": "dln_d8_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "3526565d269c6bde85314818",
+        "run": {
+          "dataset": "synthetic_dln",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "random_unbalanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 100,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "dln",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 16,
+            "normalization": "none",
+            "output_dim": 16,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-dln_d8_w16_random_unbalanced_c100-s04-68c81af1ff4ecd30",
+          "seed": 7550314401959431472,
+          "seed_index": 4,
+          "setting_id": "dln_d8_w16_random_unbalanced_c100",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 4000,
+            "budget_kind": "steps",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 256,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adam",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "0d17dbbf1b9de5b2176b0fe6",
+        "run": {
+          "dataset": "mnist",
+          "deep": true,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 1,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 6,
+            "dropout": 0.0,
+            "family": "mlp",
+            "heads": 6,
+            "image_size": 28,
+            "input_dim": 784,
+            "normalization": "none",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 128
+          },
+          "run_id": "s1-mlp_d6_relu-s00-26ad7acb17473d43",
+          "seed": 2787018757099699523,
+          "seed_index": 0,
+          "setting_id": "mlp_d6_relu",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 20,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0001
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "62eb3cd9e7d25127efcf7d9c",
+        "run": {
+          "dataset": "mnist",
+          "deep": true,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 1,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 6,
+            "dropout": 0.0,
+            "family": "mlp",
+            "heads": 6,
+            "image_size": 28,
+            "input_dim": 784,
+            "normalization": "none",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 128
+          },
+          "run_id": "s1-mlp_d6_relu-s00-26ad7acb17473d43",
+          "seed": 2787018757099699523,
+          "seed_index": 0,
+          "setting_id": "mlp_d6_relu",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 20,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0001
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "8c5d38df73431bf57a61c131",
+        "run": {
+          "dataset": "mnist",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 1,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 6,
+            "dropout": 0.0,
+            "family": "mlp",
+            "heads": 6,
+            "image_size": 28,
+            "input_dim": 784,
+            "normalization": "none",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 128
+          },
+          "run_id": "s1-mlp_d6_relu-s01-39e14b311c7a40e7",
+          "seed": 4170697404225044711,
+          "seed_index": 1,
+          "setting_id": "mlp_d6_relu",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 20,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0001
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "c61a5a747e3cf3560ac6dbbf",
+        "run": {
+          "dataset": "mnist",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 1,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 6,
+            "dropout": 0.0,
+            "family": "mlp",
+            "heads": 6,
+            "image_size": 28,
+            "input_dim": 784,
+            "normalization": "none",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 128
+          },
+          "run_id": "s1-mlp_d6_relu-s01-39e14b311c7a40e7",
+          "seed": 4170697404225044711,
+          "seed_index": 1,
+          "setting_id": "mlp_d6_relu",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 20,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0001
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "05467ce253dfee57556357c6",
+        "run": {
+          "dataset": "mnist",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 1,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 6,
+            "dropout": 0.0,
+            "family": "mlp",
+            "heads": 6,
+            "image_size": 28,
+            "input_dim": 784,
+            "normalization": "none",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 128
+          },
+          "run_id": "s1-mlp_d6_relu-s02-080a7c2ed23f536c",
+          "seed": 579412042608235372,
+          "seed_index": 2,
+          "setting_id": "mlp_d6_relu",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 20,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0001
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "189c55db051e48a288b8f503",
+        "run": {
+          "dataset": "mnist",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 1,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 6,
+            "dropout": 0.0,
+            "family": "mlp",
+            "heads": 6,
+            "image_size": 28,
+            "input_dim": 784,
+            "normalization": "none",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 128
+          },
+          "run_id": "s1-mlp_d6_relu-s02-080a7c2ed23f536c",
+          "seed": 579412042608235372,
+          "seed_index": 2,
+          "setting_id": "mlp_d6_relu",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 20,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0001
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "a34e6ab18e9021741d5589d6",
+        "run": {
+          "dataset": "mnist",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 1,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 6,
+            "dropout": 0.0,
+            "family": "mlp",
+            "heads": 6,
+            "image_size": 28,
+            "input_dim": 784,
+            "normalization": "none",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 128
+          },
+          "run_id": "s1-mlp_d6_relu-s03-1c4352198a865b98",
+          "seed": 2036561726153317272,
+          "seed_index": 3,
+          "setting_id": "mlp_d6_relu",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 20,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0001
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "620f803c728a99179b2ce638",
+        "run": {
+          "dataset": "mnist",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 1,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 6,
+            "dropout": 0.0,
+            "family": "mlp",
+            "heads": 6,
+            "image_size": 28,
+            "input_dim": 784,
+            "normalization": "none",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 128
+          },
+          "run_id": "s1-mlp_d6_relu-s03-1c4352198a865b98",
+          "seed": 2036561726153317272,
+          "seed_index": 3,
+          "setting_id": "mlp_d6_relu",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 20,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0001
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "9ce151f74a220e9101e44a01",
+        "run": {
+          "dataset": "mnist",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 1,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 6,
+            "dropout": 0.0,
+            "family": "mlp",
+            "heads": 6,
+            "image_size": 28,
+            "input_dim": 784,
+            "normalization": "none",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 128
+          },
+          "run_id": "s1-mlp_d6_relu-s04-4c1e91498d3ffe94",
+          "seed": 5484981141272264340,
+          "seed_index": 4,
+          "setting_id": "mlp_d6_relu",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 20,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0001
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "0d5b7144c4ccf67169466a5a",
+        "run": {
+          "dataset": "mnist",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 1,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 6,
+            "dropout": 0.0,
+            "family": "mlp",
+            "heads": 6,
+            "image_size": 28,
+            "input_dim": 784,
+            "normalization": "none",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 128
+          },
+          "run_id": "s1-mlp_d6_relu-s04-4c1e91498d3ffe94",
+          "seed": 5484981141272264340,
+          "seed_index": 4,
+          "setting_id": "mlp_d6_relu",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 20,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.001,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0001
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "bfad9a77eb5b676e2b6d8cbc",
+        "run": {
+          "dataset": "cifar10",
+          "deep": true,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 20,
+            "dropout": 0.0,
+            "family": "resnet",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 3072,
+            "normalization": "groupnorm",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-resnet20_gn-s00-002ea4087da9810b",
+          "seed": 13128205303644427,
+          "seed_index": 0,
+          "setting_id": "resnet20_gn",
+          "stage": "s1",
+          "train": {
+            "augmentation": true,
+            "budget": 80,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.1,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "sgd",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0005
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "db9e2063c21462841cc85ecf",
+        "run": {
+          "dataset": "cifar10",
+          "deep": true,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 20,
+            "dropout": 0.0,
+            "family": "resnet",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 3072,
+            "normalization": "groupnorm",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-resnet20_gn-s00-002ea4087da9810b",
+          "seed": 13128205303644427,
+          "seed_index": 0,
+          "setting_id": "resnet20_gn",
+          "stage": "s1",
+          "train": {
+            "augmentation": true,
+            "budget": 80,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.1,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "sgd",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0005
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "a6af2e1da94be66838421d94",
+        "run": {
+          "dataset": "cifar10",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 20,
+            "dropout": 0.0,
+            "family": "resnet",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 3072,
+            "normalization": "groupnorm",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-resnet20_gn-s01-0bddffbc7a71646f",
+          "seed": 855120689243448431,
+          "seed_index": 1,
+          "setting_id": "resnet20_gn",
+          "stage": "s1",
+          "train": {
+            "augmentation": true,
+            "budget": 80,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.1,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "sgd",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0005
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "b17d3c42f7c09758a17fe8f8",
+        "run": {
+          "dataset": "cifar10",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 20,
+            "dropout": 0.0,
+            "family": "resnet",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 3072,
+            "normalization": "groupnorm",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-resnet20_gn-s01-0bddffbc7a71646f",
+          "seed": 855120689243448431,
+          "seed_index": 1,
+          "setting_id": "resnet20_gn",
+          "stage": "s1",
+          "train": {
+            "augmentation": true,
+            "budget": 80,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.1,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "sgd",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0005
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "7c47e8c8fb7987256dc42757",
+        "run": {
+          "dataset": "cifar10",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 20,
+            "dropout": 0.0,
+            "family": "resnet",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 3072,
+            "normalization": "groupnorm",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-resnet20_gn-s02-43d476eac6ea9fc0",
+          "seed": 4887662246335520704,
+          "seed_index": 2,
+          "setting_id": "resnet20_gn",
+          "stage": "s1",
+          "train": {
+            "augmentation": true,
+            "budget": 80,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.1,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "sgd",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0005
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "8180293295a09e6d7f645592",
+        "run": {
+          "dataset": "cifar10",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 20,
+            "dropout": 0.0,
+            "family": "resnet",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 3072,
+            "normalization": "groupnorm",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-resnet20_gn-s02-43d476eac6ea9fc0",
+          "seed": 4887662246335520704,
+          "seed_index": 2,
+          "setting_id": "resnet20_gn",
+          "stage": "s1",
+          "train": {
+            "augmentation": true,
+            "budget": 80,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.1,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "sgd",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0005
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "863a2f9c9e3f4482a7f0f105",
+        "run": {
+          "dataset": "cifar10",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 20,
+            "dropout": 0.0,
+            "family": "resnet",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 3072,
+            "normalization": "groupnorm",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-resnet20_gn-s03-43ca2add57b0ea6d",
+          "seed": 4884763875984075373,
+          "seed_index": 3,
+          "setting_id": "resnet20_gn",
+          "stage": "s1",
+          "train": {
+            "augmentation": true,
+            "budget": 80,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.1,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "sgd",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0005
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "09f8c8fe69e09b4e68789234",
+        "run": {
+          "dataset": "cifar10",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 20,
+            "dropout": 0.0,
+            "family": "resnet",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 3072,
+            "normalization": "groupnorm",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-resnet20_gn-s03-43ca2add57b0ea6d",
+          "seed": 4884763875984075373,
+          "seed_index": 3,
+          "setting_id": "resnet20_gn",
+          "stage": "s1",
+          "train": {
+            "augmentation": true,
+            "budget": 80,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.1,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "sgd",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0005
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "a2c1cea50670cec3d0691b3a",
+        "run": {
+          "dataset": "cifar10",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 20,
+            "dropout": 0.0,
+            "family": "resnet",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 3072,
+            "normalization": "groupnorm",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-resnet20_gn-s04-370cf287b85448a7",
+          "seed": 3966812036533602471,
+          "seed_index": 4,
+          "setting_id": "resnet20_gn",
+          "stage": "s1",
+          "train": {
+            "augmentation": true,
+            "budget": 80,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.1,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "sgd",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0005
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "b6d5b89d8f46bc4daea0ac0f",
+        "run": {
+          "dataset": "cifar10",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 20,
+            "dropout": 0.0,
+            "family": "resnet",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 3072,
+            "normalization": "groupnorm",
+            "output_dim": 10,
+            "tie_weights": false,
+            "vocab_size": 128,
+            "width": 16
+          },
+          "run_id": "s1-resnet20_gn-s04-370cf287b85448a7",
+          "seed": 3966812036533602471,
+          "seed_index": 4,
+          "setting_id": "resnet20_gn",
+          "stage": "s1",
+          "train": {
+            "augmentation": true,
+            "budget": 80,
+            "budget_kind": "epochs",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 128,
+            "learning_rate": 0.1,
+            "microbatch": 32,
+            "momentum": 0.9,
+            "optimizer": "sgd",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.0005
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "a3a83ae8dc1c80161d2a0bf9",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": true,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d4-s00-21a94f6afacee14d",
+          "seed": 2425557195208712525,
+          "seed_index": 0,
+          "setting_id": "transformer_d4",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "f723228fb0a3bd31c014dd23",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": true,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d4-s00-21a94f6afacee14d",
+          "seed": 2425557195208712525,
+          "seed_index": 0,
+          "setting_id": "transformer_d4",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "c5903865a035909207f1dab6",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d4-s01-764a7b4504463112",
+          "seed": 8523760781106753810,
+          "seed_index": 1,
+          "setting_id": "transformer_d4",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "dd5da3e1be84c444c66642ed",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d4-s01-764a7b4504463112",
+          "seed": 8523760781106753810,
+          "seed_index": 1,
+          "setting_id": "transformer_d4",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "721b7c67399782d81d20b11c",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d4-s02-550a2ecad87ae5a0",
+          "seed": 6127761691741185440,
+          "seed_index": 2,
+          "setting_id": "transformer_d4",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "f91305e5db59ce83166a5c68",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d4-s02-550a2ecad87ae5a0",
+          "seed": 6127761691741185440,
+          "seed_index": 2,
+          "setting_id": "transformer_d4",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "57ffdbecf8fb34c17241e3f9",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d4-s03-624d2e93e1a28522",
+          "seed": 7083369001604252962,
+          "seed_index": 3,
+          "setting_id": "transformer_d4",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "cf1d291b7f1047915f1433e1",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d4-s03-624d2e93e1a28522",
+          "seed": 7083369001604252962,
+          "seed_index": 3,
+          "setting_id": "transformer_d4",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "3840db4d339ac4b77971946e",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d4-s04-2db5e91d5ddeb51d",
+          "seed": 3293795014829585693,
+          "seed_index": 4,
+          "setting_id": "transformer_d4",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "51e3090baf64efdb3cfc0268",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 4,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d4-s04-2db5e91d5ddeb51d",
+          "seed": 3293795014829585693,
+          "seed_index": 4,
+          "setting_id": "transformer_d4",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "3e04e5ecbde9287180d16ad3",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": true,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d8-s00-087f4c9d82b2d216",
+          "seed": 612292313732010518,
+          "seed_index": 0,
+          "setting_id": "transformer_d8",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "8acb9e14f1427d7e1cea0b45",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": true,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d8-s00-087f4c9d82b2d216",
+          "seed": 612292313732010518,
+          "seed_index": 0,
+          "setting_id": "transformer_d8",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "4e93411a8774b80013fe478c",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d8-s01-0d93864c1eee0903",
+          "seed": 978273205564082435,
+          "seed_index": 1,
+          "setting_id": "transformer_d8",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "4759a7bf240b3f558d07c36e",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d8-s01-0d93864c1eee0903",
+          "seed": 978273205564082435,
+          "seed_index": 1,
+          "setting_id": "transformer_d8",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "b5fe05713cdc37ae8acb656f",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d8-s02-63bd0e503b89e131",
+          "seed": 7186916318112244017,
+          "seed_index": 2,
+          "setting_id": "transformer_d8",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "d15ff437192d1c39be43dd3e",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d8-s02-63bd0e503b89e131",
+          "seed": 7186916318112244017,
+          "seed_index": 2,
+          "setting_id": "transformer_d8",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "0d64b0b8cc7d7059f541896d",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d8-s03-2d4feb06e654081e",
+          "seed": 3265086669733496862,
+          "seed_index": 3,
+          "setting_id": "transformer_d8",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "d14cb151f6047f2b731cac93",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d8-s03-2d4feb06e654081e",
+          "seed": 3265086669733496862,
+          "seed_index": 3,
+          "setting_id": "transformer_d8",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 3
+      },
+      {
+        "state_id": "a130f187891075c160d93934",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d8-s04-484efb6b1bbe84e1",
+          "seed": 5210378256359785697,
+          "seed_index": 4,
+          "setting_id": "transformer_d8",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 1
+      },
+      {
+        "state_id": "0e855030eb9aefc53859a29c",
+        "run": {
+          "dataset": "shakespeare",
+          "deep": false,
+          "model": {
+            "activation": "relu",
+            "balance": "orthogonal_balanced",
+            "channels": 3,
+            "context": 128,
+            "covariance_condition": 1.0,
+            "depth": 8,
+            "dropout": 0.0,
+            "family": "transformer",
+            "heads": 6,
+            "image_size": 32,
+            "input_dim": 192,
+            "normalization": "layernorm",
+            "output_dim": 192,
+            "tie_weights": false,
+            "vocab_size": 256,
+            "width": 192
+          },
+          "run_id": "s1-transformer_d8-s04-484efb6b1bbe84e1",
+          "seed": 5210378256359785697,
+          "seed_index": 4,
+          "setting_id": "transformer_d8",
+          "stage": "s1",
+          "train": {
+            "augmentation": false,
+            "budget": 50000000,
+            "budget_kind": "tokens",
+            "checkpoint_fractions": [
+              0.0,
+              0.3333333333333333,
+              0.6666666666666666,
+              1.0
+            ],
+            "effective_batch": 64,
+            "learning_rate": 0.0003,
+            "microbatch": 4,
+            "momentum": 0.9,
+            "optimizer": "adamw",
+            "save_every_steps": 100,
+            "schedule": "cosine",
+            "weight_decay": 0.01
+          }
+        },
+        "checkpoint_index": 3
+      }
+    ],
+    "state_count": 80,
+    "condition_count": 240,
+    "missing_policy": "No replacement",
+    "interpretation": "S1 reuse is exploratory, not independent confirmation"
+  },
+  "execution_device": "cpu",
+  "evidence_class": "EXPLORATORY_S1_FOLLOWUP_NOT_ORIGINAL_V2",
+  "freeze_sha": "178898216f22b31dc540008b42406f51b41b8f179408c25d140ed6b092b95e71"
+}

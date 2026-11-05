@@ -1,0 +1,47 @@
+test_immutable_result_id_collision_is_rejected (test_workflow.PlanTests.test_immutable_result_id_collision_is_rejected) ... ok
+test_lock_never_overwrites (test_workflow.PlanTests.test_lock_never_overwrites) ... ok
+test_missing_setting_is_not_silently_dropped (test_workflow.PlanTests.test_missing_setting_is_not_silently_dropped) ... ok
+test_native_commandline_gates_v2 (test_workflow.PlanTests.test_native_commandline_gates_v2) ... ok
+test_plan_is_s1_only_and_does_not_replace_missing (test_workflow.PlanTests.test_plan_is_s1_only_and_does_not_replace_missing) ... ok
+test_s2_config_forbidden (test_workflow.PlanTests.test_s2_config_forbidden) ... ok
+test_source_hash_mismatch_blocks_import (test_workflow.PlanTests.test_source_hash_mismatch_blocks_import) ... ok
+test_cpu_receipt_cannot_qualify_cuda (test_workflow.QualificationIsolationTests.test_cpu_receipt_cannot_qualify_cuda) ... FAIL
+test_cuda_receipt_requires_memory_measurement (test_workflow.QualificationIsolationTests.test_cuda_receipt_requires_memory_measurement) ... FAIL
+test_final_result_not_independent_seed_inflation (test_workflow.SummaryTests.test_final_result_not_independent_seed_inflation) ... ok
+
+======================================================================
+FAIL: test_cpu_receipt_cannot_qualify_cuda (test_workflow.QualificationIsolationTests.test_cpu_receipt_cannot_qualify_cuda)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/GENESIS_NEXT_v1/tests/test_workflow.py", line 76, in test_cpu_receipt_cannot_qualify_cuda
+    self.assertEqual(qualified_families(lock,p),[])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['dln'] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+'dln'
+
+- ['dln']
++ []
+
+======================================================================
+FAIL: test_cuda_receipt_requires_memory_measurement (test_workflow.QualificationIsolationTests.test_cuda_receipt_requires_memory_measurement)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/mnt/data/GENESIS_NEXT_v1/tests/test_workflow.py", line 85, in test_cuda_receipt_requires_memory_measurement
+    (p/'results/a.json').write_text(json.dumps(r));self.assertEqual(qualified_families(lock,p),[])
+                                                   ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: ['dln'] != []
+
+First list contains 1 additional elements.
+First extra element 0:
+'dln'
+
+- ['dln']
++ []
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.008s
+
+FAILED (failures=2)

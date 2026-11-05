@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "study_id": "genesis_next_v1",
+  "evidence_commit": "629032110fa51affc7f4e96cdb75f0c40070a9fe",
+  "source_stage": "s1",
+  "settings": [
+    "dln_d4_w16_orthogonal_balanced_c1",
+    "dln_d4_w16_random_unbalanced_c100",
+    "dln_d8_w16_orthogonal_balanced_c1",
+    "dln_d8_w16_random_unbalanced_c100",
+    "mlp_d6_relu",
+    "resnet20_gn",
+    "transformer_d4",
+    "transformer_d8"
+  ],
+  "seed_indices": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "checkpoints": [
+    1,
+    3
+  ],
+  "gammas": [
+    0.001,
+    0.01,
+    0.1
+  ],
+  "group_schema": "coarse",
+  "analysis_dtype": "float64",
+  "cg_steps": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "reference_rtol": 1e-08,
+  "max_iterations": 2000,
+  "dense_parameter_limit": 2048,
+  "dense_output_limit": 4096,
+  "rank_relative_tolerances": [
+    1e-10,
+    1e-08,
+    1e-06
+  ],
+  "operator_crosscheck_rtol": 1e-06,
+  "reference_solution_rtol": 1e-05,
+  "reference_delta_atol": 1e-05,
+  "zero_gradient_norm": 1e-12,
+  "utility_energy_target": 0.99,
+  "gauge_scales": [
+    0.5,
+    2.0,
+    10.0
+  ],
+  "gauge_seed_index": 1,
+  "gauge_checkpoint": 3,
+  "gauge_coordinate_rtol": 1e-07,
+  "threads": 2,
+  "state_timeout_seconds": 3600,
+  "max_states_per_invocation": 4,
+  "memory_target_gib": 9.5,
+  "bootstrap_replicates": 2000,
+  "bootstrap_seed": 20261105,
+  "missing_policy": "NO_REPLACEMENT_NO_S2_NO_ZERO_IMPUTATION",
+  "inference_status": "POSTHOC_S1_EXPLORATORY_NOT_CONFIRMATION",
+  "reference_input_policy": "V2_FP32_BATCH_LIFTED_TO_FP64",
+  "native_fp64_data_is_secondary": true
+}
