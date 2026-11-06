@@ -1,0 +1,197 @@
+{
+ "analysis_plan_sha256": "8dcc9a8d6754f40c6e0fa6d4f2fbdb28dfb1467dfc12d6f446696c62ed9e7779",
+ "code_sha256": {
+  "configs/pilot_tolerance.json": "e1291203a6db473462a7903b81353cd32fede1b747b5019bf937ae71349d3408",
+  "genesis_next_v3/__init__.py": "06e151f2cc1c700b7e5b24d7c4896b5cfaad401ae78169de6b8c674db4d329e0",
+  "genesis_next_v3/alpha_grid.py": "c696e2494ebdda29e18ed85a6f6903d4bad9c0ae32cf529749252c4bac1518a1",
+  "genesis_next_v3/assay.py": "d2dc54b03382b79c8e78f58e4521b34febf00dc8de2abad04e4787912567bc64",
+  "genesis_next_v3/costs.py": "63b3db777fc7c168d81412945fd94cc9a610f2a8c6f5a134ac4ce4b36df6e06e",
+  "genesis_next_v3/directions.py": "328394c4d0cf4d1650e7a62e584e06ae3142959ac91cc6f43069e704da1628e5",
+  "genesis_next_v3/dln_kron.py": "5a5b85473d33e22d8e3be4f78797d5f512f9928eb4bc2e03d3671469408d8ecc",
+  "genesis_next_v3/env.py": "d44343a2005b246c5a95e8d05315c209e34227e9b3d0c43ad9e3218f9400af52",
+  "genesis_next_v3/pools.py": "f2f24eb8d8bfcf420a6607ce8264041b2ee984b2d3ffc94b0ce9692cbba56026",
+  "genesis_next_v3/source.py": "4e682b953b18ee3f3832c61cf25dd31b22160f521ee9736e3ac1b8c07f469469",
+  "scripts/analyze.py": "7ec93c4f3f09e1efece679e2ab27cac1f9224a0d377ebcb1a481bae4171e4410",
+  "scripts/drive.py": "eaabd24a34e1c2b993b9961a081da18c8da94173aa8c13531ca8f3e9b249c26d",
+  "scripts/freeze.py": "2702c6a2e46328f08ed5e82a08cfe1c96d250b1c182aab88b2cf9745252b2896",
+  "scripts/pilot_reproduce.py": "69e658a125510e9b90ef3618030f1d8edf74c6889330e478373369821418fe79",
+  "scripts/run_state.py": "ebe5767a6e5fcf21d44d45dc125f809fea495685c8e5d29dd323d5dbbf944a90",
+  "tests/test_v3.py": "f460531bb9b8e68af68603cdd8dc3762f83611e0e3cf31d9ed4269dc8b9e10e0"
+ },
+ "config": {
+  "FB_abs_tol": 1e-14,
+  "FB_rel_tol": 1e-08,
+  "alpha_grid": [
+   0.0,
+   1e-05,
+   0.0001,
+   0.001,
+   0.003,
+   0.01,
+   0.03,
+   0.1,
+   0.3,
+   1.0,
+   3.0
+  ],
+  "bootstrap": {
+   "replicates": 2000,
+   "seed": 20261106
+  },
+  "direction_rtol": 1e-07,
+  "gain_matching_tolerance_Fstar": 0.0001,
+  "operator_probe_seed": 20261106,
+  "operator_rtol": 1e-10,
+  "pools": {
+   "E": [
+    8,
+    1024
+   ],
+   "T512": 512,
+   "V8": [
+    8,
+    128
+   ],
+   "namespaces": [
+    "GENESIS_NEXT_V3_T512_EXCLUDING_T32",
+    "GENESIS_NEXT_V3_V8x128_PERMUTATION",
+    "GENESIS_NEXT_V3_E8x1024_EVAL_POOL"
+   ]
+  },
+  "quality_target_Fstar": 0.99,
+  "sign_safety_factor": 2.0,
+  "state_timeout_s": 3600,
+  "timing": {
+   "cg_ks": [
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+   ],
+   "cg_rtols": [
+    0.1,
+    0.01,
+    0.001
+   ],
+   "cv_limit": 0.1,
+   "repeats": 7,
+   "target_sample_s": 0.1,
+   "threads": 2,
+   "warmups": 1
+  },
+  "train_selection_grid": [
+   0.0,
+   0.01,
+   0.03,
+   0.1,
+   0.3,
+   1.0,
+   3.0
+  ],
+  "v4": {
+   "batch": 512,
+   "cost_cap_s": 900.0,
+   "settings": [
+    "dln_d4_w16_orthogonal_balanced_c1",
+    "dln_d8_w16_random_unbalanced_c100"
+   ]
+  }
+ },
+ "design_sha256": {
+  "BOOTSTRAP_FOR_CLAUDE.md": "8afd2c8624c4e9edd42e68af6594d90e5d7dc3240d91b12094664a5a29fe14ca",
+  "EXPERIMENT_PROTOCOL.md": "4905e9096675459d1559f78ecca7aae8f992a000487f980ecbe8d42980f3bfc1",
+  "PROTOCOL_CANDIDATE.json": "fbb9cb7960e15e3ee4984628513b3a430387311c568e6d40889c9523dca0c1e5",
+  "SHA256SUMS.txt": "3f793945efc652abe8ae9a7d184832fabee86281755e6db15997aa25daa73da0"
+ },
+ "evidence_class": "POSTHOC_S1_EXPLORATORY_NOT_CONFIRMATION",
+ "freeze_sha": "0b168ec5ff55c70a012a92af301c5d4bef96dc9edb54eb6eb9faa9abb30aba94",
+ "gates": {
+  "gate2_pilot_reproduction": "PASS",
+  "gate3_tests_log_sha256": "d66b2cc6277c372775748b03c59748e05c5834216853eee165272c7f4b5bbe91",
+  "pilot_sha256": "96256991365142b4c152d7412f0ceac9e2957b2daa275a31aa7d17a0fa975108"
+ },
+ "inputs": {
+  "next_v2_code_files_verified": 13,
+  "next_v2_followup_lock_sha256": "6285e65c5833b85eb9d88a675e8e1ca4bd97cc3e9a7d570a93c0655526d315bc",
+  "next_v2_freeze_sha": "0c881869d1eb17bb034a7fde8f0868ed7780b324a07b9b90ebe65d0a5c6305bf",
+  "threads_env": {
+   "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+   "MKL_NUM_THREADS": "2",
+   "OMP_NUM_THREADS": "2",
+   "OPENBLAS_NUM_THREADS": "2"
+  },
+  "v2_delivery_manifest_present": true,
+  "v2_protocol_lock_sha256": "f9f4868297d359bf0538ac0ba6e64e3e8087911699150f6a0b33ed11fca41263",
+  "v2_source_files_sha256": {
+   "genesis_gpu/__init__.py": "1cb25cf367d9ea1eb9a9d1307c25b1d14d7fe75545407547bf791d76df6dd989",
+   "genesis_gpu/__main__.py": "8134dc71036ab6fef7cb605ec59b400b2864890fc00526f9763c447e2937e295",
+   "genesis_gpu/audit/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "genesis_gpu/audit/g0.py": "7c91a698f9e8bde8e7308f1e78ef60a62e329f74c146a20d584ccae3e67868c3",
+   "genesis_gpu/audit/independent_reference.py": "58a8d3e21203f4625d4a1837e9ccec2ebc2550faa5955cb69a9076f93fec0a55",
+   "genesis_gpu/audit/verify.py": "df1d533df1be89229eb2ab73933fb290ad1cdd49ab531443563bd658cb2c4263",
+   "genesis_gpu/cli.py": "99807cd3b2d4848ae06ba561d802fbeddb11d782dfe09d805a02fefbe6533efd",
+   "genesis_gpu/contracts.py": "8ffcff85f9a7ccea606a1b9375b6572d62d9676830e7e2db49761e06c11b6437",
+   "genesis_gpu/curvature/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "genesis_gpu/curvature/dual_solve.py": "3c32c194a1433cb4dcf72425c22573e5497844c0e6e5df02335b7041d1b4dcaa",
+   "genesis_gpu/curvature/operators.py": "65de46460055b608dcda2e534fd17c1b5ec6f5ec90d7d0f00a9f7bc2b202f497",
+   "genesis_gpu/curvature/params.py": "640c2257192b02d1f33221b446b97e1b5427e5aae1c19314bfa73837cdca2fd6",
+   "genesis_gpu/curvature/spectrum.py": "83674db9f6e74b1cdceff8e63721c3bb75dbe67b43c0c02a78bee2aa28c7456d",
+   "genesis_gpu/datasets/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "genesis_gpu/datasets/offline_import.py": "9236da569346b9827825abf15a913c9b22657b4eb886c034366e2e6c116cec72",
+   "genesis_gpu/datasets/registry.py": "9258e6e8def65b1b307a110a16ee256d6b82c97522e978769a610c1a0e8a092b",
+   "genesis_gpu/env/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "genesis_gpu/env/reproducibility.py": "71e8af757cd81b407403a104af4063a157665a25c1199837e119a42707100478",
+   "genesis_gpu/env/storage_guard.py": "6104035651080f011aa8f219d45afdeafe4f447e4d725be7e0e0f2a2a2ad92f9",
+   "genesis_gpu/models/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "genesis_gpu/models/dln.py": "9409a0d7d6c734dae5ca436843bd3b2f46778380d16e5fc30e64bd8f678c5b73",
+   "genesis_gpu/models/mlp.py": "9082af0df81b93446c32de44cf8fcf5445daa08ab9cd7353e47ad4ca4078b59a",
+   "genesis_gpu/models/registry.py": "9b425c8112ce0b09db405fb448c94f22ffde79fbe3765d01b828e46ee3ac4d9c",
+   "genesis_gpu/models/resnet_gn.py": "e7e7116613bcb5f954a161fec30a4a01b2a8d69ff5a97817343304d43cdf2818",
+   "genesis_gpu/models/tiny_transformer.py": "f825f5e297613a11f25622723a425f8794747073b6545ab97747c0c4f87617b5",
+   "genesis_gpu/reporting/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "genesis_gpu/reporting/report.py": "beee026135b0488727230b7942ce1bb06baa327d97ddffdb1caff7ac6a4e5ce4",
+   "genesis_gpu/runtime/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "genesis_gpu/runtime/atomic_io.py": "d1a13b7aef3d3eeb6c026c741ced674fa0478de369312c3a96669ba58356063e",
+   "genesis_gpu/runtime/measurement.py": "37d9cf2abaebc3ff46cdbbfc9163dec09ec54a3c5323521d2e334b061d007095",
+   "genesis_gpu/runtime/queue.py": "ba8483f68fb6a050f34f832d45440f1c9f3920977ec98688685cd034823c5773",
+   "genesis_gpu/runtime/resources.py": "cbc317030c71a292e2cdd930db115e22e75998e7ff782cb675a8d562627b69fa",
+   "genesis_gpu/runtime/scheduler.py": "f427679e0409f3205b1bd48e1677ed722d5997240e19ffc1806332224608bbbb",
+   "genesis_gpu/science/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "genesis_gpu/science/controls.py": "19d9ee6b81624b4f9972e28ccc4ceb62ebcbb004210e2496714f73f0271e2b42",
+   "genesis_gpu/science/mechanism.py": "783c1a1bf757567d4455026a8fe189a55d3006436cb891b432680392804467ad",
+   "genesis_gpu/science/predictor.py": "194299cfee6b40c48fe0c53e872666f02e45b58b7ca56cf1c53cd164842d68c2",
+   "genesis_gpu/science/structure.py": "8745354ca472c526005d2221ed1d70c23fce7074c4c5a6c9b215df4bdc952a28",
+   "genesis_gpu/science/utility.py": "b03fe61fd273e8772188c579957724bdbd6f1a44e165007a9dd76672572f153b",
+   "genesis_gpu/sketches/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "genesis_gpu/sketches/block_probe.py": "7d3a81fa5787c4fb20b4b524d2414aba99efd3b35b8611523016bae320cc07e4",
+   "genesis_gpu/solvers/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "genesis_gpu/solvers/cg.py": "f2fd15bfba00bedbeb6a40ea645ab491cb76a0048b2572f17e25301cfef45a51",
+   "genesis_gpu/study/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "genesis_gpu/study/adjudication.py": "abb7e4c0ef892b53f95d7bbbecad3408e69551477f1818b06682b65178922b03",
+   "genesis_gpu/study/design.py": "6216b9da0f8e1b4bdbe017d12b1eec98ab7e6e5f1911c74838aff6dc30095c26",
+   "genesis_gpu/study/freeze.py": "29ec31ba8d32dd836c1cb669c7e5aa4aef1f625735a160f1179ce1668e6d7baa",
+   "genesis_gpu/study/statistics.py": "db6fe0d9d9ccb6a1b0bc8e3897814e650977d43516fb7246da6e82d942dad60b",
+   "genesis_gpu/training/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "genesis_gpu/training/benchmark.py": "ba3ea870457e2be68ba9f28921fda1665d7e74789fd0e2832bb202dc528e3873",
+   "genesis_gpu/training/checkpoint.py": "3a1b9fbcbf5e6b5821969ad01c0f56a9487f5e497792e1549635001ee6fa4dad",
+   "genesis_gpu/training/optimizers.py": "4cd67c5bd84fc2376221c6c35f854f4c83972c4ec81ade31ee37515b401c6e9f",
+   "genesis_gpu/training/trainer.py": "fc7b7b96f35baeaeb1ba20d1f9fbe17d54ce9ddaebd9f2cbd915ac098261f435"
+  },
+  "v2_source_root": "E:\\GENESIS\\handoff\\audit_snapshot_20261104_201035\\07_SOURCE\\executed_source"
+ },
+ "run_plan_sha256": "b1ddf7ffad145397b8a151e9922a6c534f21395144a7ea17280d5bdda230e8f9",
+ "safety": {
+  "device": "cpu",
+  "dtype": "float64",
+  "no_S2_reads": true,
+  "no_gpu_preemption": true,
+  "no_new_training": true,
+  "no_old_v2_writes": true,
+  "no_replacement_seeds": true
+ },
+ "state_condition_index_sha256": "f17500882e53710e0febb98c62b474c7e9c17a51a482572c40231bb09754080b",
+ "study": "GENESIS_NEXT_v3"
+}
