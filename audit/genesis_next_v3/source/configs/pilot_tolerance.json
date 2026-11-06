@@ -1,0 +1,23 @@
+{
+ "purpose": "Gate 2: T32 original-alpha compatibility with recorded NEXT v2 values. Written before any pilot run.",
+ "pilot_states": [
+  {"setting_id": "dln_d4_w16_orthogonal_balanced_c1", "seed_index": 1, "checkpoint": 3, "role": "balanced"},
+  {"setting_id": "dln_d8_w16_random_unbalanced_c100", "seed_index": 1, "checkpoint": 3, "role": "ill_conditioned"}
+ ],
+ "gammas": [0.001, 0.01, 0.1],
+ "replay_A_next_v2_code_path": {
+  "description": "NEXT v2 cg/block_cg/best-ray/loss_trials re-executed read-only on the rebuilt state",
+  "selected_alpha": "identical",
+  "trial_loss_abs_tol": 1e-15,
+  "train_gain_abs_tol": 1e-15,
+  "validation_gain_abs_tol": 1e-15
+ },
+ "replay_B_v3_code_path": {
+  "description": "v3 dense Full / Kronecker-direct Block / v3 alpha-grid evaluator on T32 and the v2 V32 batch",
+  "selected_alpha": "identical",
+  "gain_rel_tol": 1e-6,
+  "gain_abs_floor": 1e-14,
+  "delta_abs_tol": 1e-6
+ },
+ "on_failure": "STOP: do not freeze; record the discrepancy; no tolerance change after seeing results"
+}

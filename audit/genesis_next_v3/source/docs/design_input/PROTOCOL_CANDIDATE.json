@@ -1,0 +1,115 @@
+{
+  "status": "DESIGN_ONLY_NOT_FROZEN_NOT_EXECUTED",
+  "study": "GENESIS_NEXT_v3",
+  "date": "2026-11-06",
+  "source_pr": 16,
+  "source_commit": "4c02cd6e465403825fbe3059f6266094a91df555",
+  "evidence_class": "POSTHOC_S1_EXPLORATORY_NOT_CONFIRMATION",
+  "panel": {
+    "states_planned_parent": 80,
+    "conditions_planned_parent": 240,
+    "states_available_as_of_pr16": 38,
+    "conditions_available_as_of_pr16": 114,
+    "seeds_independent_as_of_pr16": 19,
+    "stage": "s1",
+    "checkpoints": [
+      1,
+      3
+    ],
+    "gammas": [
+      0.001,
+      0.01,
+      0.1
+    ]
+  },
+  "validation": {
+    "train_curvature_batch": 32,
+    "train_disjoint_diagnostic": 512,
+    "full_train": 4096,
+    "validation_disjoint_groups": 8,
+    "validation_group_size": 128,
+    "validation_full": 1024,
+    "extra_iid_groups": 8,
+    "extra_iid_group_size": 1024,
+    "original_test_size": 1024,
+    "alpha_grid": [
+      0,
+      1e-05,
+      0.0001,
+      0.001,
+      0.003,
+      0.01,
+      0.03,
+      0.1,
+      0.3,
+      1,
+      3
+    ],
+    "directions": [
+      "full_ggn_fp64",
+      "block_exact_best_ray",
+      "full_cg8_best_ray"
+    ],
+    "labels": [
+      "FIRST_ORDER_CONFLICT",
+      "STEP_OVERSHOOT",
+      "CURVATURE_OR_HIGHER_ORDER_MISMATCH",
+      "BATCH_HETEROGENEITY",
+      "INCONCLUSIVE"
+    ],
+    "reestimated_direction_intervention": {
+      "settings": [
+        "dln_d4_w16_orthogonal_balanced_c1",
+        "dln_d8_w16_random_unbalanced_c100"
+      ],
+      "all_ready_seed_indices": true,
+      "checkpoints": [
+        1,
+        3
+      ],
+      "gammas": [
+        0.001,
+        0.01,
+        0.1
+      ],
+      "new_curvature_train_batch_size": 512,
+      "exclude_original_curvature_sample_indices": true,
+      "fix_absolute_lambda": true,
+      "same_heldout_eval_pool": true,
+      "class": "EXPLORATORY_INTERVENTION"
+    }
+  },
+  "benchmark": {
+    "block_baselines": [
+      "legacy_block_cg_implementation_control",
+      "exact_DLN_Kronecker_direct",
+      "exact_DLN_Kronecker_local_CG"
+    ],
+    "full_cg_iterations": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32,
+      64
+    ],
+    "rtol_direction_ref": 1e-07,
+    "gain_matching_tolerance_Fstar": 0.0001,
+    "timing_warmups": 1,
+    "timing_repeats": 7,
+    "cpu_torch_threads": 2,
+    "timing_order": "randomized_paired",
+    "cost_modes": [
+      "cold_single_gamma",
+      "warm_three_gamma"
+    ]
+  },
+  "safety": {
+    "no_old_v2_writes": true,
+    "no_S2_reads": true,
+    "no_replacement_seeds": true,
+    "no_gpu_preemption": true,
+    "no_dataset_or_checkpoint_publication": true
+  }
+}
